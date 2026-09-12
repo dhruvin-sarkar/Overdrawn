@@ -6,9 +6,10 @@
 bin/
 obj/
 
-# Ziva ships ~1.5GB of bundled Chromium and per-platform binaries, several
-# over GitHub's 100MB file limit. Reinstall it from https://ziva.sh instead.
-addons/ziva_agent/
+# Editor AI tooling, not game code. Ziva alone is ~1.5GB of bundled Chromium
+# and per-platform binaries, several past GitHub's 100MB file limit.
+# Reinstall from ziva.sh, the asset library, or each plugin's own installer.
+addons/
 
 # Design docs and working notes stay local
 Claude.md
