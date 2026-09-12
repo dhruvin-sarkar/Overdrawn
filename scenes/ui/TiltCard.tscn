@@ -48,9 +48,9 @@ font_size = 34
 font_color = Color(0.071, 0.078, 0.129, 1)
 
 [node name="TiltCard" type="Control"]
-custom_minimum_size = Vector2(280, 392)
-offset_right = 280.0
-offset_bottom = 392.0
+custom_minimum_size = Vector2(200, 280)
+offset_right = 200.0
+offset_bottom = 280.0
 mouse_filter = 0
 script = ExtResource("1_script")
 
