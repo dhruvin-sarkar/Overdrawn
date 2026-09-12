@@ -1,0 +1,301 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_menu"]
+[ext_resource type="Shader" path="res://shaders/paint_background.gdshader" id="2_paint"]
+[ext_resource type="Shader" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
+[ext_resource type="Shader" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
+[ext_resource type="Texture2D" uid="uid://bjbuix2iuudr4" path="res://Title text.png" id="5_title"]
+[ext_resource type="PackedScene" path="res://scenes/ui/TiltCard.tscn" id="6_card"]
+[ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="8_button"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
+shader = ExtResource("2_paint")
+shader_parameter/colour_1 = Color(0, 0, 0, 1)
+shader_parameter/colour_2 = Color(0, 0.4, 0.9, 1)
+shader_parameter/colour_3 = Color(1, 0, 0.2, 1)
+shader_parameter/contrast = 1.8
+shader_parameter/spin_amount = 1.05
+shader_parameter/spin_speed = 0.7
+shader_parameter/paint_speed = 1.0
+shader_parameter/pixel_filter = 740.0
+shader_parameter/swirl_centre = Vector2(0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_title"]
+noise_type = 3
+frequency = 0.0035
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_title"]
+seamless = true
+noise = SubResource("FastNoiseLite_title")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_title"]
+shader = ExtResource("4_dissolve")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_title")
+shader_parameter/progress = 1.0
+shader_parameter/burn_size = 0.32
+shader_parameter/ash_colour = Color(0.04, 0.05, 0.09, 1)
+shader_parameter/burn_colour = Color(0.98, 0.97, 0.95, 1)
+shader_parameter/hot_colour = Color(0.55, 0.75, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
+shader = ExtResource("3_crt")
+shader_parameter/curve = 0.045
+shader_parameter/scanline_strength = 0.16
+shader_parameter/scanline_density = 640.0
+shader_parameter/aberration = 1.1
+shader_parameter/vignette_strength = 0.42
+shader_parameter/brightness = 1.08
+shader_parameter/bezel_colour = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar"]
+bg_color = Color(0.243, 0.271, 0.31, 0.937)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.106, 0.122, 0.149, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play"]
+bg_color = Color(0.118, 0.447, 0.886, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_options"]
+bg_color = Color(0.933, 0.643, 0.043, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quit"]
+bg_color = Color(0.902, 0.294, 0.298, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_collection"]
+bg_color = Color(0.259, 0.678, 0.443, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+bg_color = Color(0.412, 0.447, 0.486, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_theme")
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bg")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_title")
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_title")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Card" parent="." instance=ExtResource("6_card")]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -162.0
+offset_right = 147.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonBar" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -559.0
+offset_top = -240.0
+offset_right = 559.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
+
+[node name="Margin" type="MarginContainer" parent="ButtonBar"]
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 16
+
+[node name="Row" type="HBoxContainer" parent="ButtonBar/Margin"]
+theme_override_constants/separation = 17
+
+[node name="Play" type="Button" parent="ButtonBar/Margin/Row"]
+custom_minimum_size = Vector2(300, 130)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = SubResource("StyleBoxFlat_play")
+theme_override_styles/hover = SubResource("StyleBoxFlat_play")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_play")
+theme_override_styles/focus = SubResource("StyleBoxFlat_play")
+text = "PLAY"
+script = ExtResource("8_button")
+
+[node name="Options" type="Button" parent="ButtonBar/Margin/Row"]
+custom_minimum_size = Vector2(220, 130)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_options")
+theme_override_styles/hover = SubResource("StyleBoxFlat_options")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_options")
+theme_override_styles/focus = SubResource("StyleBoxFlat_options")
+text = "OPTIONS"
+script = ExtResource("8_button")
+
+[node name="Quit" type="Button" parent="ButtonBar/Margin/Row"]
+custom_minimum_size = Vector2(218, 130)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_quit")
+theme_override_styles/hover = SubResource("StyleBoxFlat_quit")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_quit")
+theme_override_styles/focus = SubResource("StyleBoxFlat_quit")
+text = "QUIT"
+script = ExtResource("8_button")
+
+[node name="Collection" type="Button" parent="ButtonBar/Margin/Row"]
+custom_minimum_size = Vector2(308, 130)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxFlat_collection")
+theme_override_styles/hover = SubResource("StyleBoxFlat_collection")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_collection")
+theme_override_styles/focus = SubResource("StyleBoxFlat_collection")
+text = "COLLECTION"
+script = ExtResource("8_button")
+
+[node name="ProfileBar" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = -223.0
+offset_right = 339.0
+offset_bottom = -78.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
+
+[node name="Margin" type="MarginContainer" parent="ProfileBar"]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Column" type="VBoxContainer" parent="ProfileBar/Margin"]
+theme_override_constants/separation = 8
+
+[node name="Caption" type="Label" parent="ProfileBar/Margin/Column"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "Profile"
+horizontal_alignment = 1
+
+[node name="Slot" type="Button" parent="ProfileBar/Margin/Column"]
+custom_minimum_size = Vector2(0, 58)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
+text = "P1"
+script = ExtResource("8_button")
+
+[node name="LanguageBar" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -171.0
+offset_right = -146.0
+offset_bottom = -78.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
+
+[node name="Margin" type="MarginContainer" parent="LanguageBar"]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Language" type="Button" parent="LanguageBar/Margin"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
+text = "English"
+script = ExtResource("8_button")
+
+[node name="CrtLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="CrtOverlay" type="ColorRect" parent="CrtLayer"]
+material = SubResource("ShaderMaterial_crt")
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

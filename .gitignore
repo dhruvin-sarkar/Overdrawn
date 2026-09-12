@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# C# build artifacts
+bin/
+obj/
+
+# Ziva ships ~1.5GB of bundled Chromium and per-platform binaries, several
+# over GitHub's 100MB file limit. Reinstall it from https://ziva.sh instead.
+addons/ziva_agent/
+
+# Design docs and working notes stay local
+Claude.md
+CLAUDE.md
+BLACKJACK_ROGUELIKE_GDD.md
+BLACKJACK_ROGUELIKE_CONTENT_REFERENCE*.md
+.remember/
