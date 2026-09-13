@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bq5ul3t5gbgub" path="res://scenes/ui/tilt_card.tscn" id="6_card"]
 [ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
+[ext_resource type="Resource" path="res://data/menu_card_faces.tres" id="9_faces"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
@@ -104,6 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_theme")
 script = ExtResource("1_menu")
+CardFaces = ExtResource("9_faces")
 
 [node name="Background" type="ColorRect" parent="." unique_id=825869231]
 material = SubResource("ShaderMaterial_bg")

@@ -1,0 +1,88 @@
+[gd_resource type="Resource" script_class="CardFacePool" format=3]
+
+[ext_resource type="Script" uid="uid://ca3m16pgldshf" path="res://scripts/data/CardFacePool.cs" id="1_pool"]
+[ext_resource type="Texture2D" uid="uid://c4gumeo6metxe" path="res://assets/cards/card_set/spades/a_spades.png" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://c4y44adawsj78" path="res://assets/cards/card_set/hearts/a_hearts.png" id="3_tex"]
+[ext_resource type="Texture2D" uid="uid://cdgbtawq31v8h" path="res://assets/cards/card_set/diamonds/a_diamonds.png" id="4_tex"]
+[ext_resource type="Texture2D" uid="uid://c1108ayqtyus2" path="res://assets/cards/card_set/clubs/a_clubs.png" id="5_tex"]
+[ext_resource type="Texture2D" uid="uid://0imvf623l1tj" path="res://assets/cards/card_set/black_joker.png" id="6_tex"]
+[ext_resource type="Texture2D" uid="uid://c4r1wb7dj2t2c" path="res://assets/cards/card_set/red_joker.png" id="7_tex"]
+[ext_resource type="Texture2D" uid="uid://c2evfx8hhjgvn" path="res://assets/cards/jorel/spades/spade_0001.png" id="8_tex"]
+[ext_resource type="Texture2D" uid="uid://sw5xl72wd0s6" path="res://assets/cards/jorel/hearts/heart_0001.png" id="9_tex"]
+[ext_resource type="Texture2D" uid="uid://dnssxi8xv4ak5" path="res://assets/cards/jorel/diamonds/diamond_0001.png" id="10_tex"]
+[ext_resource type="Texture2D" uid="uid://cp1i0bwqy26lv" path="res://assets/cards/jorel/clubs/club_0001.png" id="11_tex"]
+[ext_resource type="Texture2D" uid="uid://dxj772sc8tguk" path="res://assets/cards/kerenel/card_01.png" id="12_tex"]
+[ext_resource type="Texture2D" uid="uid://w4rbojxus5k8" path="res://assets/cards/kerenel/card_15.png" id="13_tex"]
+[ext_resource type="Texture2D" uid="uid://dwjiaagy0q5g" path="res://assets/cards/kerenel/card_29.png" id="14_tex"]
+[ext_resource type="Texture2D" uid="uid://dek1s5pvnw4x4" path="res://assets/cards/kerenel/card_43.png" id="15_tex"]
+[ext_resource type="Texture2D" uid="uid://dskopun1e7hoi" path="res://assets/cards/kerenel/card_57.png" id="16_tex"]
+[ext_resource type="Texture2D" uid="uid://q5dxt2fvx8ft" path="res://assets/cards/kerenel/card_71.png" id="17_tex"]
+[ext_resource type="Texture2D" uid="uid://d4a48qym2dk6p" path="res://assets/cards/yewbi/pixel_playing_card_set.png" id="18_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("3_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("4_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4"]
+atlas = ExtResource("5_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5"]
+atlas = ExtResource("6_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6"]
+atlas = ExtResource("7_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7"]
+atlas = ExtResource("18_tex")
+region = Rect2(32, 32, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8"]
+atlas = ExtResource("18_tex")
+region = Rect2(64, 32, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_9"]
+atlas = ExtResource("18_tex")
+region = Rect2(96, 32, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10"]
+atlas = ExtResource("18_tex")
+region = Rect2(128, 32, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11"]
+atlas = ExtResource("18_tex")
+region = Rect2(544, 80, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12"]
+atlas = ExtResource("18_tex")
+region = Rect2(576, 80, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13"]
+atlas = ExtResource("18_tex")
+region = Rect2(160, 224, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14"]
+atlas = ExtResource("18_tex")
+region = Rect2(192, 224, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15"]
+atlas = ExtResource("18_tex")
+region = Rect2(224, 224, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16"]
+atlas = ExtResource("18_tex")
+region = Rect2(256, 224, 32, 48)
+
+[resource]
+script = ExtResource("1_pool")
+Faces = Array[Texture2D]([SubResource("AtlasTexture_1"), SubResource("AtlasTexture_2"), SubResource("AtlasTexture_3"), SubResource("AtlasTexture_4"), SubResource("AtlasTexture_5"), SubResource("AtlasTexture_6"), ExtResource("8_tex"), ExtResource("9_tex"), ExtResource("10_tex"), ExtResource("11_tex"), ExtResource("12_tex"), ExtResource("13_tex"), ExtResource("14_tex"), ExtResource("15_tex"), ExtResource("16_tex"), ExtResource("17_tex"), SubResource("AtlasTexture_7"), SubResource("AtlasTexture_8"), SubResource("AtlasTexture_9"), SubResource("AtlasTexture_10"), SubResource("AtlasTexture_11"), SubResource("AtlasTexture_12"), SubResource("AtlasTexture_13"), SubResource("AtlasTexture_14"), SubResource("AtlasTexture_15"), SubResource("AtlasTexture_16")])

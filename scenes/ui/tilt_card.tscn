@@ -2,24 +2,6 @@
 
 [ext_resource type="Script" uid="uid://obacyx6oqf75" path="res://scripts/ui/TiltCard.cs" id="1_script"]
 [ext_resource type="Shader" uid="uid://df7ymtskf2fl1" path="res://shaders/card_tilt.gdshader" id="2_tilt"]
-[ext_resource type="Theme" path="res://theme/overdrawn.tres" id="3_theme"]
-[ext_resource type="Texture2D" uid="uid://xoog1p15h86b" path="res://assets/cards/suit_spade.svg" id="4_spade"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_face"]
-bg_color = Color(0.969, 0.965, 0.941, 1)
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(0.071, 0.078, 0.129, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_rank"]
-font_size = 54
-font_color = Color(0.071, 0.078, 0.129, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_card"]
 noise_type = 3
@@ -57,72 +39,15 @@ disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(280, 392)
-size_2d_override = Vector2i(280, 392)
-size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Face" type="Panel" parent="FaceViewport" unique_id=407587933]
-offset_right = 280.0
-offset_bottom = 392.0
-theme = ExtResource("3_theme")
-theme_override_styles/panel = SubResource("StyleBoxFlat_face")
-
-[node name="Rank" type="Label" parent="FaceViewport/Face" unique_id=1501933567]
-layout_mode = 0
-offset_left = 22.0
-offset_top = -24.5
-offset_right = 69.0
-offset_bottom = 110.5
-text = "A"
-label_settings = SubResource("LabelSettings_rank")
-
-[node name="Pip" type="TextureRect" parent="FaceViewport/Face" unique_id=128825434]
-layout_mode = 0
-offset_left = 28.5
-offset_top = 91.5
-offset_right = 62.5
-offset_bottom = 129.0
-texture = ExtResource("4_spade")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Centre" type="TextureRect" parent="FaceViewport/Face" unique_id=839518298]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -66.0
-offset_right = 60.0
-offset_bottom = 66.0
+[node name="Art" type="TextureRect" parent="FaceViewport" unique_id=407587933]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_spade")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="RankFlipped" type="Label" parent="FaceViewport/Face" unique_id=1630705353]
-layout_mode = 0
-offset_left = 211.0
-offset_top = 281.5
-offset_right = 258.0
-offset_bottom = 416.5
-rotation = 3.1415927
-pivot_offset = Vector2(23.5, 67.5)
-text = "A"
-label_settings = SubResource("LabelSettings_rank")
-
-[node name="PipFlipped" type="TextureRect" parent="FaceViewport/Face" unique_id=362084419]
-layout_mode = 0
-offset_left = 217.5
-offset_top = 263.0
-offset_right = 251.5
-offset_bottom = 300.5
-rotation = 3.1415927
-pivot_offset = Vector2(17, 18.75)
-texture = ExtResource("4_spade")
 expand_mode = 1
 stretch_mode = 5
 

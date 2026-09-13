@@ -18,6 +18,7 @@ public partial class TiltCard : Control
 	[Export] public float ScaleSmoothing { get; set; } = 20f;
 
 	private SubViewport _faceViewport = null!;
+	private TextureRect _art = null!;
 	private TextureRect _display = null!;
 	private ShaderMaterial _material = null!;
 
@@ -36,6 +37,7 @@ public partial class TiltCard : Control
 	public override void _Ready()
 	{
 		_faceViewport = GetNode<SubViewport>("FaceViewport");
+		_art = GetNode<TextureRect>("FaceViewport/Art");
 		_display = GetNode<TextureRect>("Display");
 		_display.Texture = _faceViewport.GetTexture();
 		_material = (ShaderMaterial)_display.Material;
@@ -146,8 +148,10 @@ public partial class TiltCard : Control
 	/// 0 = fully burned away, 1 = fully present. Driven by the menu intro.
 	public void SetDissolve(float value) => _material.SetShaderParameter("progress", value);
 
+	public void SetFace(Texture2D face) => _art.Texture = face;
+
 	/// The tilt shader sizes its quad from the texture, so the face texture must
-	/// match this control. The face keeps its own layout via size_2d_override.
+	/// match this control.
 	private void SyncFaceResolution() => _faceViewport.Size = (Vector2I)Size.Round();
 
 	/// Frame-rate independent lerp weight.

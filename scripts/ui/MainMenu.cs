@@ -1,13 +1,15 @@
 using Godot;
+using Overdrawn.Data;
 
 namespace Overdrawn.UI;
 
 /// <summary>
-/// Drives the opening sequence: the title and card burn into view first, then
-/// the surrounding menu furniture fades up once they have landed.
+/// Drives the opening sequence: the title and a randomly drawn card burn into
+/// view first, then the surrounding menu furniture fades up once they have landed.
 /// </summary>
 public partial class MainMenu : Control
 {
+	[Export] public CardFacePool CardFaces { get; set; } = null!;
 	[Export] public float BurnDuration { get; set; } = 3.2f;
 	[Export] public float FurnitureDelay { get; set; } = 2.0f;
 	[Export] public float FurnitureDuration { get; set; } = 0.45f;
@@ -21,6 +23,7 @@ public partial class MainMenu : Control
 	{
 		_title = GetNode<TextureRect>("Title");
 		_card = GetNode<TiltCard>("Card");
+		_card.SetFace(CardFaces.PickRandom());
 		_titleMaterial = (ShaderMaterial)_title.Material;
 
 		_furniture = new[]
