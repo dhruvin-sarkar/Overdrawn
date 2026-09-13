@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/MenuPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+
+[node name="CreditsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(900, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Heading" type="Label" parent="Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Roll" type="PanelContainer" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="Lines" type="VBoxContainer" parent="Column/Roll"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MadeByRole" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.953, 0.584, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Design and Code"
+horizontal_alignment = 1
+
+[node name="MadeBy" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Dhruvin Sarkar"
+horizontal_alignment = 1
+
+[node name="ArtGap" type="Control" parent="Column/Roll/Lines"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
+[node name="ArtRole" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.953, 0.584, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Card Art Packs"
+horizontal_alignment = 1
+
+[node name="Art" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Card Set, Jorel, Kerenel, YEWBI"
+horizontal_alignment = 1
+
+[node name="ShaderGap" type="Control" parent="Column/Roll/Lines"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
+[node name="ShaderRole" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.953, 0.584, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Shaders"
+horizontal_alignment = 1
+
+[node name="Shaders" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Card perspective by Hei (MIT)
+Paint background adapted from Balatro by LocalThunk"
+horizontal_alignment = 1
+
+[node name="EngineGap" type="Control" parent="Column/Roll/Lines"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+
+[node name="EngineRole" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.953, 0.584, 0, 1)
+theme_override_font_sizes/font_size = 26
+text = "Built With"
+horizontal_alignment = 1
+
+[node name="Engine" type="Label" parent="Column/Roll/Lines"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Godot Engine"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

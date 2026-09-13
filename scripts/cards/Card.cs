@@ -102,11 +102,13 @@ public partial class Card : Node2D
 
 		_facePosition = GlobalPosition;
 		_swayPhase = GD.Randf() * Mathf.Tau;
-		Settings.Instance.Changed += OnSettingsChanged;
 	}
+
+	public override void _EnterTree() => Settings.Instance.Changed += OnSettingsChanged;
 
 	public override void _ExitTree()
 	{
+		Settings.Instance.Changed -= OnSettingsChanged;
 		if (IsDragging)
 		{
 			Held = null;

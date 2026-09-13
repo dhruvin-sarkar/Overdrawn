@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/StatsPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/stat_row.tscn" id="3_row"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/progress_summary.tscn" id="4_summary"]
+
+[node name="StatsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1480, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Body" type="HBoxContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Bests" type="VBoxContainer" parent="Column/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 22
+
+[node name="BestHand" parent="Column/Body/Bests" instance=ExtResource("3_row")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Best Hand"
+TitleWidth = 320.0
+FontSize = 40
+
+[node name="HighestLevel" parent="Column/Body/Bests" instance=ExtResource("3_row")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Highest Level"
+TitleWidth = 320.0
+FontSize = 38
+
+[node name="MostPlayed" parent="Column/Body/Bests" instance=ExtResource("3_row")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Most Played Hand"
+TitleWidth = 320.0
+FontSize = 34
+
+[node name="MostMoney" parent="Column/Body/Bests" instance=ExtResource("3_row")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Most Money"
+TitleWidth = 320.0
+FontSize = 38
+
+[node name="BestStreak" parent="Column/Body/Bests" instance=ExtResource("3_row")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Best Win Streak"
+TitleWidth = 320.0
+FontSize = 34
+
+[node name="Completion" type="PanelContainer" parent="Column/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_type_variation = &"InsetPanel"
+
+[node name="Progress" parent="Column/Body/Completion" instance=ExtResource("4_summary")]
+unique_name_in_owner = true
+layout_mode = 2
+TitleWidth = 290.0
+FontSize = 32
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

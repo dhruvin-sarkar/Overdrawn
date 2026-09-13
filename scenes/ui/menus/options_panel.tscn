@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/OptionsPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/settings_panel.tscn" id="3_settings"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/stats_panel.tscn" id="4_stats"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/deck_panel.tscn" id="5_deck"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/credits_panel.tscn" id="6_credits"]
+
+[node name="OptionsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(640, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+SettingsScene = ExtResource("3_settings")
+StatsScene = ExtResource("4_stats")
+DeckScene = ExtResource("5_deck")
+CreditsScene = ExtResource("6_credits")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 26
+
+[node name="Buttons" type="MarginContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_right = 70
+
+[node name="List" type="VBoxContainer" parent="Column/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Settings" type="Button" parent="Column/Buttons/List"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+script = ExtResource("2_button")
+
+[node name="Stats" type="Button" parent="Column/Buttons/List"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 40
+text = "Stats"
+script = ExtResource("2_button")
+
+[node name="Deck" type="Button" parent="Column/Buttons/List"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 40
+text = "Customize Deck"
+script = ExtResource("2_button")
+
+[node name="Credits" type="Button" parent="Column/Buttons/List"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+script = ExtResource("2_button")
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

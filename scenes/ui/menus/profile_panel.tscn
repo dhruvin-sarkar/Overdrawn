@@ -1,0 +1,140 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/ProfilePanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="Script" path="res://scripts/ui/components/TabStrip.cs" id="3_tabs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/progress_summary.tscn" id="4_summary"]
+
+[node name="ProfilePanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1060, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Tabs" type="HBoxContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+script = ExtResource("3_tabs")
+Tabs = PackedStringArray("1", "2", "3")
+TabWidth = 220.0
+
+[node name="Name" type="LineEdit" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 54)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"NameField"
+placeholder_text = "Enter Name"
+alignment = 1
+
+[node name="Body" type="HBoxContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/separation = 34
+
+[node name="Slot" type="MarginContainer" parent="Column/Body"]
+custom_minimum_size = Vector2(580, 360)
+layout_mode = 2
+
+[node name="Summary" type="PanelContainer" parent="Column/Body/Slot"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="Progress" parent="Column/Body/Slot/Summary" instance=ExtResource("4_summary")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+TitleWidth = 250.0
+FontSize = 30
+
+[node name="Empty" type="PanelContainer" parent="Column/Body/Slot"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="EmptyLabel" type="Label" parent="Column/Body/Slot/Empty"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.14)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 48
+text = "EMPTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="VBoxContainer" parent="Column/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="WinsRow" type="HBoxContainer" parent="Column/Body/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="WinsLabel" type="Label" parent="Column/Body/Actions/WinsRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Wins:"
+
+[node name="Wins" type="Label" parent="Column/Body/Actions/WinsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.914, 0.306, 0.247, 1)
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Load" type="Button" parent="Column/Body/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 38
+text = "Load Profile"
+script = ExtResource("2_button")
+
+[node name="Create" type="Button" parent="Column/Body/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 38
+text = "Create Profile"
+script = ExtResource("2_button")
+
+[node name="Reset" type="Button" parent="Column/Body/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 28
+text = "Reset Profile"
+script = ExtResource("2_button")
+
+[node name="Delete" type="Button" parent="Column/Body/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 28
+text = "Delete Profile"
+script = ExtResource("2_button")
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

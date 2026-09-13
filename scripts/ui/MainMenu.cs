@@ -13,6 +13,8 @@ namespace Overdrawn.UI;
 public partial class MainMenu : Control
 {
 	[Export] public CardStyleLibrary CardStyles { get; set; } = null!;
+	[Export] public PackedScene OptionsScene { get; set; } = null!;
+	[Export] public PackedScene ProfileScene { get; set; } = null!;
 	[Export] public float BurnDuration { get; set; } = 3.2f;
 	[Export] public float FurnitureDelay { get; set; } = 2.0f;
 	[Export] public float FurnitureDuration { get; set; } = 0.45f;
@@ -46,6 +48,9 @@ public partial class MainMenu : Control
 			GetNode<Control>("ProfileBar"),
 		};
 
+		var overlay = GetNode<MenuOverlay>("Overlay");
+		GetNode<Button>("ButtonBar/Margin/Row/Options").Pressed += () => overlay.Open(OptionsScene);
+		_profileButton.Pressed += () => overlay.Open(ProfileScene);
 		GetNode<Button>("ButtonBar/Margin/Row/Quit").Pressed += () => GetTree().Quit();
 
 		PlayIntro();

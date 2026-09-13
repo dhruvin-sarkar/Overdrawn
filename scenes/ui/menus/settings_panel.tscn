@@ -1,0 +1,155 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/SettingsPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="Script" path="res://scripts/ui/components/TabStrip.cs" id="3_tabs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/option_cycler.tscn" id="4_cycler"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/setting_slider.tscn" id="5_slider"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/setting_toggle.tscn" id="6_toggle"]
+
+[node name="SettingsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1100, 800)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Tabs" type="HBoxContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+script = ExtResource("3_tabs")
+Tabs = PackedStringArray("Game", "Video", "Graphics", "Audio")
+TabWidth = 210.0
+
+[node name="Pages" type="MarginContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 8
+
+[node name="Game" type="VBoxContainer" parent="Column/Pages"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="GameSpeed" parent="Column/Pages/Game" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Game Speed"
+ValueWidth = 170.0
+
+[node name="HitStand" parent="Column/Pages/Game" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Hit/Stand Button Position"
+ValueWidth = 320.0
+
+[node name="Screenshake" parent="Column/Pages/Game" instance=ExtResource("5_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Screenshake"
+
+[node name="HighContrast" parent="Column/Pages/Game" instance=ExtResource("6_toggle")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "High Contrast Cards"
+
+[node name="ReducedMotion" parent="Column/Pages/Game" instance=ExtResource("6_toggle")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Reduced Motion"
+
+[node name="Video" type="VBoxContainer" parent="Column/Pages"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Monitor" parent="Column/Pages/Video" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Display Monitor"
+ValueWidth = 260.0
+
+[node name="WindowMode" parent="Column/Pages/Video" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Window Mode"
+ValueWidth = 260.0
+
+[node name="Resolution" parent="Column/Pages/Video" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+ValueWidth = 260.0
+
+[node name="VSync" parent="Column/Pages/Video" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+ValueWidth = 260.0
+
+[node name="Apply" type="Button" parent="Column/Pages/Video"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 66)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"BlueButton"
+text = "Apply"
+script = ExtResource("2_button")
+
+[node name="Graphics" type="VBoxContainer" parent="Column/Pages"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Shadows" parent="Column/Pages/Graphics" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Shadows"
+ValueWidth = 260.0
+
+[node name="PixelSmoothing" parent="Column/Pages/Graphics" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Pixel Art Smoothing"
+ValueWidth = 260.0
+
+[node name="Crt" parent="Column/Pages/Graphics" instance=ExtResource("5_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "CRT"
+
+[node name="CrtBloom" parent="Column/Pages/Graphics" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "CRT Bloom"
+ValueWidth = 260.0
+
+[node name="Audio" type="VBoxContainer" parent="Column/Pages"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MasterVolume" parent="Column/Pages/Audio" instance=ExtResource("5_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Master Volume"
+
+[node name="MusicVolume" parent="Column/Pages/Audio" instance=ExtResource("5_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Music Volume"
+
+[node name="GameVolume" parent="Column/Pages/Audio" instance=ExtResource("5_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Game Volume"
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

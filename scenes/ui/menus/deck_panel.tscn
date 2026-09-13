@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/DeckPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="Script" path="res://scripts/ui/components/TabStrip.cs" id="3_tabs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/option_cycler.tscn" id="4_cycler"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/setting_toggle.tscn" id="5_toggle"]
+[ext_resource type="Script" path="res://scripts/cards/CardPath.cs" id="6_path"]
+[ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="7_card"]
+[ext_resource type="Resource" path="res://data/card_style_library.tres" id="8_styles"]
+
+[sub_resource type="Curve2D" id="Curve2D_table"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 140, 170, 0, 0, 0, 0, 900, 170)
+}
+point_count = 2
+
+[node name="DeckPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1120, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+CardStyles = ExtResource("8_styles")
+CardScene = ExtResource("7_card")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Tabs" type="HBoxContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+script = ExtResource("3_tabs")
+Tabs = PackedStringArray("Spades", "Hearts", "Clubs", "Diamonds")
+
+[node name="TablePanel" type="PanelContainer" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="Table" type="Control" parent="Column/TablePanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Path" type="Path2D" parent="Column/TablePanel/Table"]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_table")
+script = ExtResource("6_path")
+
+[node name="Style" parent="Column" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+ValueWidth = 480.0
+
+[node name="HighContrast" parent="Column" instance=ExtResource("5_toggle")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "High Contrast Cards"
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")

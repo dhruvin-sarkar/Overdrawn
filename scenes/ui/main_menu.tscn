@@ -9,9 +9,21 @@
 [ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
 [ext_resource type="Resource" path="res://data/card_style_library.tres" id="9_styles"]
+[ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="10_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/profile_panel.tscn" id="12_profile"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
+shader_parameter/colour_1 = Color(0, 0, 0, 1)
+shader_parameter/colour_2 = Color(0, 0.4, 0.9, 1)
+shader_parameter/colour_3 = Color(1, 0, 0.2, 1)
+shader_parameter/contrast = 1.8
+shader_parameter/spin_amount = 1.05
+shader_parameter/spin_speed = 0.7
+shader_parameter/paint_speed = 1.0
+shader_parameter/pixel_filter = 740.0
+shader_parameter/swirl_centre = Vector2(0, 0)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_title"]
 noise_type = 3
@@ -90,6 +102,8 @@ grow_vertical = 2
 theme = ExtResource("7_theme")
 script = ExtResource("1_menu")
 CardStyles = ExtResource("9_styles")
+OptionsScene = ExtResource("11_options")
+ProfileScene = ExtResource("12_profile")
 
 [node name="Background" type="ColorRect" parent="." unique_id=825869231]
 material = SubResource("ShaderMaterial_bg")
@@ -266,6 +280,25 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
 text = "P1"
 script = ExtResource("8_button")
+
+[node name="Overlay" type="Control" parent="." unique_id=103475741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_overlay")
+
+[node name="Dim" type="ColorRect" parent="Overlay" unique_id=1778081052]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0)
 
 [node name="CrtLayer" type="CanvasLayer" parent="." unique_id=1127598656]
 layer = 10
