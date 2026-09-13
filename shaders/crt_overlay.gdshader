@@ -3,7 +3,8 @@
 // phosphor grille, chromatic split, bloom, signal noise and vignette. The CRT
 // setting drives crt_strength (0 leaves the screen untouched) and crt_bloom.
 // Curvature follows Balatro's formula; scanlines lighten on bright pixels the
-// way a real beam widens.
+// way a real beam widens. Clicks raise crt_pulse, which briefly deepens the
+// scanlines, split, jitter and noise; a faint tracking band rolls up the tube.
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -11,6 +12,7 @@ uniform sampler2D screen_tex : hint_screen_texture, repeat_disable, filter_linea
 
 global uniform float crt_strength;
 global uniform float crt_bloom;
+global uniform float crt_pulse;
 
 group_uniforms tube;
 uniform vec2 curvature = vec2(0.03, 0.045);
@@ -34,6 +36,18 @@ uniform float bloom_threshold : hint_range(0.0, 1.0) = 0.55;
 uniform float bloom_intensity : hint_range(0.0, 2.0) = 0.45;
 uniform float bloom_lod : hint_range(0.0, 6.0) = 3.0;
 
+group_uniforms pulse;
+uniform float pulse_scanlines : hint_range(0.0, 1.0) = 0.4;
+uniform float pulse_aberration_px : hint_range(0.0, 8.0) = 3.0;
+uniform float pulse_jitter_px : hint_range(0.0, 8.0) = 2.5;
+uniform float pulse_noise : hint_range(0.0, 0.3) = 0.08;
+
+group_uniforms tracking;
+uniform float band_speed = 0.05;
+uniform float band_height : hint_range(0.0, 0.5) = 0.04;
+uniform float band_shift_px : hint_range(0.0, 6.0) = 1.5;
+uniform float band_glow : hint_range(0.0, 0.2) = 0.025;
+
 float hash(vec2 p) {
 	return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
 }
@@ -54,9 +68,11 @@ void fragment() {
 	vec2 uv = c * 0.5 + 0.5;
 
 	float line = floor(uv.y * scanline_count);
-	uv.x += (hash(vec2(line, floor(TIME * 24.0))) - 0.5) * jitter_px * strength * SCREEN_PIXEL_SIZE.x;
+	float band = 1.0 - smoothstep(0.0, band_height, abs(fract(uv.y + TIME * band_speed) - 0.5));
+	float jitter = (hash(vec2(line, floor(TIME * 24.0))) - 0.5) * (jitter_px + pulse_jitter_px * crt_pulse);
+	uv.x += (jitter + band * band_shift_px) * strength * SCREEN_PIXEL_SIZE.x;
 
-	vec2 split = vec2(aberration_px * strength * SCREEN_PIXEL_SIZE.x, 0.0);
+	vec2 split = vec2((aberration_px + pulse_aberration_px * crt_pulse) * strength * SCREEN_PIXEL_SIZE.x, 0.0);
 	vec3 col = vec3(
 		texture(screen_tex, uv + split).r,
 		texture(screen_tex, uv).g,
@@ -64,7 +80,7 @@ void fragment() {
 
 	float luma = dot(col, vec3(0.299, 0.587, 0.114));
 	float scan = 0.5 + 0.5 * cos(uv.y * scanline_count * TAU);
-	float scan_amt = scanline_depth * strength * (1.0 - 0.6 * luma);
+	float scan_amt = min(scanline_depth + pulse_scanlines * crt_pulse, 1.0) * strength * (1.0 - 0.6 * luma);
 	col *= mix(1.0, scan, scan_amt) / (1.0 - 0.5 * scan_amt);
 
 	float g = mod(floor(FRAGCOORD.x), 3.0);
@@ -79,7 +95,9 @@ void fragment() {
 	}
 
 	col = (col - 0.5) * mix(1.0, contrast, strength) + 0.5;
-	col += (hash(floor(FRAGCOORD.xy * 0.5) + fract(TIME) * vec2(113.0, 71.0)) - 0.5) * noise_amount * strength;
+	col += band * band_glow * strength;
+	col += (hash(floor(FRAGCOORD.xy * 0.5) + fract(TIME) * vec2(113.0, 71.0)) - 0.5)
+			* (noise_amount + pulse_noise * crt_pulse) * strength;
 
 	vec2 v = uv * (1.0 - uv);
 	col *= mix(1.0, clamp(pow(v.x * v.y * 16.0, 0.35), 0.0, 1.0), vignette * strength);

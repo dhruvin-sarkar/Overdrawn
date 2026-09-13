@@ -22,6 +22,7 @@ MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
 Settings="*res://scripts/core/Settings.cs"
 ProfileSlots="*res://scripts/profiles/ProfileSlots.cs"
 ScreenShake="*res://scripts/core/ScreenShake.cs"
+CrtPulse="*uid://ci5lhj4x20cit"
 
 [display]
 
@@ -37,6 +38,10 @@ project/assembly_name="Overdrawn"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg", "res://addons/godot_mcp_toolkit/plugin.cfg")
+
+[gui]
+
+theme/custom="res://theme/overdrawn.tres"
 
 [physics]
 
@@ -63,4 +68,8 @@ crt_bloom={
 motion_scale={
 "type": "float",
 "value": 1.0
+}
+crt_pulse={
+"type": "float",
+"value": 0.0
 }
