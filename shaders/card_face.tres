@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://clul56yuc0taj"]
+
+[ext_resource type="Shader" uid="uid://df7ymtskf2fl1" path="res://shaders/card_tilt.gdshader" id="1_tilt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_card"]
+noise_type = 3
+frequency = 0.009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_card"]
+noise = SubResource("FastNoiseLite_card")
+seamless = true
+
+[resource]
+shader = ExtResource("1_tilt")
+shader_parameter/fov = 60.0
+shader_parameter/cull_back = true
+shader_parameter/inset = 0.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_card")
+shader_parameter/burn_size = 0.3
+shader_parameter/ash_colour = Color(0.04, 0.05, 0.09, 1)
+shader_parameter/burn_colour = Color(0.98, 0.97, 0.95, 1)
+shader_parameter/hot_colour = Color(0.55, 0.75, 1, 1)

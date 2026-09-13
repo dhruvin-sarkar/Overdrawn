@@ -1,6 +1,9 @@
 // Swirling paint background, adapted from Balatro's original LOVE2D shader.
-// Driven by built-in TIME instead of script-fed uniforms.
+// Driven by built-in TIME instead of script-fed uniforms; motion_scale slows it
+// for Reduced Motion.
 shader_type canvas_item;
+
+global uniform float motion_scale;
 
 uniform vec4 colour_1 : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform vec4 colour_2 : source_color = vec4(0.0, 0.4, 0.9, 1.0);
@@ -22,14 +25,15 @@ void fragment() {
 		/ length(screen_size) - swirl_centre;
 	float uv_len = length(uv);
 
-	float speed = (TIME * spin_speed * SPIN_EASE * 0.2) + 302.2;
+	float time = TIME * motion_scale;
+	float speed = (time * spin_speed * SPIN_EASE * 0.2) + 302.2;
 	float angle = atan(uv.y, uv.x) + speed
 		- SPIN_EASE * 20.0 * (spin_amount * uv_len + (1.0 - spin_amount));
 	vec2 mid = (screen_size / length(screen_size)) / 2.0;
 	uv = vec2(uv_len * cos(angle) + mid.x, uv_len * sin(angle) + mid.y) - mid;
 
 	uv *= 30.0;
-	float spd = TIME * paint_speed * 2.0;
+	float spd = time * paint_speed * 2.0;
 	vec2 uv2 = vec2(uv.x + uv.y);
 
 	for (int i = 0; i < 5; i++) {

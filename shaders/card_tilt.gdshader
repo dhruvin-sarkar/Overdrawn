@@ -1,6 +1,7 @@
-// Fakes a 3D camera perspective on a CanvasItem. Original by Hei (MIT).
-// x_rot / y_rot are driven per-card from script; material is local to scene.
-// The burn-in dissolve is folded in here because a node carries one material.
+// Fakes a 3D camera perspective on a card face. Original by Hei (MIT).
+// Rotation and burn progress are per-card instance uniforms, so every card
+// shares one material. The burn-in dissolve lives here because a node carries
+// one material. Expects a Sprite2D, whose quad matches its texture size.
 shader_type canvas_item;
 
 #include "res://shaders/burn.gdshaderinc"
@@ -9,11 +10,11 @@ uniform float fov : hint_range(1.0, 179.0) = 60.0;
 uniform bool cull_back = true;
 uniform float inset : hint_range(0.0, 1.0) = 0.0;
 
-uniform float y_rot : hint_range(-180.0, 180.0) = 0.0;
-uniform float x_rot : hint_range(-180.0, 180.0) = 0.0;
+instance uniform float y_rot = 0.0;
+instance uniform float x_rot = 0.0;
+instance uniform float progress = 1.0;
 
 uniform sampler2D noise_texture : source_color, repeat_enable;
-uniform float progress : hint_range(0.0, 1.0) = 1.0;
 uniform float burn_size : hint_range(0.0, 1.0) = 0.12;
 uniform vec4 ash_colour : source_color = vec4(0.04, 0.05, 0.09, 1.0);
 uniform vec4 burn_colour : source_color = vec4(0.98, 0.97, 0.95, 1.0);

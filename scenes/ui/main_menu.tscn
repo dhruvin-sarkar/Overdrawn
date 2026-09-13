@@ -5,22 +5,13 @@
 [ext_resource type="Shader" uid="uid://b8t587undvbub" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
 [ext_resource type="Shader" uid="uid://dpgts8slp72xq" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
 [ext_resource type="Texture2D" uid="uid://cn44q4rxmo4tg" path="res://assets/ui/title_text.png" id="5_title"]
-[ext_resource type="PackedScene" uid="uid://bq5ul3t5gbgub" path="res://scenes/ui/tilt_card.tscn" id="6_card"]
+[ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="6_card"]
 [ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
-[ext_resource type="Resource" path="res://data/menu_card_faces.tres" id="9_faces"]
+[ext_resource type="Resource" path="res://data/card_style_library.tres" id="9_styles"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
-shader_parameter/colour_1 = Color(0, 0, 0, 1)
-shader_parameter/colour_2 = Color(0, 0.4, 0.9, 1)
-shader_parameter/colour_3 = Color(1, 0, 0.2, 1)
-shader_parameter/contrast = 1.8
-shader_parameter/spin_amount = 1.05
-shader_parameter/spin_speed = 0.7
-shader_parameter/paint_speed = 1.0
-shader_parameter/pixel_filter = 740.0
-shader_parameter/swirl_centre = Vector2(0, 0)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_title"]
 noise_type = 3
@@ -88,13 +79,6 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
 shader = ExtResource("3_crt")
-shader_parameter/curve = 0.045
-shader_parameter/scanline_strength = 0.16
-shader_parameter/scanline_density = 640.0
-shader_parameter/aberration = 1.1
-shader_parameter/vignette_strength = 0.42
-shader_parameter/brightness = 1.08
-shader_parameter/bezel_colour = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=2012571883]
 layout_mode = 3
@@ -105,7 +89,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_theme")
 script = ExtResource("1_menu")
-CardFaces = ExtResource("9_faces")
+CardStyles = ExtResource("9_styles")
 
 [node name="Background" type="ColorRect" parent="." unique_id=825869231]
 material = SubResource("ShaderMaterial_bg")
@@ -135,8 +119,7 @@ texture = ExtResource("5_title")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Card" parent="." unique_id=1354311087 instance=ExtResource("6_card")]
-custom_minimum_size = Vector2(204, 285.6)
+[node name="CardSlot" type="Control" parent="." unique_id=1354311087]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -149,6 +132,11 @@ offset_right = 15.9
 offset_bottom = 13.55
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Card" parent="CardSlot" unique_id=2041522631 instance=ExtResource("6_card")]
+Size = Vector2(204, 285.6)
+MaxTilt = 22.0
 
 [node name="ButtonBar" type="PanelContainer" parent="." unique_id=331183248]
 layout_mode = 0
@@ -277,41 +265,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
 theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
 text = "P1"
-script = ExtResource("8_button")
-
-[node name="LanguageBar" type="PanelContainer" parent="." unique_id=1989391150]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -340.0
-offset_top = -171.0
-offset_right = -146.0
-offset_bottom = -78.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
-
-[node name="Margin" type="MarginContainer" parent="LanguageBar" unique_id=207420159]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="Language" type="Button" parent="LanguageBar/Margin" unique_id=1046669589]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
-theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
-theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
-text = "English"
 script = ExtResource("8_button")
 
 [node name="CrtLayer" type="CanvasLayer" parent="." unique_id=1127598656]
