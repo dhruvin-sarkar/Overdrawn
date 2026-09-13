@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
+Settings="*res://scripts/core/Settings.cs"
+ProfileSlots="*res://scripts/profiles/ProfileSlots.cs"
+ScreenShake="*res://scripts/core/ScreenShake.cs"
 
 [display]
 
@@ -42,3 +45,22 @@ enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg", "res://addons/godo
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[shader_globals]
+
+pixel_smoothing={
+"type": "float",
+"value": 1.0
+}
+crt_strength={
+"type": "float",
+"value": 0.7
+}
+crt_bloom={
+"type": "float",
+"value": 1.0
+}
+motion_scale={
+"type": "float",
+"value": 1.0
+}

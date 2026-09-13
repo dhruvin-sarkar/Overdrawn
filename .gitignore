@@ -17,3 +17,6 @@ CLAUDE.md
 BLACKJACK_ROGUELIKE_GDD.md
 BLACKJACK_ROGUELIKE_CONTENT_REFERENCE*.md
 .remember/
+
+# Third-party reference code kept for porting, not part of the game
+reference/
