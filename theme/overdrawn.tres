@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3]
 
-[ext_resource type="FontFile" uid="uid://cc4l12smj3sqd" path="res://Thin Sans.ttf" id="1_font"]
+[ext_resource type="FontFile" uid="uid://b7r2bduvv4mxl" path="res://assets/fonts/thin_sans.ttf" id="1_font"]
 
 [resource]
 default_font = ExtResource("1_font")

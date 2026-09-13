@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cc4l12smj3sqd"
-path="res://.godot/imported/Thin Sans.ttf-4d045cd4cd2efb6ace3ded9f72f49e41.fontdata"
+uid="uid://b7r2bduvv4mxl"
+path="res://.godot/imported/thin_sans.ttf-885750a1df932d87dd3f1c0de7b26e39.fontdata"
 
 [deps]
 
-source_file="res://Thin Sans.ttf"
-dest_files=["res://.godot/imported/Thin Sans.ttf-4d045cd4cd2efb6ace3ded9f72f49e41.fontdata"]
+source_file="res://assets/fonts/thin_sans.ttf"
+dest_files=["res://.godot/imported/thin_sans.ttf-885750a1df932d87dd3f1c0de7b26e39.fontdata"]
 
 [params]
 

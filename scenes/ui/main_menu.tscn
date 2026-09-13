@@ -4,8 +4,8 @@
 [ext_resource type="Shader" uid="uid://cr68nytkm8xo7" path="res://shaders/paint_background.gdshader" id="2_paint"]
 [ext_resource type="Shader" uid="uid://b8t587undvbub" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
 [ext_resource type="Shader" uid="uid://dpgts8slp72xq" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
-[ext_resource type="Texture2D" uid="uid://bjbuix2iuudr4" path="res://Title text.png" id="5_title"]
-[ext_resource type="PackedScene" uid="uid://bq5ul3t5gbgub" path="res://scenes/ui/TiltCard.tscn" id="6_card"]
+[ext_resource type="Texture2D" uid="uid://cn44q4rxmo4tg" path="res://assets/ui/title_text.png" id="5_title"]
+[ext_resource type="PackedScene" uid="uid://bq5ul3t5gbgub" path="res://scenes/ui/tilt_card.tscn" id="6_card"]
 [ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
 
