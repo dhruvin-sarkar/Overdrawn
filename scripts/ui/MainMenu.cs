@@ -8,8 +8,8 @@ namespace Overdrawn.UI;
 /// </summary>
 public partial class MainMenu : Control
 {
-	[Export] public float BurnDuration { get; set; } = 1.6f;
-	[Export] public float FurnitureDelay { get; set; } = 1.0f;
+	[Export] public float BurnDuration { get; set; } = 3.2f;
+	[Export] public float FurnitureDelay { get; set; } = 2.0f;
 	[Export] public float FurnitureDuration { get; set; } = 0.45f;
 
 	private TextureRect _title = null!;
