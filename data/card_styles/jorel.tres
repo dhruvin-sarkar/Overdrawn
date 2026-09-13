@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="CardStyle" format=3]
+
+[ext_resource type="Script" uid="uid://cndnacxmj1ehu" path="res://scripts/cards/CardStyle.cs" id="1_style"]
+[ext_resource type="Texture2D" uid="uid://c2evfx8hhjgvn" path="res://assets/cards/jorel/spades/spade_0001.png" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://g6bcck1dog7r" path="res://assets/cards/jorel/spades/spade_0002.png" id="3_tex"]
+[ext_resource type="Texture2D" uid="uid://ce76ywegt7ppy" path="res://assets/cards/jorel/spades/spade_0003.png" id="4_tex"]
+[ext_resource type="Texture2D" uid="uid://bxw6vb1j33w4a" path="res://assets/cards/jorel/spades/spade_0004.png" id="5_tex"]
+[ext_resource type="Texture2D" uid="uid://c23xuvv4jk7tp" path="res://assets/cards/jorel/spades/spade_0005.png" id="6_tex"]
+[ext_resource type="Texture2D" uid="uid://xvokc5r50y3g" path="res://assets/cards/jorel/spades/spade_0006.png" id="7_tex"]
+[ext_resource type="Texture2D" uid="uid://blrglq041pcd3" path="res://assets/cards/jorel/spades/spade_0007.png" id="8_tex"]
+[ext_resource type="Texture2D" uid="uid://belviogcg8epo" path="res://assets/cards/jorel/spades/spade_0008.png" id="9_tex"]
+[ext_resource type="Texture2D" uid="uid://v0uyo8e2b6gf" path="res://assets/cards/jorel/spades/spade_0009.png" id="10_tex"]
+[ext_resource type="Texture2D" uid="uid://bu4l8ydid516f" path="res://assets/cards/jorel/spades/spade_0010.png" id="11_tex"]
+[ext_resource type="Texture2D" uid="uid://das8xk8f7q4ew" path="res://assets/cards/jorel/spades/spade_0011.png" id="12_tex"]
+[ext_resource type="Texture2D" uid="uid://bkds56hk2gnl7" path="res://assets/cards/jorel/spades/spade_0012.png" id="13_tex"]
+[ext_resource type="Texture2D" uid="uid://dijm78ovuh1hh" path="res://assets/cards/jorel/spades/spade_0013.png" id="14_tex"]
+[ext_resource type="Texture2D" uid="uid://sw5xl72wd0s6" path="res://assets/cards/jorel/hearts/heart_0001.png" id="15_tex"]
+[ext_resource type="Texture2D" uid="uid://b1gek41b3tocc" path="res://assets/cards/jorel/hearts/heart_0002.png" id="16_tex"]
+[ext_resource type="Texture2D" uid="uid://2v82eq17nx2e" path="res://assets/cards/jorel/hearts/heart_0003.png" id="17_tex"]
+[ext_resource type="Texture2D" uid="uid://dmrxoa202p5jc" path="res://assets/cards/jorel/hearts/heart_0004.png" id="18_tex"]
+[ext_resource type="Texture2D" uid="uid://ihqf7r3owfpt" path="res://assets/cards/jorel/hearts/heart_0005.png" id="19_tex"]
+[ext_resource type="Texture2D" uid="uid://4pgvdfu7pbpi" path="res://assets/cards/jorel/hearts/heart_0006.png" id="20_tex"]
+[ext_resource type="Texture2D" uid="uid://gjcehgm2dj1x" path="res://assets/cards/jorel/hearts/heart_0007.png" id="21_tex"]
+[ext_resource type="Texture2D" uid="uid://lgo84eaub7m8" path="res://assets/cards/jorel/hearts/heart_0008.png" id="22_tex"]
+[ext_resource type="Texture2D" uid="uid://bgvqca3604ms3" path="res://assets/cards/jorel/hearts/heart_0009.png" id="23_tex"]
+[ext_resource type="Texture2D" uid="uid://2l522r2iq1hc" path="res://assets/cards/jorel/hearts/heart_0010.png" id="24_tex"]
+[ext_resource type="Texture2D" uid="uid://dtg0c03djxgl2" path="res://assets/cards/jorel/hearts/heart_0011.png" id="25_tex"]
+[ext_resource type="Texture2D" uid="uid://b5guepp8kd8ax" path="res://assets/cards/jorel/hearts/heart_0012.png" id="26_tex"]
+[ext_resource type="Texture2D" uid="uid://dahsaht1uy5hu" path="res://assets/cards/jorel/hearts/heart_0013.png" id="27_tex"]
+[ext_resource type="Texture2D" uid="uid://cp1i0bwqy26lv" path="res://assets/cards/jorel/clubs/club_0001.png" id="28_tex"]
+[ext_resource type="Texture2D" uid="uid://c2px0dp5ka1co" path="res://assets/cards/jorel/clubs/club_0002.png" id="29_tex"]
+[ext_resource type="Texture2D" uid="uid://bhmrwm0pccaww" path="res://assets/cards/jorel/clubs/club_0003.png" id="30_tex"]
+[ext_resource type="Texture2D" uid="uid://ct62igt3cul4s" path="res://assets/cards/jorel/clubs/club_0004.png" id="31_tex"]
+[ext_resource type="Texture2D" uid="uid://b5cn1wa0mruqy" path="res://assets/cards/jorel/clubs/club_0005.png" id="32_tex"]
+[ext_resource type="Texture2D" uid="uid://cn2i8ve38j354" path="res://assets/cards/jorel/clubs/club_0006.png" id="33_tex"]
+[ext_resource type="Texture2D" uid="uid://dk32vjath36cr" path="res://assets/cards/jorel/clubs/club_0007.png" id="34_tex"]
+[ext_resource type="Texture2D" uid="uid://dfh60s3b55yy0" path="res://assets/cards/jorel/clubs/club_0008.png" id="35_tex"]
+[ext_resource type="Texture2D" uid="uid://bus07flieqvhm" path="res://assets/cards/jorel/clubs/club_0009.png" id="36_tex"]
+[ext_resource type="Texture2D" uid="uid://62nm7iwcx68q" path="res://assets/cards/jorel/clubs/club_0010.png" id="37_tex"]
+[ext_resource type="Texture2D" uid="uid://dbwjb43yjd571" path="res://assets/cards/jorel/clubs/club_0011.png" id="38_tex"]
+[ext_resource type="Texture2D" uid="uid://3wpll5gde6fu" path="res://assets/cards/jorel/clubs/club_0012.png" id="39_tex"]
+[ext_resource type="Texture2D" uid="uid://cnt4bgjjpxa67" path="res://assets/cards/jorel/clubs/club_0013.png" id="40_tex"]
+[ext_resource type="Texture2D" uid="uid://dnssxi8xv4ak5" path="res://assets/cards/jorel/diamonds/diamond_0001.png" id="41_tex"]
+[ext_resource type="Texture2D" uid="uid://ch2navxxkmh4q" path="res://assets/cards/jorel/diamonds/diamond_0002.png" id="42_tex"]
+[ext_resource type="Texture2D" uid="uid://fpudbp88e85i" path="res://assets/cards/jorel/diamonds/diamond_0003.png" id="43_tex"]
+[ext_resource type="Texture2D" uid="uid://barw4to7xbofl" path="res://assets/cards/jorel/diamonds/diamond_0004.png" id="44_tex"]
+[ext_resource type="Texture2D" uid="uid://cca2d5ypuef1m" path="res://assets/cards/jorel/diamonds/diamond_0005.png" id="45_tex"]
+[ext_resource type="Texture2D" uid="uid://dit0sy8edhjvx" path="res://assets/cards/jorel/diamonds/diamond_0006.png" id="46_tex"]
+[ext_resource type="Texture2D" uid="uid://bt32wg7ckabfm" path="res://assets/cards/jorel/diamonds/diamond_0007.png" id="47_tex"]
+[ext_resource type="Texture2D" uid="uid://bw6xyisi8tn7q" path="res://assets/cards/jorel/diamonds/diamond_0008.png" id="48_tex"]
+[ext_resource type="Texture2D" uid="uid://ccv5gulremdqw" path="res://assets/cards/jorel/diamonds/diamond_0009.png" id="49_tex"]
+[ext_resource type="Texture2D" uid="uid://hgbgdt4wybo8" path="res://assets/cards/jorel/diamonds/diamond_0010.png" id="50_tex"]
+[ext_resource type="Texture2D" uid="uid://c3lwrt5tqx5fw" path="res://assets/cards/jorel/diamonds/diamond_0011.png" id="51_tex"]
+[ext_resource type="Texture2D" uid="uid://b6dpfi3fdvrse" path="res://assets/cards/jorel/diamonds/diamond_0012.png" id="52_tex"]
+[ext_resource type="Texture2D" uid="uid://b2nrmjyrembk" path="res://assets/cards/jorel/diamonds/diamond_0013.png" id="53_tex"]
+[ext_resource type="Texture2D" uid="uid://b5wyq2ovf8rpa" path="res://assets/cards/jorel/card_back.png" id="54_tex"]
+
+[resource]
+script = ExtResource("1_style")
+Id = "jorel"
+DisplayName = "Jorel"
+Spades = Array[Texture2D]([ExtResource("2_tex"), ExtResource("3_tex"), ExtResource("4_tex"), ExtResource("5_tex"), ExtResource("6_tex"), ExtResource("7_tex"), ExtResource("8_tex"), ExtResource("9_tex"), ExtResource("10_tex"), ExtResource("11_tex"), ExtResource("12_tex"), ExtResource("13_tex"), ExtResource("14_tex")])
+Hearts = Array[Texture2D]([ExtResource("15_tex"), ExtResource("16_tex"), ExtResource("17_tex"), ExtResource("18_tex"), ExtResource("19_tex"), ExtResource("20_tex"), ExtResource("21_tex"), ExtResource("22_tex"), ExtResource("23_tex"), ExtResource("24_tex"), ExtResource("25_tex"), ExtResource("26_tex"), ExtResource("27_tex")])
+Clubs = Array[Texture2D]([ExtResource("28_tex"), ExtResource("29_tex"), ExtResource("30_tex"), ExtResource("31_tex"), ExtResource("32_tex"), ExtResource("33_tex"), ExtResource("34_tex"), ExtResource("35_tex"), ExtResource("36_tex"), ExtResource("37_tex"), ExtResource("38_tex"), ExtResource("39_tex"), ExtResource("40_tex")])
+Diamonds = Array[Texture2D]([ExtResource("41_tex"), ExtResource("42_tex"), ExtResource("43_tex"), ExtResource("44_tex"), ExtResource("45_tex"), ExtResource("46_tex"), ExtResource("47_tex"), ExtResource("48_tex"), ExtResource("49_tex"), ExtResource("50_tex"), ExtResource("51_tex"), ExtResource("52_tex"), ExtResource("53_tex")])
+Back = ExtResource("54_tex")
+ClubInks = Array[Color]([Color(0.09804, 0.07059, 0.09804, 1), Color(0.05098, 0.03137, 0.05098, 1)])
+ClubContrastInks = Array[Color]([Color(0.1647, 0.3608, 0.7608, 1), Color(0.1137, 0.2471, 0.5294, 1)])
+DiamondInks = Array[Color]([Color(0.8627, 0.298, 0.1843, 1)])
+DiamondContrastInks = Array[Color]([Color(0.9725, 0.6353, 0.1333, 1)])
+CornerSize = Vector2(0.17, 0.22)

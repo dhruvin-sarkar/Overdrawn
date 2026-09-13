@@ -1,0 +1,294 @@
+[gd_resource type="Resource" script_class="CardStyle" format=3]
+
+[ext_resource type="Script" uid="uid://cndnacxmj1ehu" path="res://scripts/cards/CardStyle.cs" id="1_style"]
+[ext_resource type="Texture2D" uid="uid://c4gumeo6metxe" path="res://assets/cards/card_set/spades/a_spades.png" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://ckesk717k66jv" path="res://assets/cards/card_set/spades/2_spades.png" id="3_tex"]
+[ext_resource type="Texture2D" uid="uid://cw3j4x2ij3s3b" path="res://assets/cards/card_set/spades/3_spades.png" id="4_tex"]
+[ext_resource type="Texture2D" uid="uid://bi2x2wyi6743j" path="res://assets/cards/card_set/spades/4_spades.png" id="5_tex"]
+[ext_resource type="Texture2D" uid="uid://b4vnfd0quwv15" path="res://assets/cards/card_set/spades/5_spades.png" id="6_tex"]
+[ext_resource type="Texture2D" uid="uid://bxktduvm735bo" path="res://assets/cards/card_set/spades/6_spades.png" id="7_tex"]
+[ext_resource type="Texture2D" uid="uid://dpgwffh2lflb3" path="res://assets/cards/card_set/spades/7_spades.png" id="8_tex"]
+[ext_resource type="Texture2D" uid="uid://dbsf6u12rbajm" path="res://assets/cards/card_set/spades/8_spades.png" id="9_tex"]
+[ext_resource type="Texture2D" uid="uid://djp21clf8iu2g" path="res://assets/cards/card_set/spades/9_spades.png" id="10_tex"]
+[ext_resource type="Texture2D" uid="uid://35h7irrexubu" path="res://assets/cards/card_set/spades/10_spades.png" id="11_tex"]
+[ext_resource type="Texture2D" uid="uid://da6j6bxtye3qj" path="res://assets/cards/card_set/spades/j_spades.png" id="12_tex"]
+[ext_resource type="Texture2D" uid="uid://dnmp3bvcrqo53" path="res://assets/cards/card_set/spades/q_spades.png" id="13_tex"]
+[ext_resource type="Texture2D" uid="uid://b3bh11pfvy4ak" path="res://assets/cards/card_set/spades/k_spades.png" id="14_tex"]
+[ext_resource type="Texture2D" uid="uid://c4y44adawsj78" path="res://assets/cards/card_set/hearts/a_hearts.png" id="15_tex"]
+[ext_resource type="Texture2D" uid="uid://bqx6klwtxf5hm" path="res://assets/cards/card_set/hearts/2_hearts.png" id="16_tex"]
+[ext_resource type="Texture2D" uid="uid://rqjond2tuy" path="res://assets/cards/card_set/hearts/3_hearts.png" id="17_tex"]
+[ext_resource type="Texture2D" uid="uid://dewaqlbgllsy8" path="res://assets/cards/card_set/hearts/4_hearts.png" id="18_tex"]
+[ext_resource type="Texture2D" uid="uid://by3q2o4wpm0iw" path="res://assets/cards/card_set/hearts/5_hearts.png" id="19_tex"]
+[ext_resource type="Texture2D" uid="uid://6htfll8a3680" path="res://assets/cards/card_set/hearts/6_hearts.png" id="20_tex"]
+[ext_resource type="Texture2D" uid="uid://ccghdgvya2r86" path="res://assets/cards/card_set/hearts/7_hearts.png" id="21_tex"]
+[ext_resource type="Texture2D" uid="uid://bd8hnxlqu2sp6" path="res://assets/cards/card_set/hearts/8_hearts.png" id="22_tex"]
+[ext_resource type="Texture2D" uid="uid://dvefx42icyy5a" path="res://assets/cards/card_set/hearts/9_hearts.png" id="23_tex"]
+[ext_resource type="Texture2D" uid="uid://bg3wc4urqp1i7" path="res://assets/cards/card_set/hearts/10_hearts.png" id="24_tex"]
+[ext_resource type="Texture2D" uid="uid://i357vlf2nnmf" path="res://assets/cards/card_set/hearts/j_hearts.png" id="25_tex"]
+[ext_resource type="Texture2D" uid="uid://b5rs60i5456ii" path="res://assets/cards/card_set/hearts/q_hearts.png" id="26_tex"]
+[ext_resource type="Texture2D" uid="uid://cr6h1p050tob7" path="res://assets/cards/card_set/hearts/k_hearts.png" id="27_tex"]
+[ext_resource type="Texture2D" uid="uid://c1108ayqtyus2" path="res://assets/cards/card_set/clubs/a_clubs.png" id="28_tex"]
+[ext_resource type="Texture2D" uid="uid://12cg16j4bmwi" path="res://assets/cards/card_set/clubs/2_clubs.png" id="29_tex"]
+[ext_resource type="Texture2D" uid="uid://cjjpw4qpd53v7" path="res://assets/cards/card_set/clubs/3_clubs.png" id="30_tex"]
+[ext_resource type="Texture2D" uid="uid://dc0muq5nyvfyh" path="res://assets/cards/card_set/clubs/4_clubs.png" id="31_tex"]
+[ext_resource type="Texture2D" uid="uid://q252u0f02v8x" path="res://assets/cards/card_set/clubs/5_clubs.png" id="32_tex"]
+[ext_resource type="Texture2D" uid="uid://bqt5r7pfwlxbr" path="res://assets/cards/card_set/clubs/6_clubs.png" id="33_tex"]
+[ext_resource type="Texture2D" uid="uid://caqpx1v06euiq" path="res://assets/cards/card_set/clubs/7_clubs.png" id="34_tex"]
+[ext_resource type="Texture2D" uid="uid://cl7vjnko4hgig" path="res://assets/cards/card_set/clubs/8_clubs.png" id="35_tex"]
+[ext_resource type="Texture2D" uid="uid://b8rm8nfva5828" path="res://assets/cards/card_set/clubs/9_clubs.png" id="36_tex"]
+[ext_resource type="Texture2D" uid="uid://b73yxrecd2nd2" path="res://assets/cards/card_set/clubs/10_clubs.png" id="37_tex"]
+[ext_resource type="Texture2D" uid="uid://bvouyf2n523ky" path="res://assets/cards/card_set/clubs/j_clubs.png" id="38_tex"]
+[ext_resource type="Texture2D" uid="uid://0rw3qroese4r" path="res://assets/cards/card_set/clubs/q_clubs.png" id="39_tex"]
+[ext_resource type="Texture2D" uid="uid://0bkdfnk4li8d" path="res://assets/cards/card_set/clubs/k_clubs.png" id="40_tex"]
+[ext_resource type="Texture2D" uid="uid://cdgbtawq31v8h" path="res://assets/cards/card_set/diamonds/a_diamonds.png" id="41_tex"]
+[ext_resource type="Texture2D" uid="uid://qqbbelhimfim" path="res://assets/cards/card_set/diamonds/2_diamonds.png" id="42_tex"]
+[ext_resource type="Texture2D" uid="uid://cypm2ea0ctcd" path="res://assets/cards/card_set/diamonds/3_diamonds.png" id="43_tex"]
+[ext_resource type="Texture2D" uid="uid://biymwbug2jlxh" path="res://assets/cards/card_set/diamonds/4_diamonds.png" id="44_tex"]
+[ext_resource type="Texture2D" uid="uid://dhr8bo6btrc3q" path="res://assets/cards/card_set/diamonds/5_diamonds.png" id="45_tex"]
+[ext_resource type="Texture2D" uid="uid://c3nq3loab6qj2" path="res://assets/cards/card_set/diamonds/6_diamonds.png" id="46_tex"]
+[ext_resource type="Texture2D" uid="uid://danhkkq60ytnm" path="res://assets/cards/card_set/diamonds/7_diamonds.png" id="47_tex"]
+[ext_resource type="Texture2D" uid="uid://3isnc46dfs7o" path="res://assets/cards/card_set/diamonds/8_diamonds.png" id="48_tex"]
+[ext_resource type="Texture2D" uid="uid://bffuubcrv0w4l" path="res://assets/cards/card_set/diamonds/9_diamonds.png" id="49_tex"]
+[ext_resource type="Texture2D" uid="uid://dhn5xllpaksuo" path="res://assets/cards/card_set/diamonds/10_diamonds.png" id="50_tex"]
+[ext_resource type="Texture2D" uid="uid://uq2qk0otcyp3" path="res://assets/cards/card_set/diamonds/j_diamonds.png" id="51_tex"]
+[ext_resource type="Texture2D" uid="uid://bel04pot0g33f" path="res://assets/cards/card_set/diamonds/q_diamonds.png" id="52_tex"]
+[ext_resource type="Texture2D" uid="uid://cw7xh8vvgwlxw" path="res://assets/cards/card_set/diamonds/k_diamonds.png" id="53_tex"]
+[ext_resource type="Texture2D" uid="uid://0imvf623l1tj" path="res://assets/cards/card_set/black_joker.png" id="54_tex"]
+[ext_resource type="Texture2D" uid="uid://c4r1wb7dj2t2c" path="res://assets/cards/card_set/red_joker.png" id="55_tex"]
+[ext_resource type="Texture2D" uid="uid://cgnfjx8wdjsei" path="res://assets/cards/card_set/blue_back.png" id="56_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("3_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("4_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4"]
+atlas = ExtResource("5_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5"]
+atlas = ExtResource("6_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6"]
+atlas = ExtResource("7_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7"]
+atlas = ExtResource("8_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8"]
+atlas = ExtResource("9_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_9"]
+atlas = ExtResource("10_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10"]
+atlas = ExtResource("11_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11"]
+atlas = ExtResource("12_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12"]
+atlas = ExtResource("13_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13"]
+atlas = ExtResource("14_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14"]
+atlas = ExtResource("15_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15"]
+atlas = ExtResource("16_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16"]
+atlas = ExtResource("17_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17"]
+atlas = ExtResource("18_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18"]
+atlas = ExtResource("19_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_19"]
+atlas = ExtResource("20_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20"]
+atlas = ExtResource("21_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21"]
+atlas = ExtResource("22_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22"]
+atlas = ExtResource("23_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23"]
+atlas = ExtResource("24_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24"]
+atlas = ExtResource("25_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25"]
+atlas = ExtResource("26_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26"]
+atlas = ExtResource("27_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27"]
+atlas = ExtResource("28_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28"]
+atlas = ExtResource("29_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_29"]
+atlas = ExtResource("30_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30"]
+atlas = ExtResource("31_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31"]
+atlas = ExtResource("32_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32"]
+atlas = ExtResource("33_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33"]
+atlas = ExtResource("34_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34"]
+atlas = ExtResource("35_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35"]
+atlas = ExtResource("36_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36"]
+atlas = ExtResource("37_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37"]
+atlas = ExtResource("38_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38"]
+atlas = ExtResource("39_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_39"]
+atlas = ExtResource("40_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40"]
+atlas = ExtResource("41_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41"]
+atlas = ExtResource("42_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42"]
+atlas = ExtResource("43_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43"]
+atlas = ExtResource("44_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44"]
+atlas = ExtResource("45_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45"]
+atlas = ExtResource("46_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46"]
+atlas = ExtResource("47_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47"]
+atlas = ExtResource("48_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48"]
+atlas = ExtResource("49_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_49"]
+atlas = ExtResource("50_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50"]
+atlas = ExtResource("51_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51"]
+atlas = ExtResource("52_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52"]
+atlas = ExtResource("53_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53"]
+atlas = ExtResource("54_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54"]
+atlas = ExtResource("55_tex")
+region = Rect2(2, 9, 60, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55"]
+atlas = ExtResource("56_tex")
+region = Rect2(2, 9, 60, 82)
+
+[resource]
+script = ExtResource("1_style")
+Id = "card_set"
+DisplayName = "Card Set"
+Spades = Array[Texture2D]([SubResource("AtlasTexture_1"), SubResource("AtlasTexture_2"), SubResource("AtlasTexture_3"), SubResource("AtlasTexture_4"), SubResource("AtlasTexture_5"), SubResource("AtlasTexture_6"), SubResource("AtlasTexture_7"), SubResource("AtlasTexture_8"), SubResource("AtlasTexture_9"), SubResource("AtlasTexture_10"), SubResource("AtlasTexture_11"), SubResource("AtlasTexture_12"), SubResource("AtlasTexture_13")])
+Hearts = Array[Texture2D]([SubResource("AtlasTexture_14"), SubResource("AtlasTexture_15"), SubResource("AtlasTexture_16"), SubResource("AtlasTexture_17"), SubResource("AtlasTexture_18"), SubResource("AtlasTexture_19"), SubResource("AtlasTexture_20"), SubResource("AtlasTexture_21"), SubResource("AtlasTexture_22"), SubResource("AtlasTexture_23"), SubResource("AtlasTexture_24"), SubResource("AtlasTexture_25"), SubResource("AtlasTexture_26")])
+Clubs = Array[Texture2D]([SubResource("AtlasTexture_27"), SubResource("AtlasTexture_28"), SubResource("AtlasTexture_29"), SubResource("AtlasTexture_30"), SubResource("AtlasTexture_31"), SubResource("AtlasTexture_32"), SubResource("AtlasTexture_33"), SubResource("AtlasTexture_34"), SubResource("AtlasTexture_35"), SubResource("AtlasTexture_36"), SubResource("AtlasTexture_37"), SubResource("AtlasTexture_38"), SubResource("AtlasTexture_39")])
+Diamonds = Array[Texture2D]([SubResource("AtlasTexture_40"), SubResource("AtlasTexture_41"), SubResource("AtlasTexture_42"), SubResource("AtlasTexture_43"), SubResource("AtlasTexture_44"), SubResource("AtlasTexture_45"), SubResource("AtlasTexture_46"), SubResource("AtlasTexture_47"), SubResource("AtlasTexture_48"), SubResource("AtlasTexture_49"), SubResource("AtlasTexture_50"), SubResource("AtlasTexture_51"), SubResource("AtlasTexture_52")])
+Jokers = Array[Texture2D]([SubResource("AtlasTexture_53"), SubResource("AtlasTexture_54")])
+Back = SubResource("AtlasTexture_55")
+ClubInks = Array[Color]([Color(0.1647, 0.1294, 0.2235, 1), Color(0.1961, 0.149, 0.2588, 1)])
+ClubContrastInks = Array[Color]([Color(0.1137, 0.2471, 0.5294, 1), Color(0.1647, 0.3608, 0.7608, 1)])
+DiamondInks = Array[Color]([Color(0.7608, 0.007843, 0.2902, 1), Color(0.2784, 0.05882, 0.1255, 1)])
+DiamondContrastInks = Array[Color]([Color(0.9725, 0.6353, 0.1333, 1), Color(0.6039, 0.3529, 0.07059, 1)])
+CornerSize = Vector2(0.22, 0.28)

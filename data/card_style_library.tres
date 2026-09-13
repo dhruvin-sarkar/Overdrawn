@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardStyleLibrary" format=3]
+
+[ext_resource type="Script" uid="uid://r3oyppl8vw3v" path="res://scripts/cards/CardStyleLibrary.cs" id="1_library"]
+[ext_resource type="Resource" path="res://data/card_styles/card_set.tres" id="2_style"]
+[ext_resource type="Resource" path="res://data/card_styles/jorel.tres" id="3_style"]
+[ext_resource type="Resource" path="res://data/card_styles/kerenel.tres" id="4_style"]
+[ext_resource type="Resource" path="res://data/card_styles/yewbi.tres" id="5_style"]
+
+[resource]
+script = ExtResource("1_library")
+Styles = Array[Object]([ExtResource("2_style"), ExtResource("3_style"), ExtResource("4_style"), ExtResource("5_style")])
