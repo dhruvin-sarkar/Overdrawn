@@ -1,13 +1,13 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene format=3 uid="uid://26mak6juj1o0"]
 
-[ext_resource type="Script" path="res://scripts/ui/MainMenu.cs" id="1_menu"]
-[ext_resource type="Shader" path="res://shaders/paint_background.gdshader" id="2_paint"]
-[ext_resource type="Shader" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
-[ext_resource type="Shader" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
+[ext_resource type="Script" uid="uid://bvcqk01lvkvhs" path="res://scripts/ui/MainMenu.cs" id="1_menu"]
+[ext_resource type="Shader" uid="uid://cr68nytkm8xo7" path="res://shaders/paint_background.gdshader" id="2_paint"]
+[ext_resource type="Shader" uid="uid://b8t587undvbub" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
+[ext_resource type="Shader" uid="uid://dpgts8slp72xq" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
 [ext_resource type="Texture2D" uid="uid://bjbuix2iuudr4" path="res://Title text.png" id="5_title"]
-[ext_resource type="PackedScene" path="res://scenes/ui/TiltCard.tscn" id="6_card"]
+[ext_resource type="PackedScene" uid="uid://bq5ul3t5gbgub" path="res://scenes/ui/TiltCard.tscn" id="6_card"]
 [ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
-[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="8_button"]
+[ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
@@ -26,8 +26,8 @@ noise_type = 3
 frequency = 0.0035
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_title"]
-seamless = true
 noise = SubResource("FastNoiseLite_title")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_title"]
 shader = ExtResource("4_dissolve")
@@ -37,16 +37,6 @@ shader_parameter/burn_size = 0.32
 shader_parameter/ash_colour = Color(0.04, 0.05, 0.09, 1)
 shader_parameter/burn_colour = Color(0.98, 0.97, 0.95, 1)
 shader_parameter/hot_colour = Color(0.55, 0.75, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
-shader = ExtResource("3_crt")
-shader_parameter/curve = 0.045
-shader_parameter/scanline_strength = 0.16
-shader_parameter/scanline_density = 640.0
-shader_parameter/aberration = 1.1
-shader_parameter/vignette_strength = 0.42
-shader_parameter/brightness = 1.08
-shader_parameter/bezel_colour = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar"]
 bg_color = Color(0.243, 0.271, 0.31, 0.937)
@@ -95,7 +85,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
+shader = ExtResource("3_crt")
+shader_parameter/curve = 0.045
+shader_parameter/scanline_strength = 0.16
+shader_parameter/scanline_density = 640.0
+shader_parameter/aberration = 1.1
+shader_parameter/vignette_strength = 0.42
+shader_parameter/brightness = 1.08
+shader_parameter/bezel_colour = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=2012571883]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -103,24 +105,27 @@ grow_vertical = 2
 theme = ExtResource("7_theme")
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=825869231]
 material = SubResource("ShaderMaterial_bg")
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Title" type="TextureRect" parent="."]
+[node name="Title" type="TextureRect" parent="." unique_id=695725321]
 material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -973.5
-offset_top = -665.0
-offset_right = 946.5
-offset_bottom = 415.0
+offset_left = -893.775
+offset_top = -447.15
+offset_right = 884.425
+offset_bottom = 192.05
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -128,20 +133,23 @@ texture = ExtResource("5_title")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Card" parent="." instance=ExtResource("6_card")]
+[node name="Card" parent="." unique_id=1354311087 instance=ExtResource("6_card")]
+custom_minimum_size = Vector2(204, 285.6)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-custom_minimum_size = Vector2(200, 280)
-offset_left = -113.5
-offset_top = -242.0
-offset_right = 86.5
-offset_bottom = 38.0
+offset_left = -188.1
+offset_top = -272.05
+offset_right = 15.9
+offset_bottom = 13.55
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonBar" type="PanelContainer" parent="."]
+[node name="ButtonBar" type="PanelContainer" parent="." unique_id=331183248]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -154,72 +162,79 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
 
-[node name="Margin" type="MarginContainer" parent="ButtonBar"]
+[node name="Margin" type="MarginContainer" parent="ButtonBar" unique_id=284043930]
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 16
 
-[node name="Row" type="HBoxContainer" parent="ButtonBar/Margin"]
+[node name="Row" type="HBoxContainer" parent="ButtonBar/Margin" unique_id=316618407]
+layout_mode = 2
 theme_override_constants/separation = 17
 
-[node name="Play" type="Button" parent="ButtonBar/Margin/Row"]
+[node name="Play" type="Button" parent="ButtonBar/Margin/Row" unique_id=527575536]
 custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 52
 theme_override_styles/normal = SubResource("StyleBoxFlat_play")
-theme_override_styles/hover = SubResource("StyleBoxFlat_play")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_play")
+theme_override_styles/hover = SubResource("StyleBoxFlat_play")
 theme_override_styles/focus = SubResource("StyleBoxFlat_play")
 text = "PLAY"
 script = ExtResource("8_button")
 
-[node name="Options" type="Button" parent="ButtonBar/Margin/Row"]
+[node name="Options" type="Button" parent="ButtonBar/Margin/Row" unique_id=824499344]
 custom_minimum_size = Vector2(220, 130)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_options")
-theme_override_styles/hover = SubResource("StyleBoxFlat_options")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_options")
+theme_override_styles/hover = SubResource("StyleBoxFlat_options")
 theme_override_styles/focus = SubResource("StyleBoxFlat_options")
 text = "OPTIONS"
 script = ExtResource("8_button")
 
-[node name="Quit" type="Button" parent="ButtonBar/Margin/Row"]
+[node name="Quit" type="Button" parent="ButtonBar/Margin/Row" unique_id=248065770]
 custom_minimum_size = Vector2(218, 130)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_quit")
-theme_override_styles/hover = SubResource("StyleBoxFlat_quit")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_quit")
+theme_override_styles/hover = SubResource("StyleBoxFlat_quit")
 theme_override_styles/focus = SubResource("StyleBoxFlat_quit")
 text = "QUIT"
 script = ExtResource("8_button")
 
-[node name="Collection" type="Button" parent="ButtonBar/Margin/Row"]
+[node name="Collection" type="Button" parent="ButtonBar/Margin/Row" unique_id=63364051]
 custom_minimum_size = Vector2(308, 130)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_collection")
-theme_override_styles/hover = SubResource("StyleBoxFlat_collection")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_collection")
+theme_override_styles/hover = SubResource("StyleBoxFlat_collection")
 theme_override_styles/focus = SubResource("StyleBoxFlat_collection")
 text = "COLLECTION"
 script = ExtResource("8_button")
 
-[node name="ProfileBar" type="PanelContainer" parent="."]
+[node name="ProfileBar" type="PanelContainer" parent="." unique_id=771153324]
+layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 130.0
@@ -229,36 +244,41 @@ offset_bottom = -78.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
 
-[node name="Margin" type="MarginContainer" parent="ProfileBar"]
+[node name="Margin" type="MarginContainer" parent="ProfileBar" unique_id=221992669]
+layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="Column" type="VBoxContainer" parent="ProfileBar/Margin"]
+[node name="Column" type="VBoxContainer" parent="ProfileBar/Margin" unique_id=1497222693]
+layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Caption" type="Label" parent="ProfileBar/Margin/Column"]
+[node name="Caption" type="Label" parent="ProfileBar/Margin/Column" unique_id=301375572]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 28
 text = "Profile"
 horizontal_alignment = 1
 
-[node name="Slot" type="Button" parent="ProfileBar/Margin/Column"]
+[node name="Slot" type="Button" parent="ProfileBar/Margin/Column" unique_id=557789873]
 custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
-theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
+theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
 text = "P1"
 script = ExtResource("8_button")
 
-[node name="LanguageBar" type="PanelContainer" parent="."]
+[node name="LanguageBar" type="PanelContainer" parent="." unique_id=1989391150]
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -271,30 +291,33 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bar")
 
-[node name="Margin" type="MarginContainer" parent="LanguageBar"]
+[node name="Margin" type="MarginContainer" parent="LanguageBar" unique_id=207420159]
+layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="Language" type="Button" parent="LanguageBar/Margin"]
+[node name="Language" type="Button" parent="LanguageBar/Margin" unique_id=1046669589]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
-theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_slot")
+theme_override_styles/hover = SubResource("StyleBoxFlat_slot")
 theme_override_styles/focus = SubResource("StyleBoxFlat_slot")
 text = "English"
 script = ExtResource("8_button")
 
-[node name="CrtLayer" type="CanvasLayer" parent="."]
+[node name="CrtLayer" type="CanvasLayer" parent="." unique_id=1127598656]
 layer = 10
 
-[node name="CrtOverlay" type="ColorRect" parent="CrtLayer"]
+[node name="CrtOverlay" type="ColorRect" parent="CrtLayer" unique_id=765425898]
 material = SubResource("ShaderMaterial_crt")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

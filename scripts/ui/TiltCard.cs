@@ -40,6 +40,9 @@ public partial class TiltCard : Control
 		_display.Texture = _faceViewport.GetTexture();
 		_material = (ShaderMaterial)_display.Material;
 
+		SyncFaceResolution();
+		Resized += SyncFaceResolution;
+
 		_pointer = GetGlobalMousePosition();
 		MouseFilter = MouseFilterEnum.Stop;
 		MouseEntered += () => _hovered = true;
@@ -142,6 +145,10 @@ public partial class TiltCard : Control
 
 	/// 0 = fully burned away, 1 = fully present. Driven by the menu intro.
 	public void SetDissolve(float value) => _material.SetShaderParameter("progress", value);
+
+	/// The tilt shader sizes its quad from the texture, so the face texture must
+	/// match this control. The face keeps its own layout via size_2d_override.
+	private void SyncFaceResolution() => _faceViewport.Size = (Vector2I)Size.Round();
 
 	/// Frame-rate independent lerp weight.
 	private static float Damp(float rate, float dt) => 1f - Mathf.Exp(-rate * dt);
