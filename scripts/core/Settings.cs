@@ -51,6 +51,7 @@ public partial class Settings : Node
 	private int _gameVolume = 100;
 	private int _currentProfile = 1;
 	private readonly Dictionary<Suit, string> _deckStyles = new();
+	private bool _savePending;
 
 	public float GameSpeed
 	{
@@ -125,7 +126,13 @@ public partial class Settings : Node
 	private void Committed()
 	{
 		ApplyEngineState();
-		Save();
+		// A dragged slider commits many values a frame; write the file once.
+		if (!_savePending)
+		{
+			_savePending = true;
+			Callable.From(Save).CallDeferred();
+		}
+
 		EmitSignal(SignalName.Changed);
 	}
 
@@ -225,6 +232,7 @@ public partial class Settings : Node
 
 	private void Save()
 	{
+		_savePending = false;
 		var file = new ConfigFile();
 		file.SetValue("game", "speed", _gameSpeed);
 		file.SetValue("game", "hit_stand", (int)_hitStand);

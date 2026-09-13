@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/components/ProgressSummary.cs" id="1_summary"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/stat_row.tscn" id="2_row"]
+
+[node name="ProgressSummary" type="VBoxContainer"]
+theme_override_constants/separation = 16
+script = ExtResource("1_summary")
+RowScene = ExtResource("2_row")

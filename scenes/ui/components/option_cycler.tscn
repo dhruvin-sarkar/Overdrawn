@@ -1,0 +1,62 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/components/OptionCycler.cs" id="1_cycler"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="Script" path="res://scripts/ui/components/PageDots.cs" id="3_dots"]
+
+[node name="OptionCycler" type="VBoxContainer"]
+theme_override_constants/separation = 6
+script = ExtResource("1_cycler")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SettingTitle"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Previous" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 62)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 30
+text = "<"
+script = ExtResource("2_button")
+
+[node name="Value" type="PanelContainer" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 62)
+layout_mode = 2
+theme_type_variation = &"RedPanel"
+
+[node name="Column" type="VBoxContainer" parent="Row/Value"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="Row/Value/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="Dots" type="Control" parent="Row/Value/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_dots")
+
+[node name="Next" type="Button" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 62)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 30
+text = ">"
+script = ExtResource("2_button")

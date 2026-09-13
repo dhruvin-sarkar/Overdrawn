@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/components/StatRow.cs" id="1_row"]
+[ext_resource type="Script" path="res://scripts/ui/components/FillBar.cs" id="2_fill"]
+
+[node name="StatRow" type="HBoxContainer"]
+theme_override_constants/separation = 8
+script = ExtResource("1_row")
+
+[node name="TitlePill" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_type_variation = &"StatLabel"
+
+[node name="Title" type="Label" parent="TitlePill"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ValueBox" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"StatValue"
+
+[node name="Fill" type="Control" parent="ValueBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_fill")
+
+[node name="Value" type="Label" parent="ValueBox"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

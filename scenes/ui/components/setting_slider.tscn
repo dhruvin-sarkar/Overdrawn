@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/components/SettingSlider.cs" id="1_slider"]
+
+[node name="SettingSlider" type="VBoxContainer"]
+theme_override_constants/separation = 6
+script = ExtResource("1_slider")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SettingTitle"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slider" type="HSlider" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 40)
+layout_mode = 2
+size_flags_vertical = 4
+rounded = true
+
+[node name="Number" type="Label" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(76, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ValuePill"
+text = "0"
+horizontal_alignment = 1
