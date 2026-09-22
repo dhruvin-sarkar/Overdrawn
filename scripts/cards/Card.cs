@@ -34,8 +34,6 @@ public partial class Card : Node2D
 	/// Degrees of in-plane lean per pixel per second of movement.
 	[Export] public float LeanPerSpeed { get; set; } = 0.012f;
 	[Export] public float MaxLean { get; set; } = 16f;
-	[Export] public float DragTiltPerSpeed { get; set; } = 0.03f;
-	[Export] public float MaxDragTilt { get; set; } = 26f;
 
 	[ExportGroup("Shadow")]
 	[Export] public float ShadowAlpha { get; set; } = 0.35f;
@@ -224,24 +222,23 @@ public partial class Card : Node2D
 	/// Where the face should be leaning this frame, in degrees (y_rot, x_rot).
 	private Vector2 TiltTarget(float motion)
 	{
-		Vector2 target = Vector2.Zero;
-		if (IsDragging || _hovered)
+		// A held card lies flat: the lean reads as the card being lifted off the
+		// table, so it belongs to the hovered card, not the carried one.
+		if (IsDragging)
 		{
-			// The face leans away from the cursor, and keeps leaning while held
-			// because it trails the cursor by however far it is behind.
+			return Vector2.Zero;
+		}
+
+		Vector2 target = Vector2.Zero;
+		if (_hovered)
+		{
+			// The face leans away from the cursor.
 			Vector2 centred = ((_pointer - _facePosition) / (Size * 0.5f * _scale)).Clamp(-Vector2.One, Vector2.One);
 			target = new Vector2(centred.X * MaxTilt, -centred.Y * MaxTilt);
 		}
 
-		if (IsDragging)
-		{
-			target += new Vector2(
-				Mathf.Clamp(_velocity.X * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt),
-				Mathf.Clamp(-_velocity.Y * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt));
-		}
-
 		float seconds = Time.GetTicksMsec() / 1000f;
-		float sway = IdleSway * motion * (_hovered || IsDragging ? 0.2f : 1f);
+		float sway = IdleSway * motion * (_hovered ? 0.2f : 1f);
 		return target + new Vector2(Mathf.Sin(seconds + _swayPhase), Mathf.Cos(seconds * 0.8f + _swayPhase)) * sway;
 	}
 
