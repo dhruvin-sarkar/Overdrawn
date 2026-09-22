@@ -10,6 +10,7 @@
        without Godot in the way. -->
   <ItemGroup>
     <Compile Include="../scripts/blackjack/*.cs" />
+    <Compile Include="../scripts/run/*.cs" />
     <Compile Include="../scripts/cards/Suit.cs" />
     <Compile Include="../scripts/cards/Rank.cs" />
     <Compile Include="../scripts/scoring/HandOutcome.cs" />
