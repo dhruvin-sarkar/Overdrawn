@@ -5,7 +5,8 @@
 [ext_resource type="Resource" path="res://data/card_styles/jorel.tres" id="3_style"]
 [ext_resource type="Resource" path="res://data/card_styles/kerenel.tres" id="4_style"]
 [ext_resource type="Resource" path="res://data/card_styles/yewbi.tres" id="5_style"]
+[ext_resource type="Resource" path="res://data/card_styles/balatro.tres" id="6_style"]
 
 [resource]
 script = ExtResource("1_library")
-Styles = Array[Object]([ExtResource("2_style"), ExtResource("3_style"), ExtResource("4_style"), ExtResource("5_style")])
+Styles = Array[Object]([ExtResource("2_style"), ExtResource("3_style"), ExtResource("4_style"), ExtResource("5_style"), ExtResource("6_style")])

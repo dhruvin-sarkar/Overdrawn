@@ -1,0 +1,329 @@
+[gd_resource type="Resource" script_class="CardStyle" load_steps=82 format=3]
+
+[ext_resource type="Script" uid="uid://cndnacxmj1ehu" path="res://scripts/cards/CardStyle.cs" id="1_style"]
+[ext_resource type="Texture2D" path="res://assets/cards/balatro/faces.png" id="2_faces"]
+[ext_resource type="Texture2D" path="res://assets/cards/balatro/faces_high_contrast.png" id="3_contrast"]
+
+[sub_resource type="AtlasTexture" id="a_0"]
+atlas = ExtResource("2_faces")
+region = Rect2(852, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_1"]
+atlas = ExtResource("2_faces")
+region = Rect2(0, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_2"]
+atlas = ExtResource("2_faces")
+region = Rect2(71, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_3"]
+atlas = ExtResource("2_faces")
+region = Rect2(142, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_4"]
+atlas = ExtResource("2_faces")
+region = Rect2(213, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_5"]
+atlas = ExtResource("2_faces")
+region = Rect2(284, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_6"]
+atlas = ExtResource("2_faces")
+region = Rect2(355, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_7"]
+atlas = ExtResource("2_faces")
+region = Rect2(426, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_8"]
+atlas = ExtResource("2_faces")
+region = Rect2(497, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_9"]
+atlas = ExtResource("2_faces")
+region = Rect2(568, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_10"]
+atlas = ExtResource("2_faces")
+region = Rect2(639, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_11"]
+atlas = ExtResource("2_faces")
+region = Rect2(710, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_12"]
+atlas = ExtResource("2_faces")
+region = Rect2(781, 0, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_13"]
+atlas = ExtResource("2_faces")
+region = Rect2(852, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_14"]
+atlas = ExtResource("2_faces")
+region = Rect2(0, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_15"]
+atlas = ExtResource("2_faces")
+region = Rect2(71, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_16"]
+atlas = ExtResource("2_faces")
+region = Rect2(142, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_17"]
+atlas = ExtResource("2_faces")
+region = Rect2(213, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_18"]
+atlas = ExtResource("2_faces")
+region = Rect2(284, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_19"]
+atlas = ExtResource("2_faces")
+region = Rect2(355, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_20"]
+atlas = ExtResource("2_faces")
+region = Rect2(426, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_21"]
+atlas = ExtResource("2_faces")
+region = Rect2(497, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_22"]
+atlas = ExtResource("2_faces")
+region = Rect2(568, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_23"]
+atlas = ExtResource("2_faces")
+region = Rect2(639, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_24"]
+atlas = ExtResource("2_faces")
+region = Rect2(710, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_25"]
+atlas = ExtResource("2_faces")
+region = Rect2(781, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_26"]
+atlas = ExtResource("2_faces")
+region = Rect2(852, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_27"]
+atlas = ExtResource("2_faces")
+region = Rect2(0, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_28"]
+atlas = ExtResource("2_faces")
+region = Rect2(71, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_29"]
+atlas = ExtResource("2_faces")
+region = Rect2(142, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_30"]
+atlas = ExtResource("2_faces")
+region = Rect2(213, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_31"]
+atlas = ExtResource("2_faces")
+region = Rect2(284, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_32"]
+atlas = ExtResource("2_faces")
+region = Rect2(355, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_33"]
+atlas = ExtResource("2_faces")
+region = Rect2(426, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_34"]
+atlas = ExtResource("2_faces")
+region = Rect2(497, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_35"]
+atlas = ExtResource("2_faces")
+region = Rect2(568, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_36"]
+atlas = ExtResource("2_faces")
+region = Rect2(639, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_37"]
+atlas = ExtResource("2_faces")
+region = Rect2(710, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_38"]
+atlas = ExtResource("2_faces")
+region = Rect2(781, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_39"]
+atlas = ExtResource("2_faces")
+region = Rect2(852, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_40"]
+atlas = ExtResource("2_faces")
+region = Rect2(0, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_41"]
+atlas = ExtResource("2_faces")
+region = Rect2(71, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_42"]
+atlas = ExtResource("2_faces")
+region = Rect2(142, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_43"]
+atlas = ExtResource("2_faces")
+region = Rect2(213, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_44"]
+atlas = ExtResource("2_faces")
+region = Rect2(284, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_45"]
+atlas = ExtResource("2_faces")
+region = Rect2(355, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_46"]
+atlas = ExtResource("2_faces")
+region = Rect2(426, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_47"]
+atlas = ExtResource("2_faces")
+region = Rect2(497, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_48"]
+atlas = ExtResource("2_faces")
+region = Rect2(568, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_49"]
+atlas = ExtResource("2_faces")
+region = Rect2(639, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_50"]
+atlas = ExtResource("2_faces")
+region = Rect2(710, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_51"]
+atlas = ExtResource("2_faces")
+region = Rect2(781, 285, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_52"]
+atlas = ExtResource("3_contrast")
+region = Rect2(852, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_53"]
+atlas = ExtResource("3_contrast")
+region = Rect2(0, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_54"]
+atlas = ExtResource("3_contrast")
+region = Rect2(71, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_55"]
+atlas = ExtResource("3_contrast")
+region = Rect2(142, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_56"]
+atlas = ExtResource("3_contrast")
+region = Rect2(213, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_57"]
+atlas = ExtResource("3_contrast")
+region = Rect2(284, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_58"]
+atlas = ExtResource("3_contrast")
+region = Rect2(355, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_59"]
+atlas = ExtResource("3_contrast")
+region = Rect2(426, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_60"]
+atlas = ExtResource("3_contrast")
+region = Rect2(497, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_61"]
+atlas = ExtResource("3_contrast")
+region = Rect2(568, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_62"]
+atlas = ExtResource("3_contrast")
+region = Rect2(639, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_63"]
+atlas = ExtResource("3_contrast")
+region = Rect2(710, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_64"]
+atlas = ExtResource("3_contrast")
+region = Rect2(781, 95, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_65"]
+atlas = ExtResource("3_contrast")
+region = Rect2(852, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_66"]
+atlas = ExtResource("3_contrast")
+region = Rect2(0, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_67"]
+atlas = ExtResource("3_contrast")
+region = Rect2(71, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_68"]
+atlas = ExtResource("3_contrast")
+region = Rect2(142, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_69"]
+atlas = ExtResource("3_contrast")
+region = Rect2(213, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_70"]
+atlas = ExtResource("3_contrast")
+region = Rect2(284, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_71"]
+atlas = ExtResource("3_contrast")
+region = Rect2(355, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_72"]
+atlas = ExtResource("3_contrast")
+region = Rect2(426, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_73"]
+atlas = ExtResource("3_contrast")
+region = Rect2(497, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_74"]
+atlas = ExtResource("3_contrast")
+region = Rect2(568, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_75"]
+atlas = ExtResource("3_contrast")
+region = Rect2(639, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_76"]
+atlas = ExtResource("3_contrast")
+region = Rect2(710, 190, 71, 95)
+
+[sub_resource type="AtlasTexture" id="a_77"]
+atlas = ExtResource("3_contrast")
+region = Rect2(781, 190, 71, 95)
+
+[resource]
+script = ExtResource("1_style")
+Id = "balatro"
+DisplayName = "Balatro"
+Spades = Array[Texture2D]([SubResource("a_39"), SubResource("a_40"), SubResource("a_41"), SubResource("a_42"), SubResource("a_43"), SubResource("a_44"), SubResource("a_45"), SubResource("a_46"), SubResource("a_47"), SubResource("a_48"), SubResource("a_49"), SubResource("a_50"), SubResource("a_51")])
+Hearts = Array[Texture2D]([SubResource("a_0"), SubResource("a_1"), SubResource("a_2"), SubResource("a_3"), SubResource("a_4"), SubResource("a_5"), SubResource("a_6"), SubResource("a_7"), SubResource("a_8"), SubResource("a_9"), SubResource("a_10"), SubResource("a_11"), SubResource("a_12")])
+Clubs = Array[Texture2D]([SubResource("a_13"), SubResource("a_14"), SubResource("a_15"), SubResource("a_16"), SubResource("a_17"), SubResource("a_18"), SubResource("a_19"), SubResource("a_20"), SubResource("a_21"), SubResource("a_22"), SubResource("a_23"), SubResource("a_24"), SubResource("a_25")])
+Diamonds = Array[Texture2D]([SubResource("a_26"), SubResource("a_27"), SubResource("a_28"), SubResource("a_29"), SubResource("a_30"), SubResource("a_31"), SubResource("a_32"), SubResource("a_33"), SubResource("a_34"), SubResource("a_35"), SubResource("a_36"), SubResource("a_37"), SubResource("a_38")])
+Jokers = Array[Texture2D]([])
+ContrastClubs = Array[Texture2D]([SubResource("a_52"), SubResource("a_53"), SubResource("a_54"), SubResource("a_55"), SubResource("a_56"), SubResource("a_57"), SubResource("a_58"), SubResource("a_59"), SubResource("a_60"), SubResource("a_61"), SubResource("a_62"), SubResource("a_63"), SubResource("a_64")])
+ContrastDiamonds = Array[Texture2D]([SubResource("a_65"), SubResource("a_66"), SubResource("a_67"), SubResource("a_68"), SubResource("a_69"), SubResource("a_70"), SubResource("a_71"), SubResource("a_72"), SubResource("a_73"), SubResource("a_74"), SubResource("a_75"), SubResource("a_76"), SubResource("a_77")])
