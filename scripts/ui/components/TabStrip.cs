@@ -36,6 +36,7 @@ public partial class TabStrip : HBoxContainer
 				ThemeTypeVariation = "RedButton",
 				CustomMinimumSize = new Vector2(TabWidth, TabHeight),
 				SizeFlagsHorizontal = TabWidth > 0f ? SizeFlags.ShrinkCenter : SizeFlags.ExpandFill,
+				PressCue = "tab",
 			};
 			button.Pressed += () => Select(index);
 			AddChild(button);

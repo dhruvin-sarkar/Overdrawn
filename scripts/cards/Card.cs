@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Overdrawn.Audio;
 using Overdrawn.Core;
 
 namespace Overdrawn.Cards;
@@ -166,6 +167,7 @@ public partial class Card : Node2D
 		if (IsDragging && @event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: false })
 		{
 			Held = null;
+			Sfx.Instance.Play("card_place");
 			ScaleTo(_hovered ? HoverScale : 1f);
 		}
 	}
@@ -223,16 +225,19 @@ public partial class Card : Node2D
 	private Vector2 TiltTarget(float motion)
 	{
 		Vector2 target = Vector2.Zero;
-		if (IsDragging)
+		if (IsDragging || _hovered)
 		{
-			target = new Vector2(
-				Mathf.Clamp(_velocity.X * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt),
-				Mathf.Clamp(-_velocity.Y * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt));
-		}
-		else if (_hovered)
-		{
+			// The face leans away from the cursor, and keeps leaning while held
+			// because it trails the cursor by however far it is behind.
 			Vector2 centred = ((_pointer - _facePosition) / (Size * 0.5f * _scale)).Clamp(-Vector2.One, Vector2.One);
 			target = new Vector2(centred.X * MaxTilt, -centred.Y * MaxTilt);
+		}
+
+		if (IsDragging)
+		{
+			target += new Vector2(
+				Mathf.Clamp(_velocity.X * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt),
+				Mathf.Clamp(-_velocity.Y * DragTiltPerSpeed, -MaxDragTilt, MaxDragTilt));
 		}
 
 		float seconds = Time.GetTicksMsec() / 1000f;
@@ -245,6 +250,7 @@ public partial class Card : Node2D
 		_hovered = true;
 		if (Held == null)
 		{
+			Sfx.Instance.Play("card_hover");
 			Pop();
 		}
 	}
@@ -263,6 +269,7 @@ public partial class Card : Node2D
 		if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true } && Held == null)
 		{
 			Held = this;
+			Sfx.Instance.Play("card_pick");
 			_grabOffset = _pointer - _facePosition;
 			ScaleTo(DragScale);
 			_hitBox.AcceptEvent();

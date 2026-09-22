@@ -20,3 +20,5 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_vertical = 4
 script = ExtResource("2_box")
+PressCue = &"toggle"
+

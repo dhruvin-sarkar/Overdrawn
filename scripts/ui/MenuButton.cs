@@ -1,4 +1,5 @@
 using Godot;
+using Overdrawn.Audio;
 
 namespace Overdrawn.UI;
 
@@ -12,6 +13,8 @@ public partial class MenuButton : Button
 	[Export] public float HoverScale { get; set; } = 1.05f;
 	[Export] public float PressScale { get; set; } = 0.96f;
 	[Export] public float Response { get; set; } = 20f;
+	[Export] public StringName PressCue { get; set; } = "button";
+	[Export] public StringName HoverCue { get; set; } = "hover";
 
 	private float _scale = 1f;
 	private bool _hovered;
@@ -21,13 +24,24 @@ public partial class MenuButton : Button
 	{
 		RecentrePivot();
 		Resized += RecentrePivot;
-		MouseEntered += () => _hovered = true;
+		MouseEntered += () =>
+		{
+			_hovered = true;
+			if (!Disabled)
+			{
+				Sfx.Instance.Play(HoverCue);
+			}
+		};
 		MouseExited += () =>
 		{
 			_hovered = false;
 			_held = false;
 		};
-		ButtonDown += () => _held = true;
+		ButtonDown += () =>
+		{
+			_held = true;
+			Sfx.Instance.Play(PressCue);
+		};
 		ButtonUp += () => _held = false;
 	}
 

@@ -17,12 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
 Settings="*res://scripts/core/Settings.cs"
 ProfileSlots="*res://scripts/profiles/ProfileSlots.cs"
 ScreenShake="*res://scripts/core/ScreenShake.cs"
 CrtPulse="*uid://ci5lhj4x20cit"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+Sfx="*res://scripts/audio/Sfx.cs"
 
 [display]
 

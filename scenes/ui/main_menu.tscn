@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="10_overlay"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/profile_panel.tscn" id="12_profile"]
+[ext_resource type="AudioStream" uid="uid://cthkql0uqsl5w" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
@@ -311,3 +312,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_music")
+volume_db = -9.0
+autoplay = true
+bus = &"Music"

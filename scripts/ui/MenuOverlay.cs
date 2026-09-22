@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Overdrawn.Audio;
 using Overdrawn.Core;
 
 namespace Overdrawn.UI;
@@ -31,6 +32,7 @@ public partial class MenuOverlay : Control
 
 	public void Open(PackedScene scene)
 	{
+		Sfx.Instance.Play("panel_open");
 		if (_holders.TryPeek(out Control? covered))
 		{
 			Slide(covered, rising: false, () => covered.Visible = false);
@@ -60,6 +62,7 @@ public partial class MenuOverlay : Control
 
 	public void Back()
 	{
+		Sfx.Instance.Play("panel_close");
 		Control leaving = _holders.Pop();
 		Slide(leaving, rising: false, () =>
 		{
@@ -82,6 +85,7 @@ public partial class MenuOverlay : Control
 	{
 		if (_holders.Count > 0 && @event.IsActionPressed("ui_cancel"))
 		{
+			Sfx.Instance.Play("cancel");
 			Back();
 			GetViewport().SetInputAsHandled();
 		}

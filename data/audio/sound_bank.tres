@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="SoundBank" load_steps=27 format=3]
+
+[ext_resource type="Script" path="res://scripts/audio/SoundBank.cs" id="bank"]
+[ext_resource type="Script" path="res://scripts/audio/SoundCue.cs" id="cue"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/button.ogg" id="s_button"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/cancel.ogg" id="s_cancel"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/card_slide1.ogg" id="s_card_slide1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/card_slide2.ogg" id="s_card_slide2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/generic1.ogg" id="s_generic1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/highlight1.ogg" id="s_highlight1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/highlight2.ogg" id="s_highlight2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/whoosh1.ogg" id="s_whoosh1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/whoosh2.ogg" id="s_whoosh2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/whoosh.ogg" id="s_whoosh"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/paper1.ogg" id="s_paper1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/card1.ogg" id="s_card1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/card3.ogg" id="s_card3"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/whoosh_long.ogg" id="s_whoosh_long"]
+
+[sub_resource type="Resource" id="c_button"]
+script = ExtResource("cue")
+Id = &"button"
+Variants = Array[AudioStream]([ExtResource("s_button")])
+VolumeDb = 0.0
+PitchRange = Vector2(0.98, 1.02)
+
+[sub_resource type="Resource" id="c_cancel"]
+script = ExtResource("cue")
+Id = &"cancel"
+Variants = Array[AudioStream]([ExtResource("s_cancel")])
+VolumeDb = 0.0
+PitchRange = Vector2(0.98, 1.02)
+
+[sub_resource type="Resource" id="c_tab"]
+script = ExtResource("cue")
+Id = &"tab"
+Variants = Array[AudioStream]([ExtResource("s_card_slide1"), ExtResource("s_card_slide2")])
+VolumeDb = -3.0
+PitchRange = Vector2(0.95, 1.05)
+
+[sub_resource type="Resource" id="c_toggle"]
+script = ExtResource("cue")
+Id = &"toggle"
+Variants = Array[AudioStream]([ExtResource("s_generic1")])
+VolumeDb = -2.0
+PitchRange = Vector2(0.97, 1.03)
+
+[sub_resource type="Resource" id="c_hover"]
+script = ExtResource("cue")
+Id = &"hover"
+Variants = Array[AudioStream]([ExtResource("s_highlight1"), ExtResource("s_highlight2")])
+VolumeDb = -14.0
+PitchRange = Vector2(0.94, 1.06)
+
+[sub_resource type="Resource" id="c_panel_open"]
+script = ExtResource("cue")
+Id = &"panel_open"
+Variants = Array[AudioStream]([ExtResource("s_whoosh1"), ExtResource("s_whoosh2")])
+VolumeDb = -7.0
+PitchRange = Vector2(0.96, 1.04)
+
+[sub_resource type="Resource" id="c_panel_close"]
+script = ExtResource("cue")
+Id = &"panel_close"
+Variants = Array[AudioStream]([ExtResource("s_whoosh")])
+VolumeDb = -9.0
+PitchRange = Vector2(0.96, 1.04)
+
+[sub_resource type="Resource" id="c_card_hover"]
+script = ExtResource("cue")
+Id = &"card_hover"
+Variants = Array[AudioStream]([ExtResource("s_paper1")])
+VolumeDb = -12.0
+PitchRange = Vector2(0.92, 1.08)
+
+[sub_resource type="Resource" id="c_card_pick"]
+script = ExtResource("cue")
+Id = &"card_pick"
+Variants = Array[AudioStream]([ExtResource("s_card1")])
+VolumeDb = -2.0
+PitchRange = Vector2(0.95, 1.05)
+
+[sub_resource type="Resource" id="c_card_place"]
+script = ExtResource("cue")
+Id = &"card_place"
+Variants = Array[AudioStream]([ExtResource("s_card3")])
+VolumeDb = -2.0
+PitchRange = Vector2(0.95, 1.05)
+
+[sub_resource type="Resource" id="c_intro"]
+script = ExtResource("cue")
+Id = &"intro"
+Variants = Array[AudioStream]([ExtResource("s_whoosh_long")])
+VolumeDb = -6.0
+PitchRange = Vector2(1.0, 1.0)
+
+[resource]
+script = ExtResource("bank")
+Cues = Array[ExtResource("cue")]([SubResource("c_button"), SubResource("c_cancel"), SubResource("c_tab"), SubResource("c_toggle"), SubResource("c_hover"), SubResource("c_panel_open"), SubResource("c_panel_close"), SubResource("c_card_hover"), SubResource("c_card_pick"), SubResource("c_card_place"), SubResource("c_intro")])
