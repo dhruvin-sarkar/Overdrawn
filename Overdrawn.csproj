@@ -5,4 +5,9 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Overdrawn</RootNamespace>
   </PropertyGroup>
+
+  <!-- The test project compiles the rules engine itself; it is not game code. -->
+  <ItemGroup>
+    <Compile Remove="tests/**" />
+  </ItemGroup>
 </Project>

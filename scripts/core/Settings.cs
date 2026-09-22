@@ -138,6 +138,10 @@ public partial class Settings : Node
 
 	private void ApplyEngineState()
 	{
+		// Game Speed drives the whole simulation clock, so every tween, deal and
+		// score count-up scales with it without being told about it.
+		Engine.TimeScale = _gameSpeed;
+
 		SetBusVolume("Master", _masterVolume);
 		SetBusVolume("Music", _musicVolume);
 		SetBusVolume("Game", _gameVolume);

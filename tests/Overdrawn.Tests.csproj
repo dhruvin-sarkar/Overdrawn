@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Overdrawn.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <!-- The rules engine is plain C#, so it is compiled straight in and tested
+       without Godot in the way. -->
+  <ItemGroup>
+    <Compile Include="../scripts/blackjack/*.cs" />
+    <Compile Include="../scripts/cards/Suit.cs" />
+    <Compile Include="../scripts/cards/Rank.cs" />
+    <Compile Include="../scripts/scoring/HandOutcome.cs" />
+    <Compile Include="../scripts/scoring/ScoreCalculator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+</Project>

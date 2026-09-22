@@ -22,3 +22,7 @@ BLACKJACK_ROGUELIKE_SYSTEMS_DEEP_DIVE.md
 
 # Third-party reference code kept for porting, not part of the game
 reference/
+
+# Test build output
+tests/bin/
+tests/obj/
