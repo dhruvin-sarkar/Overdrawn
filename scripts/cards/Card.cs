@@ -24,24 +24,24 @@ public partial class Card : Node2D
 	[ExportGroup("Pop")]
 	[Export] public float HoverScale { get; set; } = 1.06f;
 	[Export] public float PopScale { get; set; } = 1.14f;
-	[Export] public float DragScale { get; set; } = 1.18f;
+	[Export] public float DragScale { get; set; } = 1.22f;
 	[Export] public float PopDegrees { get; set; } = 5f;
 
 	[ExportGroup("Movement")]
-	[Export] public float FollowRate { get; set; } = 30f;
+	[Export] public float FollowRate { get; set; } = 46f;
 	[Export] public float ReturnStiffness { get; set; } = 320f;
 	[Export] public float ReturnDamping { get; set; } = 24f;
 	/// Degrees of in-plane lean per pixel per second of movement.
-	[Export] public float LeanPerSpeed { get; set; } = 0.012f;
-	[Export] public float MaxLean { get; set; } = 16f;
+	[Export] public float LeanPerSpeed { get; set; } = 0.026f;
+	[Export] public float MaxLean { get; set; } = 30f;
 
 	[ExportGroup("Shadow")]
 	[Export] public float ShadowAlpha { get; set; } = 0.35f;
 	/// Shadow drop as a fraction of card height, resting and lifted.
 	[Export] public float ShadowRestDrop { get; set; } = 0.03f;
-	[Export] public float ShadowLiftDrop { get; set; } = 0.13f;
+	[Export] public float ShadowLiftDrop { get; set; } = 0.18f;
 	/// Sideways shadow offset in pixels at the edge of the screen.
-	[Export] public float ShadowSpread { get; set; } = 40f;
+	[Export] public float ShadowSpread { get; set; } = 55f;
 
 	/// The card currently picked up, so only one moves at a time.
 	public static Card? Held { get; private set; }
@@ -189,7 +189,7 @@ public partial class Card : Node2D
 		}
 
 		float leanTarget = Mathf.Clamp(_velocity.X * LeanPerSpeed, -MaxLean, MaxLean) * motion;
-		_lean = Mathf.Lerp(_lean, leanTarget, Damp(20f, dt));
+		_lean = Mathf.Lerp(_lean, leanTarget, Damp(26f, dt));
 		_tilt = _tilt.Lerp(TiltTarget(motion), Damp(TiltRate, dt));
 		_lift = Mathf.Lerp(_lift, IsDragging ? 1f : 0f, Damp(12f, dt));
 
