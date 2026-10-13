@@ -45,10 +45,22 @@ public sealed class Round
 	public int ActiveIndex { get; private set; }
 	public Hand Active => _hands[ActiveIndex];
 
-	/// The dealer's second card stays face down until the dealer plays.
-	public bool HoleCardHidden => Phase == RoundPhase.PlayerTurn;
+	/// The dealer's second card is dealt face down and stays that way until the
+	/// dealer turns it over, which a natural on either side does not skip.
+	public bool HoleCardHidden { get; private set; }
 
 	public IReadOnlyList<Move> LegalMoves => Phase == RoundPhase.PlayerTurn ? Moves(Active) : Array.Empty<Move>();
+
+	/// What this table takes, with the ceiling pulled down to what the player
+	/// actually holds. The one place a wager range is decided.
+	public (int Minimum, int Maximum) WagerBounds
+	{
+		get
+		{
+			(int minimum, int maximum) = RunEconomy.WagerBounds(_run.Level);
+			return (minimum, Math.Min(maximum, _run.Bankroll));
+		}
+	}
 
 	/// <param name="wager">Within the table's bounds, and already covered by the bankroll.</param>
 	public void Begin(int wager)
@@ -58,7 +70,7 @@ public sealed class Round
 			throw new InvalidOperationException("This hand has already been dealt.");
 		}
 
-		(int minimum, int maximum) = RunEconomy.WagerBounds(_run.Level);
+		(int minimum, int maximum) = WagerBounds;
 		if (wager < minimum || wager > maximum)
 		{
 			throw new ArgumentOutOfRangeException(nameof(wager), wager, $"This table takes ${minimum} to ${maximum}.");
@@ -66,6 +78,8 @@ public sealed class Round
 
 		_run.Stake(wager);
 		_run.SpendHand();
+		_run.Shoe.BeginHand();
+		HoleCardHidden = true;
 
 		var hand = new Hand(wager);
 		_hands.Add(hand);
@@ -114,6 +128,17 @@ public sealed class Round
 		}
 
 		Advance();
+	}
+
+	/// Turns the hole card over, the beat the dealer's turn opens on.
+	public void RevealHole()
+	{
+		if (Phase != RoundPhase.DealerTurn)
+		{
+			throw new InvalidOperationException("The dealer only shows the hole card on their own turn.");
+		}
+
+		HoleCardHidden = false;
 	}
 
 	/// Draws one card for the dealer. False once the dealer is done, so the

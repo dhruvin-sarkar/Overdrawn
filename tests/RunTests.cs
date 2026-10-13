@@ -39,7 +39,7 @@ public class ShoeTests
 	}
 
 	[Fact]
-	public void AnEmptyShoeReshufflesItselfOnTheNextDraw()
+	public void AShoeThatRunsDryInsideAHandRefusesToDealRatherThanRepeatItself()
 	{
 		Shoe shoe = Standard();
 		for (int i = 0; i < 52; i++)
@@ -47,9 +47,44 @@ public class ShoeTests
 			shoe.Draw();
 		}
 
-		shoe.Draw();
+		Assert.Throws<InvalidOperationException>(() => shoe.Draw());
+	}
 
-		Assert.Equal(51, shoe.Remaining);
+	[Fact]
+	public void TheCutCardIsReachedBetweenHandsAndNeverInsideOne()
+	{
+		Shoe shoe = Standard();
+
+		shoe.BeginHand();
+		Assert.Equal(52, shoe.Remaining);
+
+		while (shoe.Remaining > Shoe.CutCard)
+		{
+			shoe.Draw();
+		}
+
+		shoe.BeginHand();
+
+		Assert.Equal(52, shoe.Remaining);
+	}
+
+	[Fact]
+	public void AHandDealtOffACutCardShuffleNeverSeesTheSameCardTwice()
+	{
+		Shoe shoe = Standard();
+		while (shoe.Remaining > Shoe.CutCard)
+		{
+			shoe.Draw();
+		}
+
+		shoe.BeginHand();
+		var dealt = new List<PlayingCard>();
+		for (int i = 0; i < Shoe.CutCard; i++)
+		{
+			dealt.Add(shoe.Draw());
+		}
+
+		Assert.Equal(dealt.Count, dealt.Distinct().Count());
 	}
 
 	[Fact]
@@ -83,6 +118,23 @@ public class ShoeTests
 		shoe.BeginLevel(Array.Empty<PlayingCard>(), cap: 26);
 
 		Assert.Equal(26, shoe.Remaining);
+	}
+
+	[Fact]
+	public void StartingALevelShufflesTheShoe()
+	{
+		List<PlayingCard> ordered = Shoe.StandardDeck();
+
+		var one = new Shoe(ordered, new Random(1));
+		var two = new Shoe(ordered, new Random(2));
+		one.BeginLevel(Array.Empty<PlayingCard>());
+		two.BeginLevel(Array.Empty<PlayingCard>());
+
+		List<PlayingCard> first = Enumerable.Range(0, 8).Select(_ => one.Draw()).ToList();
+		List<PlayingCard> second = Enumerable.Range(0, 8).Select(_ => two.Draw()).ToList();
+
+		Assert.NotEqual(ordered.Take(8), first);
+		Assert.NotEqual(first, second);
 	}
 
 	[Fact]

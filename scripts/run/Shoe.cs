@@ -18,6 +18,11 @@ public sealed class Shoe
 	private readonly List<PlayingCard> _drawPile = new();
 	private readonly Random _random;
 
+	/// How few cards may be left when a hand starts. A real table sets its cut
+	/// card so a shuffle never interrupts a hand, because the cards already on
+	/// the felt must not come back and be dealt a second time.
+	public const int CutCard = 24;
+
 	private int _cap;
 
 	public Shoe(IEnumerable<PlayingCard> deck, Random random)
@@ -61,11 +66,21 @@ public sealed class Shoe
 		_drawPile.Insert(_random.Next(_drawPile.Count + 1), card);
 	}
 
+	/// Reaches for the cut card before a hand is dealt. A shoe is reshuffled
+	/// here and nowhere else, so a hand always finishes on the cards it began on.
+	public void BeginHand()
+	{
+		if (_drawPile.Count <= CutCard)
+		{
+			Shuffle();
+		}
+	}
+
 	public PlayingCard Draw()
 	{
 		if (_drawPile.Count == 0)
 		{
-			Shuffle();
+			throw new InvalidOperationException("The shoe ran dry inside a hand; the cut card shuffles it between hands.");
 		}
 
 		PlayingCard card = _drawPile[^1];
