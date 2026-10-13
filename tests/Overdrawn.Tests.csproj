@@ -13,8 +13,7 @@
     <Compile Include="../scripts/run/*.cs" />
     <Compile Include="../scripts/cards/Suit.cs" />
     <Compile Include="../scripts/cards/Rank.cs" />
-    <Compile Include="../scripts/scoring/HandOutcome.cs" />
-    <Compile Include="../scripts/scoring/ScoreCalculator.cs" />
+    <Compile Include="../scripts/scoring/*.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,3 +1,4 @@
+using System.Linq;
 using Overdrawn.Blackjack;
 using Overdrawn.Cards;
 using Overdrawn.Scoring;
@@ -101,5 +102,30 @@ public class ScoreCalculatorTests
 		hand.Surrender();
 
 		Assert.Equal(0, ScoreCalculator.Score(hand, new HandSettlement(Settlement.PlayerSurrender, -10), 0).Score);
+	}
+
+	[Fact]
+	public void TheBeatsArriveInTheOrderTheyFiredAndLandOnTheFinalTotal()
+	{
+		ScoreBreakdown score = ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), DealerBusted, 3);
+
+		Assert.Equal(
+			new[] { ScoreStepKind.Base, ScoreStepKind.Streak, ScoreStepKind.DealerBust },
+			score.Steps.Select(step => step.Kind));
+		Assert.Equal(new double[] { 2, 5, 6 }, score.Steps.Select(step => step.Mult));
+		Assert.All(score.Steps, step => Assert.Equal(34, step.Chips));
+
+		ScoreStep last = score.Steps[^1];
+		Assert.Equal(score.Chips, last.Chips);
+		Assert.Equal(score.Mult, last.Mult);
+	}
+
+	[Fact]
+	public void ABustHasNoBeatsToPlay()
+	{
+		Hand hand = Dealt(Rank.Ten, Rank.Six);
+		hand.Take(new PlayingCard(Suit.Spades, Rank.Ten));
+
+		Assert.Empty(ScoreCalculator.Score(hand, new HandSettlement(Settlement.PlayerBust, -20), 0).Steps);
 	}
 }

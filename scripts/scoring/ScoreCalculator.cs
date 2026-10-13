@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using Overdrawn.Blackjack;
 
 namespace Overdrawn.Scoring;
 
-/// The Chips and Mult a hand produced, and their product.
-public readonly record struct ScoreBreakdown(HandOutcome Outcome, int Chips, double Mult, long Score);
+/// The Chips and Mult a hand produced, their product, and the beats that got
+/// there in the order they fired.
+public readonly record struct ScoreBreakdown(
+	HandOutcome Outcome, int Chips, double Mult, long Score, IReadOnlyList<ScoreStep> Steps);
 
 /// <summary>
 /// Turns a finished hand into Chips x Mult. It reads the hand and the money
@@ -46,7 +49,7 @@ public static class ScoreCalculator
 		HandOutcome outcome = Classify(hand);
 		if (outcome == HandOutcome.Bust)
 		{
-			return new ScoreBreakdown(outcome, 0, 0, 0);
+			return new ScoreBreakdown(outcome, 0, 0, 0, ScoreStep.None);
 		}
 
 		int sum = hand.Total;
@@ -59,12 +62,21 @@ public static class ScoreCalculator
 			_ => throw new ArgumentOutOfRangeException(nameof(hand), outcome, "Unscored outcome."),
 		};
 
-		mult += Math.Min(winStreak, MaxStreakBonus);
+		var steps = new List<ScoreStep> { new(ScoreStepKind.Base, chips, mult, chips, mult) };
+
+		int streak = Math.Min(winStreak, MaxStreakBonus);
+		if (streak > 0)
+		{
+			mult += streak;
+			steps.Add(new ScoreStep(ScoreStepKind.Streak, 0, streak, chips, mult));
+		}
+
 		if (settlement.DealerBusted)
 		{
 			mult += 1;
+			steps.Add(new ScoreStep(ScoreStepKind.DealerBust, 0, 1, chips, mult));
 		}
 
-		return new ScoreBreakdown(outcome, chips, mult, (long)(chips * mult));
+		return new ScoreBreakdown(outcome, chips, mult, (long)(chips * mult), steps);
 	}
 }
