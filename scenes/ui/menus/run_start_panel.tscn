@@ -1,0 +1,154 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/RunStartPanel.cs" id="1_panel"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="2_button"]
+[ext_resource type="Script" path="res://scripts/ui/components/TabStrip.cs" id="3_tabs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/option_cycler.tscn" id="4_cycler"]
+[ext_resource type="Resource" path="res://data/starting_deck_library.tres" id="5_decks"]
+[ext_resource type="Texture2D" path="res://assets/cards/card_set/red_back.png" id="6_back"]
+[ext_resource type="Texture2D" path="res://assets/ui/balatro/stakes.png" id="7_stakes"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stake"]
+atlas = ExtResource("7_stakes")
+region = Rect2(0, 0, 29, 29)
+
+[node name="RunStartPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1120, 0)
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_panel")
+StartingDecks = ExtResource("5_decks")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Tabs" type="HBoxContainer" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+script = ExtResource("3_tabs")
+Tabs = PackedStringArray("New Run", "Continue", "Challenges")
+TabWidth = 300.0
+
+[node name="Body" type="MarginContainer" parent="Column"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+
+[node name="NewRun" type="HBoxContainer" parent="Column/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BackFrame" type="PanelContainer" parent="Column/Body/NewRun"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"InsetPanel"
+
+[node name="Margin" type="MarginContainer" parent="Column/Body/NewRun/BackFrame"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="Back" type="TextureRect" parent="Column/Body/NewRun/BackFrame/Margin"]
+texture_filter = 1
+custom_minimum_size = Vector2(228, 342)
+layout_mode = 2
+texture = ExtResource("6_back")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DeckColumn" type="VBoxContainer" parent="Column/Body/NewRun"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="Deck" parent="Column/Body/NewRun/DeckColumn" instance=ExtResource("4_cycler")]
+unique_name_in_owner = true
+layout_mode = 2
+ValueWidth = 440.0
+
+[node name="EffectPanel" type="PanelContainer" parent="Column/Body/NewRun/DeckColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"InsetPanel"
+
+[node name="Margin" type="MarginContainer" parent="Column/Body/NewRun/DeckColumn/EffectPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 20
+
+[node name="Effect" type="Label" parent="Column/Body/NewRun/DeckColumn/EffectPanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Empty" type="Label" parent="Column/Body"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.3)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StakeRow" type="PanelContainer" parent="Column"]
+layout_mode = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="Row" type="HBoxContainer" parent="Column/StakeRow"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Chip" type="TextureRect" parent="Column/StakeRow/Row"]
+texture_filter = 1
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_stake")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StakeColumn" type="VBoxContainer" parent="Column/StakeRow/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="StakeName" type="Label" parent="Column/StakeRow/Row/StakeColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "White Stake"
+horizontal_alignment = 1
+
+[node name="Difficulty" type="Label" parent="Column/StakeRow/Row/StakeColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.55)
+theme_override_font_sizes/font_size = 26
+text = "Base Difficulty"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 86)
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+script = ExtResource("2_button")
+
+[node name="Back" type="Button" parent="Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Back"
+script = ExtResource("2_button")
+PressCue = &"cancel"

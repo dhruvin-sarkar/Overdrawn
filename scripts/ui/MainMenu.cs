@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Godot;
 using Overdrawn.Cards;
+using Overdrawn.Content;
 using Overdrawn.Profiles;
+using Overdrawn.Run;
 
 namespace Overdrawn.UI;
 
@@ -15,6 +17,8 @@ public partial class MainMenu : Control
 	[Export] public CardStyleLibrary CardStyles { get; set; } = null!;
 	[Export] public PackedScene OptionsScene { get; set; } = null!;
 	[Export] public PackedScene ProfileScene { get; set; } = null!;
+	[Export] public PackedScene RunStartScene { get; set; } = null!;
+	[Export] public StartingDeckLibrary StartingDecks { get; set; } = null!;
 	[Export] public float BurnDuration { get; set; } = 3.2f;
 	[Export] public float FurnitureDelay { get; set; } = 2.0f;
 	[Export] public float FurnitureDuration { get; set; } = 0.45f;
@@ -49,11 +53,21 @@ public partial class MainMenu : Control
 		};
 
 		var overlay = GetNode<MenuOverlay>("Overlay");
+		overlay.RunRequested += StartRun;
+		GetNode<Button>("ButtonBar/Margin/Row/Play").Pressed += () => overlay.Open(RunStartScene);
 		GetNode<Button>("ButtonBar/Margin/Row/Options").Pressed += () => overlay.Open(OptionsScene);
 		_profileButton.Pressed += () => overlay.Open(ProfileScene);
 		GetNode<Button>("ButtonBar/Margin/Row/Quit").Pressed += () => GetTree().Quit();
 
 		PlayIntro();
+	}
+
+	/// Deals the player in. The table that run sits down at is the next screen.
+	private void StartRun(string startingDeckId)
+	{
+		StartingDeck deck = StartingDecks.Find(startingDeckId);
+		RunState run = RunState.Begin(deck.Id, deck.BuildDeck(), (int)GD.Randi(), deck.StartingBankrollScale);
+		GD.Print($"Run started on {deck.DisplayName}: {run.Shoe.Deck.Count} cards, ${run.Bankroll}, target {run.ScoreTarget}.");
 	}
 
 	private void CentreCard() => _card.Position = _cardSlot.Size * 0.5f;

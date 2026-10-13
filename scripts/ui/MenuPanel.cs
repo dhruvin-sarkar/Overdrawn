@@ -11,9 +11,12 @@ public partial class MenuPanel : PanelContainer
 {
 	[Signal] public delegate void BackPressedEventHandler();
 	[Signal] public delegate void OpenRequestedEventHandler(PackedScene scene);
+	[Signal] public delegate void RunRequestedEventHandler(string startingDeckId);
 
 	public override void _Ready() =>
 		GetNode<Button>("%Back").Pressed += () => EmitSignal(SignalName.BackPressed);
 
 	protected void RequestOpen(PackedScene scene) => EmitSignal(SignalName.OpenRequested, scene);
+
+	protected void RequestRun(string startingDeckId) => EmitSignal(SignalName.RunRequested, startingDeckId);
 }

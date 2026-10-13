@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StartingDeck" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/StartingDeck.cs" id="1_deck"]
+
+[resource]
+script = ExtResource("1_deck")
+Id = "counters_deck"
+DisplayName = "Counter's Deck"
+Effect = "Face cards reduced by 4 in the deck; see a hint (high/low) of the next card before every deal"
+RemovedRanks = Array[int]([11])
+StartingBankrollScale = 1.0

@@ -92,8 +92,13 @@ public sealed class Shoe
 		}
 	}
 
-	public static List<PlayingCard> StandardDeck() =>
-		(from Suit suit in Enum.GetValues<Suit>()
+	/// <param name="without">Ranks the deck is built without, such as a deck that has had its fours pulled.</param>
+	public static List<PlayingCard> StandardDeck(IEnumerable<Rank>? without = null)
+	{
+		var removed = without?.ToHashSet() ?? new HashSet<Rank>();
+		return (from Suit suit in Enum.GetValues<Suit>()
 			from Rank rank in Enum.GetValues<Rank>()
+			where !removed.Contains(rank)
 			select new PlayingCard(suit, rank)).ToList();
+	}
 }

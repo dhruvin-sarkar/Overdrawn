@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StartingDeck" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/StartingDeck.cs" id="1_deck"]
+
+[resource]
+script = ExtResource("1_deck")
+Id = "high_rollers_deck"
+DisplayName = "High Roller's Deck"
+Effect = "Wager min and max both +50% for the whole run; starting bankroll -30%"
+RemovedRanks = Array[int]([])
+StartingBankrollScale = 0.7

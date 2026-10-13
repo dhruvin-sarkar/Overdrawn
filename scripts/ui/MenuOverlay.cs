@@ -19,6 +19,9 @@ public partial class MenuOverlay : Control
 	/// How far a panel travels when Reduced Motion is on.
 	[Export] public float CalmDistance { get; set; } = 40f;
 
+	/// A panel asked for a run to start. The overlay only relays it.
+	[Signal] public delegate void RunRequestedEventHandler(string startingDeckId);
+
 	private readonly Stack<Control> _holders = new();
 	private readonly Dictionary<Control, Tween> _slides = new();
 	private ColorRect _dim = null!;
@@ -46,6 +49,7 @@ public partial class MenuOverlay : Control
 		MenuPanel panel = scene.Instantiate<MenuPanel>();
 		panel.BackPressed += Back;
 		panel.OpenRequested += Open;
+		panel.RunRequested += id => EmitSignal(SignalName.RunRequested, id);
 
 		// The holder is what slides, so the panel can stay centred by its anchors.
 		var holder = new Control { MouseFilter = MouseFilterEnum.Ignore };

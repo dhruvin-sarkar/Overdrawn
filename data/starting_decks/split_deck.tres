@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StartingDeck" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/StartingDeck.cs" id="1_deck"]
+
+[resource]
+script = ExtResource("1_deck")
+Id = "split_deck"
+DisplayName = "Split Deck"
+Effect = "Start with 2 extra Joker slots; max wager -25% for the whole run"
+RemovedRanks = Array[int]([])
+StartingBankrollScale = 1.0

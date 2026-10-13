@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StartingDeckLibrary" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/StartingDeckLibrary.cs" id="1_library"]
+[ext_resource type="Script" path="res://scripts/content/StartingDeck.cs" id="1_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/house_deck.tres" id="2_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/counters_deck.tres" id="3_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/high_rollers_deck.tres" id="4_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/superstition_deck.tres" id="5_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/insurance_deck.tres" id="6_deck"]
+[ext_resource type="Resource" path="res://data/starting_decks/split_deck.tres" id="7_deck"]
+
+[resource]
+script = ExtResource("1_library")
+Decks = Array[ExtResource("1_deck")]([ExtResource("2_deck"), ExtResource("3_deck"), ExtResource("4_deck"), ExtResource("5_deck"), ExtResource("6_deck"), ExtResource("7_deck")])
