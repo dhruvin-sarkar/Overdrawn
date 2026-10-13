@@ -6,13 +6,13 @@
 [ext_resource type="Shader" uid="uid://dpgts8slp72xq" path="res://shaders/title_dissolve.gdshader" id="4_dissolve"]
 [ext_resource type="Texture2D" uid="uid://cn44q4rxmo4tg" path="res://assets/ui/title_text.png" id="5_title"]
 [ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="6_card"]
-[ext_resource type="Theme" path="res://theme/overdrawn.tres" id="7_theme"]
+[ext_resource type="Theme" uid="uid://8loo6n44xcyi" path="res://theme/overdrawn.tres" id="7_theme"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
-[ext_resource type="Resource" path="res://data/card_style_library.tres" id="9_styles"]
+[ext_resource type="Resource" uid="uid://btol8wqksn2sd" path="res://data/card_style_library.tres" id="9_styles"]
 [ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="10_overlay"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/profile_panel.tscn" id="12_profile"]
-[ext_resource type="AudioStream" uid="uid://cthkql0uqsl5w" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
+[ext_resource type="AudioStream" uid="uid://cthkql0uqsl5w" path="res://assets/audio/music/ambient_organ1.ogg" id="13_8ekit"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
 shader = ExtResource("2_paint")
@@ -92,6 +92,28 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
 shader = ExtResource("3_crt")
+shader_parameter/curvature = Vector2(0.03, 0.045)
+shader_parameter/corner_radius = 0.08
+shader_parameter/edge_feather = 0.006
+shader_parameter/vignette = 0.3
+shader_parameter/scanline_count = 270.0
+shader_parameter/scanline_depth = 0.5
+shader_parameter/grille_depth = 0.15
+shader_parameter/aberration_px = 1.0
+shader_parameter/contrast = 1.12
+shader_parameter/noise_amount = 0.035
+shader_parameter/jitter_px = 0.3
+shader_parameter/bloom_threshold = 0.55
+shader_parameter/bloom_intensity = 0.45
+shader_parameter/bloom_lod = 3.0
+shader_parameter/pulse_scanlines = 0.4
+shader_parameter/pulse_aberration_px = 3.0
+shader_parameter/pulse_jitter_px = 2.5
+shader_parameter/pulse_noise = 0.08
+shader_parameter/band_speed = 0.05
+shader_parameter/band_height = 0.04
+shader_parameter/band_shift_px = 1.5
+shader_parameter/band_glow = 0.025
 
 [node name="MainMenu" type="Control" unique_id=2012571883]
 layout_mode = 3
@@ -313,8 +335,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_music")
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=136740715]
+stream = ExtResource("13_8ekit")
 volume_db = -9.0
 autoplay = true
 bus = &"Music"

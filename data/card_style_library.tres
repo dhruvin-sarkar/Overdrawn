@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="CardStyleLibrary" format=3]
+[gd_resource type="Resource" script_class="CardStyleLibrary" format=3 uid="uid://btol8wqksn2sd"]
 
 [ext_resource type="Script" uid="uid://r3oyppl8vw3v" path="res://scripts/cards/CardStyleLibrary.cs" id="1_library"]
-[ext_resource type="Resource" path="res://data/card_styles/card_set.tres" id="2_style"]
+[ext_resource type="Script" uid="uid://cndnacxmj1ehu" path="res://scripts/cards/CardStyle.cs" id="1_yroli"]
+[ext_resource type="Resource" uid="uid://bfclhvmarxsai" path="res://data/card_styles/card_set.tres" id="2_style"]
 [ext_resource type="Resource" path="res://data/card_styles/jorel.tres" id="3_style"]
 [ext_resource type="Resource" path="res://data/card_styles/kerenel.tres" id="4_style"]
-[ext_resource type="Resource" path="res://data/card_styles/yewbi.tres" id="5_style"]
+[ext_resource type="Resource" uid="uid://bvjponw5ii06d" path="res://data/card_styles/yewbi.tres" id="5_style"]
 [ext_resource type="Resource" path="res://data/card_styles/balatro.tres" id="6_style"]
 
 [resource]
 script = ExtResource("1_library")
-Styles = Array[Object]([ExtResource("2_style"), ExtResource("3_style"), ExtResource("4_style"), ExtResource("5_style"), ExtResource("6_style")])
+Styles = Array[ExtResource("1_yroli")]([ExtResource("2_style"), ExtResource("3_style"), ExtResource("4_style"), ExtResource("5_style"), ExtResource("6_style")])
