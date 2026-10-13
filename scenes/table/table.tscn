@@ -16,11 +16,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
 shader = ExtResource("2_paint")
-shader_parameter/colour_1 = Color(0.012, 0.075, 0.051, 1)
-shader_parameter/colour_2 = Color(0.04, 0.4, 0.247, 1)
-shader_parameter/colour_3 = Color(0.098, 0.565, 0.353, 1)
-shader_parameter/contrast = 1.6
-shader_parameter/spin_amount = 0.85
+shader_parameter/colour_1 = Color(0.043, 0.129, 0.098, 1)
+shader_parameter/colour_2 = Color(0.125, 0.306, 0.231, 1)
+shader_parameter/colour_3 = Color(0.208, 0.431, 0.325, 1)
+shader_parameter/contrast = 1.1
+shader_parameter/spin_amount = 0.7
 shader_parameter/spin_speed = 0.45
 shader_parameter/paint_speed = 1.0
 shader_parameter/pixel_filter = 740.0
@@ -51,18 +51,6 @@ shader_parameter/band_height = 0.04
 shader_parameter/band_shift_px = 1.5
 shader_parameter/band_glow = 0.025
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
-bg_color = Color(0, 0, 0, 0.3)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 0.22)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [node name="Table" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -91,7 +79,7 @@ mouse_filter = 2
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 440.0
+offset_right = 460.0
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
 
@@ -135,7 +123,7 @@ theme_override_constants/separation = 12
 
 [node name="Token" type="PanelContainer" parent="Rail/Pad/Column/TargetRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_vertical = 4
 theme_type_variation = &"BlindPill"
@@ -144,7 +132,7 @@ theme_type_variation = &"BlindPill"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.09, 0.11, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 34
 text = "21"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -176,6 +164,7 @@ horizontal_alignment = 1
 [node name="Reward" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
 unique_name_in_owner = true
 layout_mode = 2
+autowrap_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.85)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 1
@@ -237,36 +226,40 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Buttons" type="HBoxContainer" parent="Rail/Pad/Column"]
+[node name="Controls" type="HBoxContainer" parent="Rail/Pad/Column"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RunInfo" type="Button" parent="Rail/Pad/Column/Buttons"]
+[node name="Stack" type="VBoxContainer" parent="Rail/Pad/Column/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RunInfo" type="Button" parent="Rail/Pad/Column/Controls/Stack"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_type_variation = &"RedButton"
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 19
 text = "Run Info"
 script = ExtResource("6_button")
 
-[node name="Options" type="Button" parent="Rail/Pad/Column/Buttons"]
+[node name="Options" type="Button" parent="Rail/Pad/Column/Controls/Stack"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_type_variation = &"OrangeButton"
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 19
 text = "Options"
 script = ExtResource("6_button")
 
-[node name="Hands" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
+[node name="Hands" parent="Rail/Pad/Column/Controls" instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 Title = "Hands"
-TitleWidth = 168.0
-FontSize = 28
+TitleWidth = 64.0
+FontSize = 24
 
 [node name="Money" type="PanelContainer" parent="Rail/Pad/Column"]
 custom_minimum_size = Vector2(0, 72)
@@ -337,7 +330,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 440.0
+offset_left = 460.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -346,10 +339,10 @@ mouse_filter = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 40.0
-offset_top = 46.0
-offset_right = -40.0
-offset_bottom = 274.0
+offset_left = 56.0
+offset_top = 24.0
+offset_right = -56.0
+offset_bottom = 272.0
 grow_horizontal = 2
 mouse_filter = 2
 
@@ -357,48 +350,23 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
-offset_right = 800.0
-offset_bottom = 200.0
+offset_right = 856.0
+offset_bottom = 214.0
 mouse_filter = 2
-theme_override_constants/separation = 10
-
-[node name="Slot1" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
-
-[node name="Slot2" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
-
-[node name="Slot3" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
-
-[node name="Slot4" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
-
-[node name="Slot5" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+theme_override_constants/separation = 14
 
 [node name="JokerCount" type="Label" parent="Felt/JokerArea"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -20.0
-offset_right = 80.0
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 0.65)
-theme_override_font_sizes/font_size = 20
+anchors_preset = 0
+offset_left = 736.0
+offset_top = 218.0
+offset_right = 856.0
+offset_bottom = 248.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 22
 text = "0/5"
+horizontal_alignment = 2
 
 [node name="ConsumableRow" type="HBoxContainer" parent="Felt/JokerArea"]
 unique_name_in_owner = true
@@ -406,36 +374,24 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -310.0
-offset_bottom = 200.0
+offset_left = -334.0
+offset_bottom = 214.0
 grow_horizontal = 0
 mouse_filter = 2
-theme_override_constants/separation = 10
-
-[node name="Slot1" type="PanelContainer" parent="Felt/JokerArea/ConsumableRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
-
-[node name="Slot2" type="PanelContainer" parent="Felt/JokerArea/ConsumableRow"]
-custom_minimum_size = Vector2(150, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+theme_override_constants/separation = 14
 
 [node name="ConsumableCount" type="Label" parent="Felt/JokerArea"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -24.0
+offset_left = -120.0
+offset_top = 218.0
+offset_bottom = 248.0
 grow_horizontal = 0
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 0.65)
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 22
 text = "0/2"
 horizontal_alignment = 2
 

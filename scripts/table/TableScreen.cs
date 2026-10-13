@@ -115,6 +115,7 @@ public partial class TableScreen : Control
 
 		_deal.Pressed += OnDeal;
 		GetNode<Button>("%Options").Pressed += () => _overlay.Open(OptionsScene);
+
 	}
 
 	/// Sits the player down at this level's table. Starting a level is what
@@ -134,6 +135,18 @@ public partial class TableScreen : Control
 		GetNode<Label>("%TableTrick").Text = Trick(_run.Rules);
 		GetNode<Label>("%Target").Text = $"{_run.ScoreTarget:N0}";
 		GetNode<Label>("%Reward").Text = $"Clear for ${RunEconomy.ClearPayout} + ${RunEconomy.UnusedHandBonus} a hand";
+
+		// The felt starts where the rail ends. A panel is never laid out narrower
+		// than its contents, so a row that outgrows the rail silently pushes it
+		// over the felt and buries the first joker rather than wrapping. Checked
+		// here because a row is only as wide as the text it has been given.
+		float needed = GetNode<Control>("Rail").GetCombinedMinimumSize().X;
+		float edge = GetNode<Control>("Felt").OffsetLeft;
+		if (needed > edge)
+		{
+			throw new InvalidOperationException(
+				$"The rail needs {needed}px but the felt starts at {edge}px; a row in the rail is too wide.");
+		}
 
 		OpenBetting();
 	}
