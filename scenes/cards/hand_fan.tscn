@@ -1,0 +1,63 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/cards/HandFan.cs" id="1_fan"]
+[ext_resource type="Script" path="res://scripts/cards/CardPath.cs" id="2_path"]
+
+[sub_resource type="Curve2D" id="Curve2D_fan"]
+resource_local_to_scene = true
+
+[node name="Fan" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fan")
+
+[node name="Path" type="Path2D" parent="."]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_fan")
+script = ExtResource("2_path")
+
+[node name="Footer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Total" type="PanelContainer" parent="Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(118, 64)
+layout_mode = 2
+theme_type_variation = &"StatValue"
+
+[node name="TotalValue" type="Label" parent="Footer/Total"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stake" type="PanelContainer" parent="Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_type_variation = &"StatValue"
+
+[node name="StakeValue" type="Label" parent="Footer/Stake"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,523 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Godot;
+using Overdrawn.Audio;
+using Overdrawn.Blackjack;
+using Overdrawn.Cards;
+using Overdrawn.Core;
+using Overdrawn.Run;
+using Overdrawn.UI;
+
+namespace Overdrawn.Table;
+
+/// <summary>
+/// The table: a rail of run statistics on the left, the felt on the right, and
+/// one hand of blackjack at a time. The round owns the rules; this owns the
+/// clock, pulling one step at a time so the player can watch each card land.
+/// </summary>
+public partial class TableScreen : Control
+{
+	[Export] public PackedScene CardScene { get; set; } = null!;
+	[Export] public PackedScene FanScene { get; set; } = null!;
+	[Export] public CardStyleLibrary CardStyles { get; set; } = null!;
+	[Export] public PackedScene OptionsScene { get; set; } = null!;
+
+	[ExportGroup("Pacing")]
+	/// Between the four opening cards.
+	[Export] public float DealGap { get; set; } = 0.14f;
+	/// Between the dealer's draws, deliberately slower than the deal.
+	[Export] public float DrawGap { get; set; } = 0.22f;
+	[Export] public float DealerThinking { get; set; } = 0.3f;
+	/// The gap that separates money from score.
+	[Export] public float SettleHold { get; set; } = 0.35f;
+	[Export] public float ReadoutHold { get; set; } = 0.2f;
+
+	[ExportGroup("Feedback")]
+	/// How fast the rail's numbers chase the run's real numbers.
+	[Export] public float ReadoutRate { get; set; } = 9f;
+	[Export] public float CalmCount { get; set; } = 0.35f;
+	[Export] public float LoudCount { get; set; } = 1.1f;
+	[Export] public float CalmTrauma { get; set; } = 0.1f;
+	[Export] public float LoudTrauma { get; set; } = 0.8f;
+	[Export] public float CalmPulse { get; set; } = 0.2f;
+	[Export] public float LoudPulse { get; set; } = 0.9f;
+	/// How many times its share of the target a hand has to score to feel loud.
+	[Export] public float LoudMultiple { get; set; } = 16f;
+
+	private static readonly Color Gold = new(1f, 0.84f, 0.25f);
+
+	private readonly List<HandFan> _seats = new();
+	private readonly Dictionary<Move, Button> _moves = new();
+
+	private RunState _run = null!;
+	private Round? _round;
+	private bool _animating;
+	private float _shownScore;
+	private float _shownMoney;
+
+	private HandFan _dealerFan = null!;
+	private HBoxContainer _seatRow = null!;
+	private Control _betRow = null!;
+	private Label _banner = null!;
+	private Label _wagerMin = null!;
+	private Label _wagerMax = null!;
+	private SettingSlider _wager = null!;
+	private Button _deal = null!;
+	private Control _shoePile = null!;
+	private TextureRect _shoeBack = null!;
+	private Label _shoeCount = null!;
+	private Label _chips = null!;
+	private Label _mult = null!;
+	private StatRow _score = null!;
+	private StatRow _hands = null!;
+	private StatRow _money = null!;
+	private MenuOverlay _overlay = null!;
+
+	public override void _Ready()
+	{
+		_dealerFan = GetNode<HandFan>("%DealerFan");
+		_seatRow = GetNode<HBoxContainer>("%PlayerSeats");
+		_betRow = GetNode<Control>("%BetRow");
+		_banner = GetNode<Label>("%Banner");
+		_wagerMin = GetNode<Label>("%WagerMin");
+		_wagerMax = GetNode<Label>("%WagerMax");
+		_wager = GetNode<SettingSlider>("%Wager");
+		_deal = GetNode<Button>("%Deal");
+		_shoePile = GetNode<Control>("%ShoePile");
+		_shoeBack = GetNode<TextureRect>("%ShoeBack");
+		_shoeCount = GetNode<Label>("%ShoeCount");
+		_chips = GetNode<Label>("%ChipsValue");
+		_mult = GetNode<Label>("%MultValue");
+		_score = GetNode<StatRow>("%Score");
+		_hands = GetNode<StatRow>("%Hands");
+		_money = GetNode<StatRow>("%Money");
+		_overlay = GetNode<MenuOverlay>("%Overlay");
+
+		_moves[Move.Hit] = GetNode<Button>("%Hit");
+		_moves[Move.Stand] = GetNode<Button>("%Stand");
+		_moves[Move.Double] = GetNode<Button>("%Double");
+		_moves[Move.Split] = GetNode<Button>("%Split");
+		foreach ((Move move, Button button) in _moves)
+		{
+			button.Pressed += () => OnMove(move);
+		}
+
+		_deal.Pressed += OnDeal;
+		GetNode<Button>("%Options").Pressed += () => _overlay.Open(OptionsScene);
+	}
+
+	/// Sits the player down at this level's table. Starting a level is what
+	/// shuffles the shoe, the way a dealer does.
+	public void Begin(RunState run)
+	{
+		_run = run;
+		_run.Shoe.BeginLevel(Array.Empty<PlayingCard>());
+
+		_shoeBack.Texture = BackStyle().Back;
+		_dealerFan.ShowStake(0);
+		_shownScore = _run.LevelScore;
+		_shownMoney = _run.Bankroll;
+
+		GetNode<Label>("%TableName").Text = $"Level {_run.Level} of {RunEconomy.LevelsPerRun}";
+		GetNode<Label>("%TableTrick").Text = Trick(_run.Rules);
+		GetNode<Label>("%Target").Text = $"{_run.ScoreTarget:N0}";
+		GetNode<Label>("%Reward").Text = $"Clear for ${RunEconomy.ClearPayout} + ${RunEconomy.UnusedHandBonus} a hand";
+
+		OpenBetting();
+	}
+
+	public override void _Process(double delta)
+	{
+		if (_run is null)
+		{
+			return;
+		}
+
+		float ease = Damp(ReadoutRate, (float)delta);
+		_shownScore = Mathf.Lerp(_shownScore, _run.LevelScore, ease);
+		_shownMoney = Mathf.Lerp(_shownMoney, _run.Bankroll, ease);
+
+		_score.ShowFill(_shownScore / _run.ScoreTarget, $"{Mathf.RoundToInt(_shownScore):N0}");
+		_money.ShowValue($"${Mathf.RoundToInt(_shownMoney):N0}", Gold);
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			_overlay.Open(OptionsScene);
+			AcceptEvent();
+		}
+	}
+
+	/// Opens the betting circle for the next hand, or says why there is not one.
+	private void OpenBetting()
+	{
+		_round = null;
+		foreach (HandFan seat in _seats)
+		{
+			seat.QueueFree();
+		}
+
+		_seats.Clear();
+		_dealerFan.Clear();
+		_dealerFan.ShowTotal("");
+		_chips.Text = "0";
+		_mult.Text = "0";
+
+		if (_run.LevelCleared || _run.HandsRemaining == 0)
+		{
+			_betRow.Visible = false;
+			_banner.Visible = true;
+			_banner.Text = _run.LevelCleared ? "LEVEL CLEARED" : "OUT OF HANDS";
+			Refresh();
+			return;
+		}
+
+		// Debt triggers on its own the moment the bankroll cannot cover the
+		// table's minimum, so the slider always has a legal range to offer.
+		if (_run.CoverMinimumWager())
+		{
+			Sfx.Instance.Play("cancel");
+		}
+
+		(int minimum, int maximum) = new Round(_run).WagerBounds;
+		_wager.SetRange(minimum, maximum, RunEconomy.WagerStep);
+		_wager.SetValue(minimum);
+		_wagerMin.Text = $"${minimum}";
+		_wagerMax.Text = $"${maximum}";
+		_betRow.Visible = true;
+		_banner.Visible = false;
+		Refresh();
+	}
+
+	private async void OnDeal()
+	{
+		_round = new Round(_run);
+		_round.Begin(_wager.Value);
+		_animating = true;
+		_betRow.Visible = false;
+		Refresh();
+
+		await DealOut(DealGap);
+		await Dwell(ReadoutHold);
+		await Continue();
+	}
+
+	private async void OnMove(Move move)
+	{
+		Round round = _round!;
+		int seat = round.ActiveIndex;
+		round.Play(move);
+		_animating = true;
+		Refresh();
+
+		switch (move)
+		{
+			case Move.Split:
+				await Split(seat);
+				break;
+			case Move.Double:
+				Sfx.Instance.Play("card_pick");
+				ScreenShake.Instance.Kick(0.14f);
+				CrtPulse.Instance.Pulse(0.25f);
+				break;
+			case Move.Stand:
+				Sfx.Instance.Play("button");
+				break;
+		}
+
+		await DealOut(DealGap);
+
+		if (round.Hands[seat].IsBust)
+		{
+			Sfx.Instance.Play("cancel");
+			ScreenShake.Instance.Kick(0.45f);
+			CrtPulse.Instance.Pulse(0.7f);
+			await Dwell(SettleHold);
+		}
+
+		await Continue();
+	}
+
+	/// Either hands back to the player or plays the dealer out and settles.
+	private async Task Continue()
+	{
+		if (_round!.Phase == RoundPhase.PlayerTurn)
+		{
+			_animating = false;
+			Refresh();
+			return;
+		}
+
+		await PlayDealer();
+		_round.Finish();
+		await ShowResults();
+
+		_animating = false;
+		OpenBetting();
+	}
+
+	/// Deals every card the round has that the felt has not, one at a time. A
+	/// card is only ever in flight on its own, so none can land behind its
+	/// neighbour.
+	private async Task DealOut(float gap)
+	{
+		bool dealt = false;
+		while (SyncOne())
+		{
+			dealt = true;
+			Sfx.Instance.Play("tab");
+			Refresh();
+			ScreenShake.Instance.Kick(0.06f);
+			CrtPulse.Instance.Pulse(0.1f);
+			await Dwell(gap);
+		}
+
+		if (dealt)
+		{
+			Sfx.Instance.Play("card_place");
+		}
+	}
+
+	/// The pair pulls apart: the second card takes a seat of its own, and only
+	/// then does each half draw.
+	private async Task Split(int seat)
+	{
+		Sfx.Instance.Play("tab");
+		ScreenShake.Instance.Kick(0.2f);
+		CrtPulse.Instance.Pulse(0.35f);
+
+		HandFan from = _seats[seat];
+		HandFan to = AddSeat(seat + 1);
+		// The card keeps its place on screen while it changes seats, so it
+		// slides across rather than flying back to the shoe.
+		to.Adopt(from.Release(1));
+		await Dwell(DrawGap);
+		Refresh();
+	}
+
+	private async Task PlayDealer()
+	{
+		await Dwell(DealerThinking);
+
+		_round!.RevealHole();
+
+		Card hole = _dealerFan.Cards[1];
+		if (hole.IsFaceDown)
+		{
+			Sfx.Instance.Play("card_pick");
+			ScreenShake.Instance.Kick(0.22f);
+			CrtPulse.Instance.Pulse(0.45f);
+			await ToSignal(hole.Flip(), Tween.SignalName.Finished);
+			Refresh();
+		}
+
+		int drawn = 0;
+		while (_round!.DealerStep())
+		{
+			drawn++;
+			// A long dealer run escalates on its own.
+			ScreenShake.Instance.Kick(0.04f * drawn);
+			await DealOut(DrawGap);
+		}
+
+		if (_round.Dealer.IsBust)
+		{
+			Sfx.Instance.Play("panel_close");
+			ScreenShake.Instance.Kick(0.35f);
+			CrtPulse.Instance.Pulse(0.55f);
+		}
+
+		await Dwell(ReadoutHold);
+	}
+
+	/// Money first and instantly, then the score, one hand at a time.
+	private async Task ShowResults()
+	{
+		foreach (HandResult result in _round!.Results)
+		{
+			_banner.Visible = true;
+			_banner.Text = Word(result.Settlement.Result);
+			Sfx.Instance.Play("panel_open");
+			ScreenShake.Instance.Kick(0.1f);
+			CrtPulse.Instance.Pulse(0.3f);
+			await Dwell(SettleHold);
+
+			_chips.Text = $"{result.Score.Chips}";
+			_mult.Text = $"{result.Score.Mult:0.##}";
+			Sfx.Instance.Play("toggle");
+			await Dwell(ReadoutHold);
+
+			if (result.Score.Score == 0)
+			{
+				continue;
+			}
+
+			float loud = Magnitude(result.Score.Score);
+			Sfx.Instance.Play(loud > 0.6f ? "intro" : "card_place");
+			ScreenShake.Instance.Kick(Mathf.Lerp(CalmTrauma, LoudTrauma, loud));
+			CrtPulse.Instance.Pulse(Mathf.Lerp(CalmPulse, LoudPulse, loud));
+			await Dwell(Mathf.Lerp(CalmCount, LoudCount, loud));
+		}
+	}
+
+	/// How big a hand's score felt, as a fraction: zero at nothing, one at many
+	/// times what a hand has to average to clear the level. Logarithmic, because
+	/// score grows multiplicatively across a run while the hand count is flat.
+	private float Magnitude(long score)
+	{
+		float par = (float)_run.ScoreTarget / RunEconomy.HandsPerLevel;
+		return Mathf.Clamp(Mathf.Log(1f + (score / par)) / Mathf.Log(1f + LoudMultiple), 0f, 1f);
+	}
+
+	/// Puts the single card the felt is most behind on, which deals the opening
+	/// round the table in order: whoever is furthest behind, the player before
+	/// the dealer on a tie. False once the felt matches the round.
+	private bool SyncOne()
+	{
+		Round round = _round!;
+		while (_seats.Count < round.Hands.Count)
+		{
+			AddSeat(_seats.Count);
+		}
+
+		HandFan? behind = null;
+		Hand? hand = null;
+		int worst = 0;
+
+		for (int i = 0; i < _seats.Count; i++)
+		{
+			int owed = round.Hands[i].Cards.Count - _seats[i].Cards.Count;
+			if (owed > worst)
+			{
+				(worst, behind, hand) = (owed, _seats[i], round.Hands[i]);
+			}
+		}
+
+		if (round.Dealer.Cards.Count - _dealerFan.Cards.Count > worst)
+		{
+			(behind, hand) = (_dealerFan, round.Dealer);
+		}
+
+		if (behind is null)
+		{
+			return false;
+		}
+
+		DealNext(behind, hand!, behind == _dealerFan && round.HoleCardHidden);
+		return true;
+	}
+
+	private void DealNext(HandFan fan, Hand hand, bool concealHole)
+	{
+		PlayingCard dealt = hand.Cards[fan.Cards.Count];
+		bool hole = concealHole && fan.Cards.Count == 1;
+
+		// Seat the card before telling it what to show: a Card only finds its
+		// own viewport and art once it is in the tree.
+		Card card = CardScene.Instantiate<Card>();
+		fan.Deal(card, _shoePile.GlobalPosition + (_shoePile.Size * 0.5f));
+
+		if (hole)
+		{
+			card.ShowFaceDown(BackStyle(), dealt.Suit, dealt.Rank);
+		}
+		else
+		{
+			card.ShowFace(CardStyles.Find(Settings.Instance.DeckStyle(dealt.Suit)), dealt.Suit, dealt.Rank);
+		}
+	}
+
+	private HandFan AddSeat(int index)
+	{
+		var fan = FanScene.Instantiate<HandFan>();
+		fan.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+		_seatRow.AddChild(fan);
+		_seatRow.MoveChild(fan, index);
+		_seats.Insert(index, fan);
+		return fan;
+	}
+
+	/// Pushes the round's state onto the screen. Called once after every change,
+	/// never polled.
+	private void Refresh()
+	{
+		Round? round = _round;
+		foreach ((Move move, Button button) in _moves)
+		{
+			button.Disabled = _animating || round is null || !round.LegalMoves.Contains(move);
+		}
+
+		_deal.Disabled = _animating || round is not null || _run.LevelCleared || _run.HandsRemaining == 0;
+		_hands.ShowValue($"{_run.HandsRemaining}/{RunEconomy.HandsPerLevel}", Colors.White);
+		_shoeCount.Text = $"{_run.Shoe.Remaining}/{_run.Shoe.Deck.Count + _run.Shoe.Temporary.Count}";
+
+		if (round is null)
+		{
+			return;
+		}
+
+		_dealerFan.ShowTotal(round.HoleCardHidden ? $"{Showing(round.Dealer)}" : $"{round.Dealer.Total}");
+		for (int i = 0; i < _seats.Count && i < round.Hands.Count; i++)
+		{
+			Hand hand = round.Hands[i];
+			_seats[i].ShowTotal(hand.IsBust ? $"{hand.Total} BUST" : $"{hand.Total}");
+			_seats[i].ShowStake(hand.Wager);
+			_seats[i].SetActive(round.Phase != RoundPhase.PlayerTurn || i == round.ActiveIndex);
+		}
+	}
+
+	private async Task Dwell(float seconds)
+	{
+		Tween tween = CreateTween();
+		tween.TweenInterval(seconds);
+		await ToSignal(tween, Tween.SignalName.Finished);
+	}
+
+	/// The back belongs to the shoe rather than to a card: picking it by the
+	/// card's own suit would give the hole card away.
+	private CardStyle BackStyle() => CardStyles.Find(Settings.Instance.DeckStyle(Suit.Spades));
+
+	/// What the dealer is showing while the hole card is still down.
+	private static int Showing(Hand dealer) => dealer.Cards[0].Rank == Rank.Ace ? 11 : dealer.Cards[0].Value;
+
+	private static string Word(Settlement result) => result switch
+	{
+		Settlement.PlayerBlackjack => "BLACKJACK",
+		Settlement.PlayerWin => "WIN",
+		Settlement.DealerBust => "DEALER BUSTS",
+		Settlement.Push => "PUSH",
+		Settlement.PlayerBust => "BUST",
+		Settlement.PlayerSurrender => "SURRENDERED",
+		Settlement.DealerBlackjack => "DEALER BLACKJACK",
+		Settlement.DealerWin => "DEALER WINS",
+		_ => throw new ArgumentOutOfRangeException(nameof(result), result, "Unworded settlement."),
+	};
+
+	/// What the player can read off the table before the first card is dealt.
+	private static string Trick(HouseRules rules)
+	{
+		var notes = new List<string>
+		{
+			rules.DealerHitsSoft17 ? "Dealer hits soft 17" : "Dealer stands on all 17s",
+			$"Blackjack pays {(Mathf.IsEqualApprox((float)rules.BlackjackPayout, 1.5f) ? "3:2" : "even money")}",
+		};
+
+		if (rules.DealerWinsTies)
+		{
+			notes.Add("The dealer takes pushes");
+		}
+
+		if (!rules.SplitAllowed)
+		{
+			notes.Add("No splitting");
+		}
+
+		return string.Join("  -  ", notes);
+	}
+
+	private static float Damp(float rate, float dt) => 1f - Mathf.Exp(-rate * dt);
+}

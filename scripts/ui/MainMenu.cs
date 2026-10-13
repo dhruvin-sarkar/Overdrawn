@@ -5,6 +5,7 @@ using Overdrawn.Cards;
 using Overdrawn.Content;
 using Overdrawn.Profiles;
 using Overdrawn.Run;
+using Overdrawn.Table;
 
 namespace Overdrawn.UI;
 
@@ -19,6 +20,7 @@ public partial class MainMenu : Control
 	[Export] public PackedScene ProfileScene { get; set; } = null!;
 	[Export] public PackedScene RunStartScene { get; set; } = null!;
 	[Export] public StartingDeckLibrary StartingDecks { get; set; } = null!;
+	[Export] public PackedScene TableScene { get; set; } = null!;
 	[Export] public float BurnDuration { get; set; } = 3.2f;
 	[Export] public float FurnitureDelay { get; set; } = 2.0f;
 	[Export] public float FurnitureDuration { get; set; } = 0.45f;
@@ -62,12 +64,19 @@ public partial class MainMenu : Control
 		PlayIntro();
 	}
 
-	/// Deals the player in. The table that run sits down at is the next screen.
+	/// Deals the player in and sits them down at the first table. The run is
+	/// plain C# so it is handed to the table directly rather than through a
+	/// scene change.
 	private void StartRun(string startingDeckId)
 	{
 		StartingDeck deck = StartingDecks.Find(startingDeckId);
 		RunState run = RunState.Begin(deck.Id, deck.BuildDeck(), (int)GD.Randi(), deck.StartingBankrollScale);
-		GD.Print($"Run started on {deck.DisplayName}: {run.Shoe.Deck.Count} cards, ${run.Bankroll}, target {run.ScoreTarget}.");
+
+		var table = TableScene.Instantiate<TableScreen>();
+		GetTree().Root.AddChild(table);
+		GetTree().CurrentScene = table;
+		table.Begin(run);
+		QueueFree();
 	}
 
 	private void CentreCard() => _card.Position = _cardSlot.Size * 0.5f;

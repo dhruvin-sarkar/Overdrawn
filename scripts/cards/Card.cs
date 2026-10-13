@@ -14,6 +14,11 @@ namespace Overdrawn.Cards;
 /// </summary>
 public partial class Card : Node2D
 {
+	/// The widest step the return spring stays stable over. Semi-implicit Euler
+	/// on this stiffness and damping diverges past about 0.06s, and Game Speed
+	/// scales the frame delta, so a fast setting must still land under it.
+	private const float MaxSpringStep = 1f / 30f;
+
 	[Export] public Vector2 Size { get; set; } = new(142, 199);
 
 	[ExportGroup("Tilt")]
@@ -28,6 +33,10 @@ public partial class Card : Node2D
 	[Export] public float PopDegrees { get; set; } = 5f;
 
 	[ExportGroup("Movement")]
+	/// Hand cards sit where they are dealt. The joker row stays draggable,
+	/// because the GDD has jokers fire in the order they are arranged in.
+	[Export] public bool Draggable { get; set; } = true;
+
 	[Export] public float FollowRate { get; set; } = 46f;
 	[Export] public float ReturnStiffness { get; set; } = 320f;
 	[Export] public float ReturnDamping { get; set; } = 24f;
@@ -50,6 +59,9 @@ public partial class Card : Node2D
 
 	/// Where the face is drawn right now, trailing the home position.
 	public Vector2 FaceGlobalPosition => _facePosition;
+
+	public bool IsFaceDown => _faceDown;
+	public bool IsFlipping => _flipTween is { } tween && tween.IsValid();
 
 	private SubViewport _viewport = null!;
 	private TextureRect _art = null!;
@@ -75,8 +87,12 @@ public partial class Card : Node2D
 	private float _dissolve = 1f;
 	private float _swayPhase;
 	private bool _hovered;
+	private bool _faceDown;
+	/// Extra y_rot while turning over, 0 to 90 degrees.
+	private float _flip;
 	private Tween? _scaleTween;
 	private Tween? _punchTween;
+	private Tween? _flipTween;
 
 	public override void _Ready()
 	{
@@ -115,9 +131,13 @@ public partial class Card : Node2D
 	}
 
 	/// Places the face at home immediately, for when the home is first laid out.
-	public void SnapToHome()
+	public void SnapToHome() => SnapFaceTo(GlobalPosition);
+
+	/// Puts the face somewhere other than home so the return spring flies it
+	/// in. Dealing from the shoe is this and nothing else.
+	public void SnapFaceTo(Vector2 global)
 	{
-		_facePosition = GlobalPosition;
+		_facePosition = global;
 		_velocity = Vector2.Zero;
 	}
 
@@ -135,6 +155,35 @@ public partial class Card : Node2D
 		_joker = joker;
 		_style = null;
 		RefreshArt();
+	}
+
+	/// Deals this card face down. It still remembers its face, so turning it
+	/// over needs nothing passed back in.
+	public void ShowFaceDown(CardStyle style, Suit suit, Rank rank)
+	{
+		_faceDown = true;
+		ShowFace(style, suit, rank);
+	}
+
+	/// Turns the card over, edge-on at the halfway point. Returns the tween so
+	/// the dealer's reveal can wait for it.
+	public Tween Flip(float half = 0.13f)
+	{
+		_flipTween?.Kill();
+		_flipTween = CreateTween();
+		Callable set = Callable.From<float>(value => _flip = value);
+
+		// Two halves rather than one sweep: past 90 degrees the tilt shader's
+		// perspective divide mirrors the art, so the face would come up
+		// back-to-front.
+		_flipTween.TweenMethod(set, 0f, 90f, half).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+		_flipTween.TweenCallback(Callable.From(() =>
+		{
+			_faceDown = !_faceDown;
+			RefreshArt();
+		}));
+		_flipTween.TweenMethod(set, -90f, 0f, half).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
+		return _flipTween;
 	}
 
 	/// 0 = fully burned away, 1 = fully present.
@@ -172,7 +221,10 @@ public partial class Card : Node2D
 
 	public override void _Process(double delta)
 	{
-		float dt = Mathf.Min((float)delta, 1f / 30f);
+		// The return spring is explicit Euler, stable while the step stays under
+		// ~0.11s at this stiffness. A 60fps frame at four times speed is 0.067s,
+		// so this only ever catches a real hitch.
+		float dt = Mathf.Min((float)delta, MaxSpringStep);
 		float motion = Settings.Instance.ReducedMotion ? 0f : 1f;
 
 		if (IsDragging)
@@ -199,7 +251,7 @@ public partial class Card : Node2D
 		_face.Position = local;
 		_face.Rotation = rotation;
 		_face.Scale = Vector2.One * _scale;
-		_face.SetInstanceShaderParameter("y_rot", _tilt.X);
+		_face.SetInstanceShaderParameter("y_rot", _tilt.X + _flip);
 		_face.SetInstanceShaderParameter("x_rot", _tilt.Y);
 
 		float screenCentre = GetViewportRect().Size.X * 0.5f;
@@ -207,7 +259,9 @@ public partial class Card : Node2D
 		float drop = Size.Y * Mathf.Lerp(ShadowRestDrop, ShadowLiftDrop, _lift);
 		_shadow.Position = local + new Vector2(spread, drop);
 		_shadow.Rotation = rotation;
-		_shadow.Scale = Vector2.One * _scale;
+		// The shadow is the flat viewport texture with no material of its own,
+		// so it cannot turn edge-on by itself.
+		_shadow.Scale = new Vector2(_scale * Mathf.Cos(Mathf.DegToRad(_flip)), _scale);
 		_shadow.Modulate = new Color(0f, 0f, 0f, ShadowAlpha * _dissolve);
 		_shadow.Visible = Settings.Instance.Shadows;
 
@@ -224,7 +278,7 @@ public partial class Card : Node2D
 	{
 		// A held card lies flat: the lean reads as the card being lifted off the
 		// table, so it belongs to the hovered card, not the carried one.
-		if (IsDragging)
+		if (IsDragging || IsFlipping)
 		{
 			return Vector2.Zero;
 		}
@@ -263,7 +317,7 @@ public partial class Card : Node2D
 
 	private void OnHitBoxInput(InputEvent @event)
 	{
-		if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true } && Held == null)
+		if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true } && Draggable && Held == null)
 		{
 			Held = this;
 			Sfx.Instance.Play("card_pick");
@@ -305,10 +359,9 @@ public partial class Card : Node2D
 
 	private void RefreshArt()
 	{
-		CardArt art = _joker != null
-			? new CardArt(_joker, null)
-			: (_style ?? throw new InvalidOperationException("Card has no face to show."))
-				.Art(_suit, _rank, Settings.Instance.HighContrastCards);
+		CardArt art = Artwork();
+		// The art only changes here, so the face viewport only has to draw here.
+		_viewport.RenderTargetUpdateMode = SubViewport.UpdateMode.Once;
 
 		_art.Texture = art.Texture;
 		_artMaterial.SetShaderParameter("atlas_rect", AtlasRect(art.Texture));
@@ -327,6 +380,27 @@ public partial class Card : Node2D
 
 		_artMaterial.SetShaderParameter("region", swap.Region);
 		_artMaterial.SetShaderParameter("edge_inset", swap.EdgeInset);
+	}
+
+	private CardArt Artwork()
+	{
+		if (_joker != null)
+		{
+			return new CardArt(_joker, null);
+		}
+
+		CardStyle style = _style ?? throw new InvalidOperationException("Card has no face to show.");
+		if (!_faceDown)
+		{
+			return style.Art(_suit, _rank, Settings.Instance.HighContrastCards);
+		}
+
+		if (style.Back is null)
+		{
+			throw new InvalidOperationException($"{style.ResourcePath} has no card back to show face down.");
+		}
+
+		return new CardArt(style.Back, null);
 	}
 
 	private static Vector4 AtlasRect(Texture2D texture)

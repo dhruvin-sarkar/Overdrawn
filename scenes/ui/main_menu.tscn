@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="6_card"]
 [ext_resource type="Resource" path="res://data/starting_deck_library.tres" id="7_ayp64"]
 [ext_resource type="Theme" uid="uid://8loo6n44xcyi" path="res://theme/overdrawn.tres" id="7_theme"]
+[ext_resource type="PackedScene" path="res://scenes/table/table.tscn" id="8_ayp64"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="8_button"]
 [ext_resource type="Resource" uid="uid://btol8wqksn2sd" path="res://data/card_style_library.tres" id="9_styles"]
 [ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="10_overlay"]
@@ -131,6 +132,7 @@ OptionsScene = ExtResource("11_options")
 ProfileScene = ExtResource("12_profile")
 RunStartScene = ExtResource("6_877pj")
 StartingDecks = ExtResource("7_ayp64")
+TableScene = ExtResource("8_ayp64")
 
 [node name="Background" type="ColorRect" parent="." unique_id=825869231]
 material = SubResource("ShaderMaterial_bg")

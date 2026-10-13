@@ -51,14 +51,13 @@ public partial class MenuOverlay : Control
 		panel.OpenRequested += Open;
 		panel.RunRequested += id => EmitSignal(SignalName.RunRequested, id);
 
-		// The holder is what slides, so the panel can stay centred by its anchors.
-		var holder = new Control { MouseFilter = MouseFilterEnum.Ignore };
+		// The holder is what slides, and it centres the panel every layout pass so
+		// a panel that measures itself late — wrapped text, art that loads in —
+		// still ends up the size its content actually needs.
+		var holder = new CenterContainer { MouseFilter = MouseFilterEnum.Ignore };
 		AddChild(holder);
 		holder.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
 		holder.AddChild(panel);
-		panel.SetAnchorsAndOffsetsPreset(LayoutPreset.Center, LayoutPresetMode.Minsize);
-		panel.GrowHorizontal = GrowDirection.Both;
-		panel.GrowVertical = GrowDirection.Both;
 
 		_holders.Push(holder);
 		Slide(holder, rising: true, () => { });

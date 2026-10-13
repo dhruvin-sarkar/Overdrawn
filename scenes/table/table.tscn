@@ -1,0 +1,430 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/table/TableScreen.cs" id="1_table"]
+[ext_resource type="Shader" path="res://shaders/paint_background.gdshader" id="2_paint"]
+[ext_resource type="Shader" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
+[ext_resource type="Theme" path="res://theme/overdrawn.tres" id="4_theme"]
+[ext_resource type="Script" path="res://scripts/ui/MenuOverlay.cs" id="5_overlay"]
+[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="6_button"]
+[ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="7_card"]
+[ext_resource type="PackedScene" path="res://scenes/cards/hand_fan.tscn" id="8_fan"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/stat_row.tscn" id="9_stat"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/setting_slider.tscn" id="10_slider"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
+[ext_resource type="Resource" path="res://data/card_style_library.tres" id="12_styles"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
+shader = ExtResource("2_paint")
+shader_parameter/colour_1 = Color(0.01, 0.06, 0.04, 1)
+shader_parameter/colour_2 = Color(0, 0.33, 0.2, 1)
+shader_parameter/colour_3 = Color(0.7, 0.04, 0.16, 1)
+shader_parameter/contrast = 1.6
+shader_parameter/spin_amount = 0.85
+shader_parameter/spin_speed = 0.45
+shader_parameter/paint_speed = 1.0
+shader_parameter/pixel_filter = 740.0
+shader_parameter/swirl_centre = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
+shader = ExtResource("3_crt")
+shader_parameter/curvature = Vector2(0.03, 0.045)
+shader_parameter/corner_radius = 0.08
+shader_parameter/edge_feather = 0.006
+shader_parameter/vignette = 0.3
+shader_parameter/scanline_count = 270.0
+shader_parameter/scanline_depth = 0.5
+shader_parameter/grille_depth = 0.15
+shader_parameter/aberration_px = 1.0
+shader_parameter/contrast = 1.12
+shader_parameter/noise_amount = 0.035
+shader_parameter/jitter_px = 0.3
+shader_parameter/bloom_threshold = 0.55
+shader_parameter/bloom_intensity = 0.45
+shader_parameter/bloom_lod = 3.0
+shader_parameter/pulse_scanlines = 0.4
+shader_parameter/pulse_aberration_px = 3.0
+shader_parameter/pulse_jitter_px = 2.5
+shader_parameter/pulse_noise = 0.08
+shader_parameter/band_speed = 0.05
+shader_parameter/band_height = 0.04
+shader_parameter/band_shift_px = 1.5
+shader_parameter/band_glow = 0.025
+
+[node name="Table" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_theme")
+script = ExtResource("1_table")
+CardScene = ExtResource("7_card")
+FanScene = ExtResource("8_fan")
+CardStyles = ExtResource("12_styles")
+OptionsScene = ExtResource("11_options")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_felt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Rail" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 480.0
+grow_vertical = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="Column" type="VBoxContainer" parent="Rail"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Plaque" type="PanelContainer" parent="Rail/Column"]
+custom_minimum_size = Vector2(0, 230)
+layout_mode = 2
+theme_type_variation = &"StatValue"
+
+[node name="Inner" type="VBoxContainer" parent="Rail/Column/Plaque"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TableName" type="Label" parent="Rail/Column/Plaque/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "Level 1 of 18"
+horizontal_alignment = 1
+
+[node name="TableTrick" type="Label" parent="Rail/Column/Plaque/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.75)
+theme_override_font_sizes/font_size = 22
+text = "Dealer stands on all 17s"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Target" type="Label" parent="Rail/Column/Plaque/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
+theme_override_font_sizes/font_size = 46
+text = "300"
+horizontal_alignment = 1
+
+[node name="Reward" type="Label" parent="Rail/Column/Plaque/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.75)
+theme_override_font_sizes/font_size = 22
+text = "Clear for $25 + $5 a hand"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Score" parent="Rail/Column" instance=ExtResource("9_stat")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Level Score"
+TitleWidth = 190.0
+FontSize = 30
+
+[node name="Readout" type="HBoxContainer" parent="Rail/Column"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Chips" type="PanelContainer" parent="Rail/Column/Readout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"StatValue"
+
+[node name="ChipsValue" type="Label" parent="Rail/Column/Readout/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.72, 1, 1)
+theme_override_font_sizes/font_size = 44
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Times" type="Label" parent="Rail/Column/Readout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.914, 0.306, 0.247, 1)
+theme_override_font_sizes/font_size = 38
+text = "X"
+vertical_alignment = 1
+
+[node name="Mult" type="PanelContainer" parent="Rail/Column/Readout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RedPanel"
+
+[node name="MultValue" type="Label" parent="Rail/Column/Readout/Mult"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "0"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Rail/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Options" type="Button" parent="Rail/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "Options"
+script = ExtResource("6_button")
+
+[node name="Hands" parent="Rail/Column" instance=ExtResource("9_stat")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Hands"
+TitleWidth = 190.0
+FontSize = 30
+
+[node name="Money" parent="Rail/Column" instance=ExtResource("9_stat")]
+unique_name_in_owner = true
+layout_mode = 2
+Title = "Money"
+TitleWidth = 190.0
+FontSize = 30
+
+[node name="Felt" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DealerSeat" type="Control" parent="Felt"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 160.0
+offset_top = 60.0
+offset_right = -240.0
+offset_bottom = 360.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="DealerFan" parent="Felt/DealerSeat" instance=ExtResource("8_fan")]
+unique_name_in_owner = true
+layout_mode = 1
+Arc = 0.0
+
+[node name="BetSpot" type="PanelContainer" parent="Felt"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 160.0
+offset_top = 392.0
+offset_right = -240.0
+offset_bottom = 510.0
+grow_horizontal = 2
+theme_type_variation = &"InsetPanel"
+
+[node name="BetRow" type="HBoxContainer" parent="Felt/BetSpot"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="WagerMin" type="Label" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 26
+text = "min"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Wager" parent="Felt/BetSpot/BetRow" instance=ExtResource("10_slider")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+Title = "Wager"
+
+[node name="WagerMax" type="Label" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 26
+text = "max"
+vertical_alignment = 1
+
+[node name="Deal" type="Button" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 92)
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 38
+text = "DEAL"
+script = ExtResource("6_button")
+
+[node name="Banner" type="Label" parent="Felt/BetSpot"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
+theme_override_font_sizes/font_size = 56
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerSeats" type="HBoxContainer" parent="Felt"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 160.0
+offset_top = 530.0
+offset_right = -240.0
+offset_bottom = 830.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Felt"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -200.0
+offset_right = -240.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Hit" type="Button" parent="Felt/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 96)
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 34
+text = "Hit"
+script = ExtResource("6_button")
+
+[node name="Stand" type="Button" parent="Felt/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 96)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 34
+text = "Stand"
+script = ExtResource("6_button")
+
+[node name="Double" type="Button" parent="Felt/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 96)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+theme_override_font_sizes/font_size = 34
+text = "Double"
+script = ExtResource("6_button")
+
+[node name="Split" type="Button" parent="Felt/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 96)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+theme_override_font_sizes/font_size = 34
+text = "Split"
+script = ExtResource("6_button")
+
+[node name="ShoePile" type="VBoxContainer" parent="Felt"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -450.0
+offset_right = -48.0
+offset_bottom = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ShoeBack" type="TextureRect" parent="Felt/ShoePile"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 224)
+layout_mode = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShoeCount" type="Label" parent="Felt/ShoePile"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "52/52"
+horizontal_alignment = 1
+
+[node name="OverlayLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Overlay" type="Control" parent="OverlayLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("4_theme")
+script = ExtResource("5_overlay")
+
+[node name="Dim" type="ColorRect" parent="OverlayLayer/Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0)
+
+[node name="CrtLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="CrtOverlay" type="ColorRect" parent="CrtLayer"]
+material = SubResource("ShaderMaterial_crt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_music")
+volume_db = -11.0
+autoplay = true
+bus = &"Music"

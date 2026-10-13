@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cndnacxmj1ehu" path="res://scripts/cards/CardStyle.cs" id="1_style"]
 [ext_resource type="Texture2D" uid="uid://btww2e5or660m" path="res://assets/cards/balatro/faces.png" id="2_faces"]
 [ext_resource type="Texture2D" uid="uid://ta4aa8dw1sbm" path="res://assets/cards/balatro/faces_high_contrast.png" id="3_contrast"]
+[ext_resource type="Texture2D" uid="uid://cvguifkkbuvbm" path="res://assets/cards/balatro/back.png" id="4_back"]
 
 [sub_resource type="AtlasTexture" id="a_13"]
 atlas = ExtResource("2_faces")
@@ -324,5 +325,6 @@ Spades = Array[Texture2D]([SubResource("a_39"), SubResource("a_40"), SubResource
 Hearts = Array[Texture2D]([SubResource("a_0"), SubResource("a_1"), SubResource("a_2"), SubResource("a_3"), SubResource("a_4"), SubResource("a_5"), SubResource("a_6"), SubResource("a_7"), SubResource("a_8"), SubResource("a_9"), SubResource("a_10"), SubResource("a_11"), SubResource("a_12")])
 Clubs = Array[Texture2D]([SubResource("a_13"), SubResource("a_14"), SubResource("a_15"), SubResource("a_16"), SubResource("a_17"), SubResource("a_18"), SubResource("a_19"), SubResource("a_20"), SubResource("a_21"), SubResource("a_22"), SubResource("a_23"), SubResource("a_24"), SubResource("a_25")])
 Diamonds = Array[Texture2D]([SubResource("a_26"), SubResource("a_27"), SubResource("a_28"), SubResource("a_29"), SubResource("a_30"), SubResource("a_31"), SubResource("a_32"), SubResource("a_33"), SubResource("a_34"), SubResource("a_35"), SubResource("a_36"), SubResource("a_37"), SubResource("a_38")])
+Back = ExtResource("4_back")
 ContrastClubs = Array[Texture2D]([SubResource("a_52"), SubResource("a_53"), SubResource("a_54"), SubResource("a_55"), SubResource("a_56"), SubResource("a_57"), SubResource("a_58"), SubResource("a_59"), SubResource("a_60"), SubResource("a_61"), SubResource("a_62"), SubResource("a_63"), SubResource("a_64")])
 ContrastDiamonds = Array[Texture2D]([SubResource("a_65"), SubResource("a_66"), SubResource("a_67"), SubResource("a_68"), SubResource("a_69"), SubResource("a_70"), SubResource("a_71"), SubResource("a_72"), SubResource("a_73"), SubResource("a_74"), SubResource("a_75"), SubResource("a_76"), SubResource("a_77")])

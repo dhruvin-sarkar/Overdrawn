@@ -8,19 +8,35 @@ namespace Overdrawn.Core;
 /// </summary>
 public partial class CrtPulse : Node
 {
+	public static CrtPulse Instance { get; private set; } = null!;
+
 	[Export] public float ClickPulse { get; set; } = 1f;
 	[Export] public float Decay { get; set; } = 3.5f;
 
 	private float _pulse;
 
+	public override void _EnterTree() => Instance = this;
+
 	public override void _Ready() => SetProcess(false);
+
+	/// Jolts the CRT for something the player did not click, such as a card
+	/// landing or a score hitting home.
+	public void Pulse(float amount)
+	{
+		if (Settings.Instance.ReducedMotion)
+		{
+			return;
+		}
+
+		_pulse = Mathf.Min(1f, _pulse + amount);
+		SetProcess(true);
+	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton { Pressed: true } || @event.IsActionPressed("ui_accept"))
 		{
-			_pulse = Mathf.Min(1f, _pulse + ClickPulse);
-			SetProcess(true);
+			Pulse(ClickPulse);
 		}
 	}
 
