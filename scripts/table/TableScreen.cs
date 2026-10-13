@@ -8,6 +8,7 @@ using Overdrawn.Blackjack;
 using Overdrawn.Cards;
 using Overdrawn.Core;
 using Overdrawn.Run;
+using Overdrawn.Scoring;
 using Overdrawn.UI;
 
 namespace Overdrawn.Table;
@@ -59,7 +60,8 @@ public partial class TableScreen : Control
 
 	private HandFan _dealerFan = null!;
 	private HBoxContainer _seatRow = null!;
-	private Control _betRow = null!;
+	private Control _betSpot = null!;
+	private Control _actions = null!;
 	private Label _banner = null!;
 	private Label _wagerMin = null!;
 	private Label _wagerMax = null!;
@@ -72,14 +74,18 @@ public partial class TableScreen : Control
 	private Label _mult = null!;
 	private StatRow _score = null!;
 	private StatRow _hands = null!;
-	private StatRow _money = null!;
+	private Label _money = null!;
+	private Label _outcome = null!;
+	private Label _levelCount = null!;
+	private Label _handCount = null!;
 	private MenuOverlay _overlay = null!;
 
 	public override void _Ready()
 	{
 		_dealerFan = GetNode<HandFan>("%DealerFan");
 		_seatRow = GetNode<HBoxContainer>("%PlayerSeats");
-		_betRow = GetNode<Control>("%BetRow");
+		_betSpot = GetNode<Control>("%BetSpot");
+		_actions = GetNode<Control>("%Actions");
 		_banner = GetNode<Label>("%Banner");
 		_wagerMin = GetNode<Label>("%WagerMin");
 		_wagerMax = GetNode<Label>("%WagerMax");
@@ -87,12 +93,15 @@ public partial class TableScreen : Control
 		_deal = GetNode<Button>("%Deal");
 		_shoePile = GetNode<Control>("%ShoePile");
 		_shoeBack = GetNode<TextureRect>("%ShoeBack");
-		_shoeCount = GetNode<Label>("%ShoeCount");
+		_shoeCount = GetNode<Label>("%ShoeTally");
 		_chips = GetNode<Label>("%ChipsValue");
 		_mult = GetNode<Label>("%MultValue");
 		_score = GetNode<StatRow>("%Score");
 		_hands = GetNode<StatRow>("%Hands");
-		_money = GetNode<StatRow>("%Money");
+		_money = GetNode<Label>("%MoneyValue");
+		_outcome = GetNode<Label>("%OutcomeName");
+		_levelCount = GetNode<Label>("%LevelCount");
+		_handCount = GetNode<Label>("%HandCount");
 		_overlay = GetNode<MenuOverlay>("%Overlay");
 
 		_moves[Move.Hit] = GetNode<Button>("%Hit");
@@ -120,7 +129,8 @@ public partial class TableScreen : Control
 		_shownScore = _run.LevelScore;
 		_shownMoney = _run.Bankroll;
 
-		GetNode<Label>("%TableName").Text = $"Level {_run.Level} of {RunEconomy.LevelsPerRun}";
+		GetNode<Label>("%TableName").Text = $"Level {_run.Level}";
+		_levelCount.Text = $"{_run.Level}/{RunEconomy.LevelsPerRun}";
 		GetNode<Label>("%TableTrick").Text = Trick(_run.Rules);
 		GetNode<Label>("%Target").Text = $"{_run.ScoreTarget:N0}";
 		GetNode<Label>("%Reward").Text = $"Clear for ${RunEconomy.ClearPayout} + ${RunEconomy.UnusedHandBonus} a hand";
@@ -140,7 +150,7 @@ public partial class TableScreen : Control
 		_shownMoney = Mathf.Lerp(_shownMoney, _run.Bankroll, ease);
 
 		_score.ShowFill(_shownScore / _run.ScoreTarget, $"{Mathf.RoundToInt(_shownScore):N0}");
-		_money.ShowValue($"${Mathf.RoundToInt(_shownMoney):N0}", Gold);
+		_money.Text = $"${Mathf.RoundToInt(_shownMoney):N0}";
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -166,10 +176,12 @@ public partial class TableScreen : Control
 		_dealerFan.ShowTotal("");
 		_chips.Text = "0";
 		_mult.Text = "0";
+		_outcome.Text = "";
 
 		if (_run.LevelCleared || _run.HandsRemaining == 0)
 		{
-			_betRow.Visible = false;
+			_betSpot.Visible = false;
+			_actions.Visible = false;
 			_banner.Visible = true;
 			_banner.Text = _run.LevelCleared ? "LEVEL CLEARED" : "OUT OF HANDS";
 			Refresh();
@@ -188,7 +200,8 @@ public partial class TableScreen : Control
 		_wager.SetValue(minimum);
 		_wagerMin.Text = $"${minimum}";
 		_wagerMax.Text = $"${maximum}";
-		_betRow.Visible = true;
+		_betSpot.Visible = true;
+		_actions.Visible = false;
 		_banner.Visible = false;
 		Refresh();
 	}
@@ -198,7 +211,8 @@ public partial class TableScreen : Control
 		_round = new Round(_run);
 		_round.Begin(_wager.Value);
 		_animating = true;
-		_betRow.Visible = false;
+		_betSpot.Visible = false;
+		_actions.Visible = true;
 		Refresh();
 
 		await DealOut(DealGap);
@@ -346,6 +360,7 @@ public partial class TableScreen : Control
 			CrtPulse.Instance.Pulse(0.3f);
 			await Dwell(SettleHold);
 
+			_outcome.Text = result.Score.Outcome.Label();
 			_chips.Text = $"{result.Score.Chips}";
 			_mult.Text = $"{result.Score.Mult:0.##}";
 			Sfx.Instance.Play("toggle");
@@ -453,6 +468,7 @@ public partial class TableScreen : Control
 
 		_deal.Disabled = _animating || round is not null || _run.LevelCleared || _run.HandsRemaining == 0;
 		_hands.ShowValue($"{_run.HandsRemaining}/{RunEconomy.HandsPerLevel}", Colors.White);
+		_handCount.Text = $"{RunEconomy.HandsPerLevel - _run.HandsRemaining}/{RunEconomy.HandsPerLevel}";
 		_shoeCount.Text = $"{_run.Shoe.Remaining}/{_run.Shoe.Deck.Count + _run.Shoe.Temporary.Count}";
 
 		if (round is null)

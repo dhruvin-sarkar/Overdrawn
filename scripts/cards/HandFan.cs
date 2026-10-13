@@ -21,6 +21,7 @@ public partial class HandFan : Control
 	private readonly List<Card> _cards = new();
 
 	private CardPath _path = null!;
+	private Control _footer = null!;
 	private Label _total = null!;
 	private Control _stake = null!;
 	private Label _stakeValue = null!;
@@ -30,6 +31,7 @@ public partial class HandFan : Control
 	public override void _Ready()
 	{
 		_path = GetNode<CardPath>("%Path");
+		_footer = GetNode<Control>("%Footer");
 		_total = GetNode<Label>("%TotalValue");
 		_stake = GetNode<Control>("%Stake");
 		_stakeValue = GetNode<Label>("%StakeValue");
@@ -102,6 +104,7 @@ public partial class HandFan : Control
 		float middle = (Size.Y - FooterHeight) * 0.5f;
 		float left = (Size.X - chord) * 0.5f;
 
+		_footer.Visible = _cards.Count > 0;
 		_path.Curve.ClearPoints();
 		_path.Curve.AddPoint(new Vector2(left, middle));
 		if (Arc > 0f)

@@ -208,6 +208,48 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 expand_margin_bottom = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue_panel"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0, 0.57, 0.89, 1)
+border_width_bottom = 6
+border_color = Color(0.0, 0.36, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold_panel"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.95, 0.73, 0.2, 1)
+border_width_bottom = 6
+border_color = Color(0.65, 0.47, 0.08, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blind_pill"]
+content_margin_left = 16.0
+content_margin_top = 2.0
+content_margin_right = 16.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 6
+border_color = Color(0.66, 0.66, 0.66, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+expand_margin_bottom = 6.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_red_panel"]
 content_margin_left = 12.0
 content_margin_top = 2.0
@@ -323,6 +365,12 @@ RedButton/styles/hover = SubResource("StyleBoxFlat_red_hover")
 RedButton/styles/hover_pressed = SubResource("StyleBoxFlat_red_pressed")
 RedButton/styles/normal = SubResource("StyleBoxFlat_red")
 RedButton/styles/pressed = SubResource("StyleBoxFlat_red_pressed")
+BluePanel/base_type = &"PanelContainer"
+BluePanel/styles/panel = SubResource("StyleBoxFlat_blue_panel")
+GoldPanel/base_type = &"PanelContainer"
+GoldPanel/styles/panel = SubResource("StyleBoxFlat_gold_panel")
+BlindPill/base_type = &"PanelContainer"
+BlindPill/styles/panel = SubResource("StyleBoxFlat_blind_pill")
 RedPanel/base_type = &"PanelContainer"
 RedPanel/styles/panel = SubResource("StyleBoxFlat_red_panel")
 SettingTitle/base_type = &"Label"

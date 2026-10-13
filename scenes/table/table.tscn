@@ -16,9 +16,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
 shader = ExtResource("2_paint")
-shader_parameter/colour_1 = Color(0.01, 0.06, 0.04, 1)
-shader_parameter/colour_2 = Color(0, 0.33, 0.2, 1)
-shader_parameter/colour_3 = Color(0.7, 0.04, 0.16, 1)
+shader_parameter/colour_1 = Color(0.012, 0.075, 0.051, 1)
+shader_parameter/colour_2 = Color(0.04, 0.4, 0.247, 1)
+shader_parameter/colour_3 = Color(0.098, 0.565, 0.353, 1)
 shader_parameter/contrast = 1.6
 shader_parameter/spin_amount = 0.85
 shader_parameter/spin_speed = 0.45
@@ -51,6 +51,18 @@ shader_parameter/band_height = 0.04
 shader_parameter/band_shift_px = 1.5
 shader_parameter/band_glow = 0.025
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+bg_color = Color(0, 0, 0, 0.3)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.22)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Table" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -79,211 +91,376 @@ mouse_filter = 2
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 480.0
+offset_right = 440.0
 grow_vertical = 2
-theme_type_variation = &"InsetPanel"
+theme_type_variation = &"MenuPanel"
 
-[node name="Column" type="VBoxContainer" parent="Rail"]
+[node name="Pad" type="MarginContainer" parent="Rail"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
 
-[node name="Plaque" type="PanelContainer" parent="Rail/Column"]
-custom_minimum_size = Vector2(0, 230)
+[node name="Column" type="VBoxContainer" parent="Rail/Pad"]
 layout_mode = 2
-theme_type_variation = &"StatValue"
+theme_override_constants/separation = 12
 
-[node name="Inner" type="VBoxContainer" parent="Rail/Column/Plaque"]
+[node name="BlindPill" type="PanelContainer" parent="Rail/Pad/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
+theme_type_variation = &"BlindPill"
 
-[node name="TableName" type="Label" parent="Rail/Column/Plaque/Inner"]
+[node name="TableName" type="Label" parent="Rail/Pad/Column/BlindPill"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
-text = "Level 1 of 18"
+theme_override_colors/font_color = Color(0.08, 0.09, 0.11, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TableTrick" type="Label" parent="Rail/Column/Plaque/Inner"]
+[node name="TableTrick" type="Label" parent="Rail/Pad/Column"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.75)
-theme_override_font_sizes/font_size = 22
-text = "Dealer stands on all 17s"
+theme_override_colors/font_color = Color(1, 1, 1, 0.68)
+theme_override_font_sizes/font_size = 19
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Target" type="Label" parent="Rail/Column/Plaque/Inner"]
+[node name="TargetRow" type="HBoxContainer" parent="Rail/Pad/Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Token" type="PanelContainer" parent="Rail/Pad/Column/TargetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"BlindPill"
+
+[node name="TokenMark" type="Label" parent="Rail/Pad/Column/TargetRow/Token"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.09, 0.11, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 40
+text = "21"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetBox" type="PanelContainer" parent="Rail/Pad/Column/TargetRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InsetPanel"
+
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/TargetRow/TargetBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Caption" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 18
+text = "Score at least"
+horizontal_alignment = 1
+
+[node name="Target" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
-theme_override_font_sizes/font_size = 46
-text = "300"
+theme_override_font_sizes/font_size = 42
 horizontal_alignment = 1
 
-[node name="Reward" type="Label" parent="Rail/Column/Plaque/Inner"]
+[node name="Reward" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.75)
-theme_override_font_sizes/font_size = 22
-text = "Clear for $25 + $5 a hand"
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.85)
+theme_override_font_sizes/font_size = 18
 horizontal_alignment = 1
-autowrap_mode = 3
 
-[node name="Score" parent="Rail/Column" instance=ExtResource("9_stat")]
+[node name="Score" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
-Title = "Level Score"
-TitleWidth = 190.0
-FontSize = 30
 
-[node name="Readout" type="HBoxContainer" parent="Rail/Column"]
-custom_minimum_size = Vector2(0, 112)
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Chips" type="PanelContainer" parent="Rail/Column/Readout"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"StatValue"
-
-[node name="ChipsValue" type="Label" parent="Rail/Column/Readout/Chips"]
+[node name="OutcomeName" type="Label" parent="Rail/Pad/Column"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.72, 1, 1)
-theme_override_font_sizes/font_size = 44
-text = "0"
-horizontal_alignment = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Times" type="Label" parent="Rail/Column/Readout"]
+[node name="Readout" type="HBoxContainer" parent="Rail/Pad/Column"]
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Chips" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BluePanel"
+
+[node name="ChipsValue" type="Label" parent="Rail/Pad/Column/Readout/Chips"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
+theme_override_font_sizes/font_size = 52
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Times" type="Label" parent="Rail/Pad/Column/Readout"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.914, 0.306, 0.247, 1)
-theme_override_font_sizes/font_size = 38
+theme_override_font_sizes/font_size = 34
 text = "X"
 vertical_alignment = 1
 
-[node name="Mult" type="PanelContainer" parent="Rail/Column/Readout"]
+[node name="Mult" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RedPanel"
 
-[node name="MultValue" type="Label" parent="Rail/Column/Readout/Mult"]
+[node name="MultValue" type="Label" parent="Rail/Pad/Column/Readout/Mult"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 44
-text = "0"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
+theme_override_font_sizes/font_size = 52
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="Rail/Column"]
+[node name="Spacer" type="Control" parent="Rail/Pad/Column"]
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
 
-[node name="Options" type="Button" parent="Rail/Column"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 64)
+[node name="Buttons" type="HBoxContainer" parent="Rail/Pad/Column"]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RunInfo" type="Button" parent="Rail/Pad/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 26
+text = "Run Info"
+script = ExtResource("6_button")
+
+[node name="Options" type="Button" parent="Rail/Pad/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"OrangeButton"
+theme_override_font_sizes/font_size = 26
 text = "Options"
 script = ExtResource("6_button")
 
-[node name="Hands" parent="Rail/Column" instance=ExtResource("9_stat")]
+[node name="Hands" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
-Title = "Hands"
-TitleWidth = 190.0
-FontSize = 30
 
-[node name="Money" parent="Rail/Column" instance=ExtResource("9_stat")]
+[node name="Money" type="PanelContainer" parent="Rail/Pad/Column"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"GoldPanel"
+
+[node name="MoneyValue" type="Label" parent="Rail/Pad/Column/Money"]
 unique_name_in_owner = true
 layout_mode = 2
-Title = "Money"
-TitleWidth = 190.0
-FontSize = 30
+theme_override_colors/font_color = Color(0.18, 0.12, 0.02, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 44
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Counts" type="HBoxContainer" parent="Rail/Pad/Column"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelBox" type="PanelContainer" parent="Rail/Pad/Column/Counts"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InsetPanel"
+
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/LevelBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.55)
+theme_override_font_sizes/font_size = 17
+text = "Level"
+horizontal_alignment = 1
+
+[node name="LevelCount" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="HandBox" type="PanelContainer" parent="Rail/Pad/Column/Counts"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"InsetPanel"
+
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/HandBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.55)
+theme_override_font_sizes/font_size = 17
+text = "Hand"
+horizontal_alignment = 1
+
+[node name="HandCount" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
 
 [node name="Felt" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 480.0
+offset_left = 440.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="JokerArea" type="Control" parent="Felt"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 40.0
+offset_top = 34.0
+offset_right = -40.0
+offset_bottom = 262.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="JokerRow" type="HBoxContainer" parent="Felt/JokerArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 800.0
+offset_bottom = 200.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Slot1" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="Slot2" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="Slot3" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="Slot4" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="Slot5" type="PanelContainer" parent="Felt/JokerArea/JokerRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="JokerCount" type="Label" parent="Felt/JokerArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_right = 80.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.65)
+theme_override_font_sizes/font_size = 20
+text = "0/5"
+
+[node name="ConsumableRow" type="HBoxContainer" parent="Felt/JokerArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -310.0
+offset_bottom = 200.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Slot1" type="PanelContainer" parent="Felt/JokerArea/ConsumableRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="Slot2" type="PanelContainer" parent="Felt/JokerArea/ConsumableRow"]
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="ConsumableCount" type="Label" parent="Felt/JokerArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.65)
+theme_override_font_sizes/font_size = 20
+text = "0/2"
+horizontal_alignment = 2
 
 [node name="DealerSeat" type="Control" parent="Felt"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 160.0
-offset_top = 60.0
-offset_right = -240.0
-offset_bottom = 360.0
+offset_left = 40.0
+offset_top = 278.0
+offset_right = -230.0
+offset_bottom = 580.0
 grow_horizontal = 2
 mouse_filter = 2
 
 [node name="DealerFan" parent="Felt/DealerSeat" instance=ExtResource("8_fan")]
 unique_name_in_owner = true
 layout_mode = 1
+CardSize = Vector2(160, 214)
 Arc = 0.0
 
-[node name="BetSpot" type="PanelContainer" parent="Felt"]
+[node name="Banner" type="Label" parent="Felt"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 160.0
-offset_top = 392.0
-offset_right = -240.0
-offset_bottom = 510.0
+offset_left = 40.0
+offset_top = 584.0
+offset_right = -230.0
+offset_bottom = 648.0
 grow_horizontal = 2
-theme_type_variation = &"InsetPanel"
-
-[node name="BetRow" type="HBoxContainer" parent="Felt/BetSpot"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 18
-alignment = 1
-
-[node name="WagerMin" type="Label" parent="Felt/BetSpot/BetRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.6)
-theme_override_font_sizes/font_size = 26
-text = "min"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Wager" parent="Felt/BetSpot/BetRow" instance=ExtResource("10_slider")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(420, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-Title = "Wager"
-
-[node name="WagerMax" type="Label" parent="Felt/BetSpot/BetRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.6)
-theme_override_font_sizes/font_size = 26
-text = "max"
-vertical_alignment = 1
-
-[node name="Deal" type="Button" parent="Felt/BetSpot/BetRow"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 92)
-layout_mode = 2
-theme_type_variation = &"BlueButton"
-theme_override_font_sizes/font_size = 38
-text = "DEAL"
-script = ExtResource("6_button")
-
-[node name="Banner" type="Label" parent="Felt/BetSpot"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
+mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
 theme_override_font_sizes/font_size = 56
 horizontal_alignment = 1
@@ -294,64 +471,113 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 160.0
-offset_top = 530.0
-offset_right = -240.0
-offset_bottom = 830.0
+offset_left = 40.0
+offset_top = 652.0
+offset_right = -230.0
+offset_bottom = 954.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 alignment = 1
 
 [node name="Actions" type="HBoxContainer" parent="Felt"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 160.0
-offset_top = -200.0
-offset_right = -240.0
-offset_bottom = -104.0
+offset_left = 40.0
+offset_top = -98.0
+offset_right = -230.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Hit" type="Button" parent="Felt/Actions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(190, 96)
+custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
 theme_type_variation = &"BlueButton"
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Hit"
 script = ExtResource("6_button")
 
 [node name="Stand" type="Button" parent="Felt/Actions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(190, 96)
+custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
 theme_type_variation = &"RedButton"
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Stand"
 script = ExtResource("6_button")
 
 [node name="Double" type="Button" parent="Felt/Actions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(210, 96)
+custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
 theme_type_variation = &"OrangeButton"
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Double"
 script = ExtResource("6_button")
 
 [node name="Split" type="Button" parent="Felt/Actions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(180, 96)
+custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
-theme_type_variation = &"OrangeButton"
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 32
 text = "Split"
+script = ExtResource("6_button")
+
+[node name="BetSpot" type="PanelContainer" parent="Felt"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -555.0
+offset_top = -110.0
+offset_right = 385.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"InsetPanel"
+
+[node name="BetRow" type="HBoxContainer" parent="Felt/BetSpot"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="WagerMin" type="Label" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.75)
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+
+[node name="Wager" parent="Felt/BetSpot/BetRow" instance=ExtResource("10_slider")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WagerMax" type="Label" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.75)
+theme_override_font_sizes/font_size = 24
+vertical_alignment = 1
+
+[node name="Deal" type="Button" parent="Felt/BetSpot/BetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 68)
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 32
+text = "DEAL"
 script = ExtResource("6_button")
 
 [node name="ShoePile" type="VBoxContainer" parent="Felt"]
@@ -362,29 +588,28 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -224.0
-offset_top = -450.0
-offset_right = -48.0
-offset_bottom = -150.0
+offset_left = -200.0
+offset_top = -400.0
+offset_right = -40.0
+offset_bottom = -130.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 8
-alignment = 1
 
 [node name="ShoeBack" type="TextureRect" parent="Felt/ShoePile"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 224)
-layout_mode = 2
 texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ShoeCount" type="Label" parent="Felt/ShoePile"]
+[node name="ShoeTally" type="Label" parent="Felt/ShoePile"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "52/52"
+theme_override_colors/font_color = Color(1, 1, 1, 0.75)
+theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 
 [node name="OverlayLayer" type="CanvasLayer" parent="."]
@@ -398,7 +623,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme = ExtResource("4_theme")
 script = ExtResource("5_overlay")
 
@@ -409,7 +633,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.02, 0.03, 0.05, 0)
+color = Color(0, 0, 0, 0)
 
 [node name="CrtLayer" type="CanvasLayer" parent="."]
 layer = 10
@@ -425,6 +649,5 @@ mouse_filter = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_music")
-volume_db = -11.0
 autoplay = true
 bus = &"Music"
