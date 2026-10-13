@@ -183,6 +183,9 @@ horizontal_alignment = 1
 [node name="Score" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
+Title = "Round score"
+TitleWidth = 168.0
+FontSize = 28
 
 [node name="OutcomeName" type="Label" parent="Rail/Pad/Column"]
 unique_name_in_owner = true
@@ -261,6 +264,9 @@ script = ExtResource("6_button")
 [node name="Hands" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
+Title = "Hands"
+TitleWidth = 168.0
+FontSize = 28
 
 [node name="Money" type="PanelContainer" parent="Rail/Pad/Column"]
 custom_minimum_size = Vector2(0, 72)
@@ -341,9 +347,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 40.0
-offset_top = 34.0
+offset_top = 46.0
 offset_right = -40.0
-offset_bottom = 262.0
+offset_bottom = 274.0
 grow_horizontal = 2
 mouse_filter = 2
 
