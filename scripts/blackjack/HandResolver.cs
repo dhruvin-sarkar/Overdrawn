@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Overdrawn.Cards;
 
 namespace Overdrawn.Blackjack;
 
@@ -42,7 +43,7 @@ public static class HandResolver
 	public static IReadOnlyList<Move> LegalMoves(Hand hand, Hand dealer, int bankroll, HouseRules rules, int splitsUsed)
 	{
 		var moves = new List<Move>();
-		if (hand.IsFinished)
+		if (hand.IsFinished || SplitAceStandsPat(hand, rules))
 		{
 			return moves;
 		}
@@ -69,6 +70,10 @@ public static class HandResolver
 
 		return moves;
 	}
+
+	/// A hand split off a pair of Aces takes its one card and stops there.
+	private static bool SplitAceStandsPat(Hand hand, HouseRules rules) =>
+		!rules.HitSplitAces && hand.FromSplit && hand.Cards.Count == 2 && hand.Cards[0].Rank == Rank.Ace;
 
 	/// The dealer's fixed strategy: draw to 17, and on soft 17 draw only at a
 	/// table that says so.

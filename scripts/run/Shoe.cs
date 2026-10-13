@@ -24,7 +24,7 @@ public sealed class Shoe
 	{
 		_deck = deck.ToList();
 		_random = random;
-		Shuffle();
+		Fill();
 	}
 
 	/// The player's own cards. A level never touches this.
@@ -73,12 +73,11 @@ public sealed class Shoe
 		return card;
 	}
 
-	/// Rebuilds the draw pile from the deck plus this level's cards.
+	/// Rebuilds the draw pile from the deck plus this level's cards, then puts
+	/// it in a random order. A level is always started by shuffling.
 	public void Shuffle()
 	{
-		_drawPile.Clear();
-		_drawPile.AddRange(_deck);
-		_drawPile.AddRange(_temporary);
+		Fill();
 
 		for (int i = _drawPile.Count - 1; i > 0; i--)
 		{
@@ -86,10 +85,18 @@ public sealed class Shoe
 			(_drawPile[i], _drawPile[j]) = (_drawPile[j], _drawPile[i]);
 		}
 
+		// A thin shoe keeps a random handful rather than the same cards each time.
 		if (_cap > 0 && _drawPile.Count > _cap)
 		{
 			_drawPile.RemoveRange(_cap, _drawPile.Count - _cap);
 		}
+	}
+
+	private void Fill()
+	{
+		_drawPile.Clear();
+		_drawPile.AddRange(_deck);
+		_drawPile.AddRange(_temporary);
 	}
 
 	/// <param name="without">Ranks the deck is built without, such as a deck that has had its fours pulled.</param>

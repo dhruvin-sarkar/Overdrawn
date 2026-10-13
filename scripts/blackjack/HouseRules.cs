@@ -18,6 +18,8 @@ public sealed record HouseRules
 	public bool SplitAllowed { get; init; } = true;
 	/// How many extra hands a split may produce.
 	public int MaxSplits { get; init; } = 3;
+	/// Split Aces take one card each and that is the hand, as at nearly every table.
+	public bool HitSplitAces { get; init; }
 	public bool SurrenderAllowed { get; init; } = true;
 	public bool InsuranceAllowed { get; init; } = true;
 	/// The dealer takes pushes. A boss trick, never an ordinary table.
