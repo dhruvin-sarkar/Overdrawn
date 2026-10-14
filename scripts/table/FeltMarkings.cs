@@ -20,6 +20,15 @@ public sealed partial class FeltMarkings : Control
 	[Export] public float Band { get; set; } = 50f;
 	[Export] public float LineWidth { get; set; } = 3f;
 
+	[ExportGroup("Seats")]
+	/// Where the dealer's and the player's spots sit, as fractions of height.
+	[Export] public float DealerSeat { get; set; } = 0.355f;
+	[Export] public float PlayerSeat { get; set; } = 0.70f;
+	[Export] public float SpotRadius { get; set; } = 120f;
+	/// How much wider than tall a spot is, so a fanned hand sits inside it.
+	[Export] public float SpotStretch { get; set; } = 2.1f;
+	[Export] public Color Worn { get; set; } = new(0f, 0f, 0f, 0.3f);
+
 	[ExportGroup("Print")]
 	[Export] public Color Ink { get; set; } = new(1f, 0.93f, 0.78f, 0.45f);
 	[Export] public int PrintSize { get; set; } = 22;
@@ -44,6 +53,11 @@ public sealed partial class FeltMarkings : Control
 		float drop = Size.Y * Drop;
 		float apex = Size.Y * Apex;
 
+		// The spots the cards land on, worn into the felt. Filled rather than
+		// outlined so they anchor a hand without competing with the band's lines.
+		Seat(DealerSeat);
+		Seat(PlayerSeat);
+
 		// The band the terms are printed in, swept from a centre far below the
 		// felt so only its crown crosses the table.
 		float radius = ((half * half) + (drop * drop)) / (2f * drop);
@@ -53,6 +67,15 @@ public sealed partial class FeltMarkings : Control
 
 		DrawString(GetThemeDefaultFont(), new Vector2(0f, apex + PrintSize + 12f), Terms(_rules),
 			HorizontalAlignment.Center, width, PrintSize, Ink);
+	}
+
+	/// A spot worn into the felt where a hand is dealt. Drawn through a stretched
+	/// transform because the canvas draws circles, and a seat is an oval.
+	private void Seat(float height)
+	{
+		DrawSetTransform(new Vector2(Size.X * 0.5f, Size.Y * height), 0f, new Vector2(SpotStretch, 1f));
+		DrawCircle(Vector2.Zero, SpotRadius, Worn);
+		DrawSetTransform(Vector2.Zero, 0f, Vector2.One);
 	}
 
 	/// One arc of the band, carried across the whole width of the felt.
