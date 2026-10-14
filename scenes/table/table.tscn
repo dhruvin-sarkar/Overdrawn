@@ -14,6 +14,7 @@
 [ext_resource type="Resource" path="res://data/card_style_library.tres" id="12_styles"]
 [ext_resource type="AudioStream" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
 [ext_resource type="Script" path="res://scripts/table/FeltMarkings.cs" id="14_marks"]
+[ext_resource type="Script" path="res://scripts/table/ShoeStack.cs" id="15_shoe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
 shader = ExtResource("2_paint")
@@ -573,13 +574,13 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="ShoeBack" type="TextureRect" parent="Felt/ShoePile"]
+[node name="ShoeBack" type="Control" parent="Felt/ShoePile"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
-expand_mode = 1
-stretch_mode = 5
+mouse_filter = 2
+script = ExtResource("15_shoe")
 
 [node name="ShoeTally" type="Label" parent="Felt/ShoePile"]
 unique_name_in_owner = true

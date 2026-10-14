@@ -81,7 +81,7 @@ public partial class TableScreen : Control
 	private SettingSlider _wager = null!;
 	private Button _deal = null!;
 	private Control _shoePile = null!;
-	private TextureRect _shoeBack = null!;
+	private ShoeStack _shoeBack = null!;
 	private Label _shoeCount = null!;
 	private Label _chips = null!;
 	private Label _mult = null!;
@@ -107,7 +107,7 @@ public partial class TableScreen : Control
 		_wager = GetNode<SettingSlider>("%Wager");
 		_deal = GetNode<Button>("%Deal");
 		_shoePile = GetNode<Control>("%ShoePile");
-		_shoeBack = GetNode<TextureRect>("%ShoeBack");
+		_shoeBack = GetNode<ShoeStack>("%ShoeBack");
 		_shoeCount = GetNode<Label>("%ShoeTally");
 		_chips = GetNode<Label>("%ChipsValue");
 		_mult = GetNode<Label>("%MultValue");
@@ -144,7 +144,6 @@ public partial class TableScreen : Control
 		_run = run;
 		_run.Shoe.BeginLevel(Array.Empty<PlayingCard>());
 
-		_shoeBack.Texture = BackStyle().Back;
 		_dealerFan.ShowStake(0);
 		_shownScore = _run.LevelScore;
 		_shownMoney = _run.Bankroll;
@@ -590,7 +589,9 @@ public partial class TableScreen : Control
 		_deal.Disabled = _animating || round is not null || _run.LevelCleared || _run.HandsRemaining == 0;
 		_hands.ShowValue($"{_run.HandsRemaining}/{RunEconomy.HandsPerLevel}", Colors.White);
 		_handCount.Text = $"{RunEconomy.HandsPerLevel - _run.HandsRemaining}/{RunEconomy.HandsPerLevel}";
-		_shoeCount.Text = $"{_run.Shoe.Remaining}/{_run.Shoe.Deck.Count + _run.Shoe.Temporary.Count}";
+		int stock = _run.Shoe.Deck.Count + _run.Shoe.Temporary.Count;
+		_shoeCount.Text = $"{_run.Shoe.Remaining}/{stock}";
+		_shoeBack.ShowStock(BackStyle().Back, _run.Shoe.Remaining / (float)stock);
 
 		if (round is null)
 		{
