@@ -184,14 +184,16 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Readout" type="HBoxContainer" parent="Rail/Pad/Column"]
+[node name="Readout" type="Control" parent="Rail/Pad/Column"]
 custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
-theme_override_constants/separation = 8
 
 [node name="Chips" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
-layout_mode = 2
-size_flags_horizontal = 3
+unique_name_in_owner = true
+layout_mode = 1
+anchor_right = 0.45
+anchor_bottom = 1.0
+offset_right = -6.0
 theme_type_variation = &"BluePanel"
 
 [node name="ChipsValue" type="Label" parent="Rail/Pad/Column/Readout/Chips"]
@@ -203,15 +205,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Times" type="Label" parent="Rail/Pad/Column/Readout"]
-layout_mode = 2
+layout_mode = 1
+anchor_left = 0.45
+anchor_right = 0.55
+anchor_bottom = 1.0
 theme_override_colors/font_color = Color(0.914, 0.306, 0.247, 1)
 theme_override_font_sizes/font_size = 34
 text = "X"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Mult" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
-layout_mode = 2
-size_flags_horizontal = 3
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
 theme_type_variation = &"RedPanel"
 
 [node name="MultValue" type="Label" parent="Rail/Pad/Column/Readout/Mult"]

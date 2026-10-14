@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundBank" load_steps=27 format=3]
+[gd_resource type="Resource" script_class="SoundBank" load_steps=33 format=3]
 
 [ext_resource type="Script" path="res://scripts/audio/SoundBank.cs" id="bank"]
 [ext_resource type="Script" path="res://scripts/audio/SoundCue.cs" id="cue"]
@@ -16,6 +16,10 @@
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/card1.ogg" id="s_card1"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/card3.ogg" id="s_card3"]
 [ext_resource type="AudioStream" path="res://assets/audio/sfx/whoosh_long.ogg" id="s_whoosh_long"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/chips1.ogg" id="s_chips1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/chips2.ogg" id="s_chips2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/multhit1.ogg" id="s_multhit1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/multhit2.ogg" id="s_multhit2"]
 
 [sub_resource type="Resource" id="c_button"]
 script = ExtResource("cue")
@@ -94,6 +98,20 @@ Variants = Array[AudioStream]([ExtResource("s_whoosh_long")])
 VolumeDb = -6.0
 PitchRange = Vector2(1.0, 1.0)
 
+[sub_resource type="Resource" id="c_chips"]
+script = ExtResource("cue")
+Id = &"chips"
+Variants = Array[AudioStream]([ExtResource("s_chips1"), ExtResource("s_chips2")])
+VolumeDb = -3.0
+PitchRange = Vector2(0.97, 1.03)
+
+[sub_resource type="Resource" id="c_mult"]
+script = ExtResource("cue")
+Id = &"mult"
+Variants = Array[AudioStream]([ExtResource("s_multhit1"), ExtResource("s_multhit2")])
+VolumeDb = -2.0
+PitchRange = Vector2(0.97, 1.03)
+
 [resource]
 script = ExtResource("bank")
-Cues = Array[ExtResource("cue")]([SubResource("c_button"), SubResource("c_cancel"), SubResource("c_tab"), SubResource("c_toggle"), SubResource("c_hover"), SubResource("c_panel_open"), SubResource("c_panel_close"), SubResource("c_card_hover"), SubResource("c_card_pick"), SubResource("c_card_place"), SubResource("c_intro")])
+Cues = Array[ExtResource("cue")]([SubResource("c_button"), SubResource("c_cancel"), SubResource("c_tab"), SubResource("c_toggle"), SubResource("c_hover"), SubResource("c_panel_open"), SubResource("c_panel_close"), SubResource("c_card_hover"), SubResource("c_card_pick"), SubResource("c_card_place"), SubResource("c_intro"), SubResource("c_chips"), SubResource("c_mult")])

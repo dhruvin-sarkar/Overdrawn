@@ -46,6 +46,13 @@ public partial class TableScreen : Control
 	[Export] public float LoudPulse { get; set; } = 0.9f;
 	/// How many times its share of the target a hand has to score to feel loud.
 	[Export] public float LoudMultiple { get; set; } = 16f;
+	/// The gap between one beat of the scoring pipeline and the next.
+	[Export] public float BeatGap { get; set; } = 0.18f;
+	/// How far a readout box swells on its beat.
+	[Export] public float BeatSwell { get; set; } = 0.18f;
+	/// How much of a hand's full kick one beat of its pipeline gets, so a hand
+	/// of many beats does not hit many times harder than a hand of one.
+	[Export] public float BeatShare { get; set; } = 0.35f;
 
 	private static readonly Color Gold = new(1f, 0.84f, 0.25f);
 
@@ -57,6 +64,12 @@ public partial class TableScreen : Control
 	private bool _animating;
 	private float _shownScore;
 	private float _shownMoney;
+	private float _chipsPop;
+	private float _multPop;
+
+	/// How many of the round's hands have finished playing their beats. The
+	/// rail holds back the rest of the run's score until they have.
+	private int _played;
 
 	private HandFan _dealerFan = null!;
 	private HBoxContainer _seatRow = null!;
@@ -72,6 +85,8 @@ public partial class TableScreen : Control
 	private Label _shoeCount = null!;
 	private Label _chips = null!;
 	private Label _mult = null!;
+	private Control _chipsBox = null!;
+	private Control _multBox = null!;
 	private StatRow _score = null!;
 	private StatRow _hands = null!;
 	private Label _money = null!;
@@ -96,6 +111,10 @@ public partial class TableScreen : Control
 		_shoeCount = GetNode<Label>("%ShoeTally");
 		_chips = GetNode<Label>("%ChipsValue");
 		_mult = GetNode<Label>("%MultValue");
+		_chipsBox = GetNode<Control>("%Chips");
+		_multBox = GetNode<Control>("%Mult");
+		_chipsBox.Resized += () => _chipsBox.PivotOffset = _chipsBox.Size * 0.5f;
+		_multBox.Resized += () => _multBox.PivotOffset = _multBox.Size * 0.5f;
 		_score = GetNode<StatRow>("%Score");
 		_hands = GetNode<StatRow>("%Hands");
 		_money = GetNode<Label>("%MoneyValue");
@@ -159,8 +178,22 @@ public partial class TableScreen : Control
 		}
 
 		float ease = Damp(ReadoutRate, (float)delta);
-		_shownScore = Mathf.Lerp(_shownScore, _run.LevelScore, ease);
+		long released = Released();
+		_shownScore = Mathf.Lerp(_shownScore, released, ease);
 		_shownMoney = Mathf.Lerp(_shownMoney, _run.Bankroll, ease);
+		_chipsPop = Mathf.Lerp(_chipsPop, 0f, ease);
+		_multPop = Mathf.Lerp(_multPop, 0f, ease);
+
+		// A lerp stops moving once its step falls under the float's precision, so
+		// the last digit is snapped home rather than left parked short of it.
+		if (Mathf.Abs(released - _shownScore) < 1f)
+		{
+			_shownScore = released;
+		}
+
+		float swell = Settings.Instance.ReducedMotion ? 0f : BeatSwell;
+		_chipsBox.Scale = Vector2.One * (1f + (_chipsPop * swell));
+		_multBox.Scale = Vector2.One * (1f + (_multPop * swell));
 
 		_score.ShowFill(_shownScore / _run.ScoreTarget, $"{Mathf.RoundToInt(_shownScore):N0}");
 		_money.Text = $"${Mathf.RoundToInt(_shownMoney):N0}";
@@ -223,6 +256,7 @@ public partial class TableScreen : Control
 	{
 		_round = new Round(_run);
 		_round.Begin(_wager.Value);
+		_played = 0;
 		_animating = true;
 		_betSpot.Visible = false;
 		_actions.Visible = true;
@@ -279,12 +313,20 @@ public partial class TableScreen : Control
 			return;
 		}
 
-		await PlayDealer();
-		_round.Finish();
-		await ShowResults();
-
-		_animating = false;
-		OpenBetting();
+		// The settle runs inside a finally because these handlers are async void:
+		// a throw that skipped this would leave every button disabled with the
+		// round still open, which reads as a freeze rather than as the fault.
+		try
+		{
+			await PlayDealer();
+			_round.Finish();
+			await ShowResults();
+		}
+		finally
+		{
+			_animating = false;
+			OpenBetting();
+		}
 	}
 
 	/// Deals every card the round has that the felt has not, one at a time. A
@@ -361,7 +403,9 @@ public partial class TableScreen : Control
 		await Dwell(ReadoutHold);
 	}
 
-	/// Money first and instantly, then the score, one hand at a time.
+	/// Money first and instantly, then the score beat by beat: every step of the
+	/// pipeline is one readout beat, and a hand's total only lands on the rail
+	/// once its last beat has played.
 	private async Task ShowResults()
 	{
 		foreach (HandResult result in _round!.Results)
@@ -373,11 +417,22 @@ public partial class TableScreen : Control
 			CrtPulse.Instance.Pulse(0.3f);
 			await Dwell(SettleHold);
 
-			_outcome.Text = result.Score.Outcome.Label();
-			_chips.Text = $"{result.Score.Chips}";
-			_mult.Text = $"{result.Score.Mult:0.##}";
-			Sfx.Instance.Play("toggle");
-			await Dwell(ReadoutHold);
+			// Every hand builds its total up from nothing.
+			_chips.Text = "0";
+			_mult.Text = "0";
+
+			// A bust scores no beats, so its outcome is the only caption it gets.
+			if (result.Score.Steps.Count == 0)
+			{
+				_outcome.Text = result.Score.Outcome.Label();
+			}
+
+			foreach (ScoreStep step in result.Score.Steps)
+			{
+				await PlayStep(step, result.Score.Outcome);
+			}
+
+			_played++;
 
 			if (result.Score.Score == 0)
 			{
@@ -390,6 +445,59 @@ public partial class TableScreen : Control
 			CrtPulse.Instance.Pulse(Mathf.Lerp(CalmPulse, LoudPulse, loud));
 			await Dwell(Mathf.Lerp(CalmCount, LoudCount, loud));
 		}
+	}
+
+	/// One beat of the pipeline. Whichever boxes the step moved take their new
+	/// values and swell, and the beat is as loud as the running total it leaves
+	/// behind, so a hand grows into the impact that follows it.
+	private async Task PlayStep(ScoreStep step, HandOutcome outcome)
+	{
+		float loud = Magnitude((long)(step.Chips * step.Mult));
+		_outcome.Text = Caption(step.Kind, outcome);
+
+		if (step.AddChips != 0)
+		{
+			_chips.Text = $"{step.Chips}";
+			_chipsPop = Mathf.Min(1f, _chipsPop + loud);
+			Sfx.Instance.Play("chips");
+		}
+
+		// Every step the pipeline can produce moves the mult.
+		_mult.Text = $"{step.Mult:0.##}";
+		_multPop = Mathf.Min(1f, _multPop + loud);
+		Sfx.Instance.Play("mult");
+
+		ScreenShake.Instance.Kick(Mathf.Lerp(CalmTrauma, LoudTrauma, loud) * BeatShare);
+		CrtPulse.Instance.Pulse(Mathf.Lerp(CalmPulse, LoudPulse, loud) * BeatShare);
+		await Dwell(BeatGap);
+	}
+
+	/// What a beat is called while it plays.
+	private static string Caption(ScoreStepKind kind, HandOutcome outcome) => kind switch
+	{
+		ScoreStepKind.Base => outcome.Label(),
+		ScoreStepKind.Streak => "Win Streak",
+		ScoreStepKind.DealerBust => "Dealer Bust",
+		_ => throw new ArgumentOutOfRangeException(nameof(kind), kind, "Uncaptioned beat."),
+	};
+
+	/// The score the beats have let through: the run's total less every hand of
+	/// this round whose beats have not played yet. The rail chases this so a
+	/// hand lands on its own beat instead of the moment the round settled.
+	private long Released()
+	{
+		long score = _run.LevelScore;
+		if (_round is null)
+		{
+			return score;
+		}
+
+		for (int i = _played; i < _round.Results.Count; i++)
+		{
+			score -= _round.Results[i].Score.Score;
+		}
+
+		return score;
 	}
 
 	/// How big a hand's score felt, as a fraction: zero at nothing, one at many
