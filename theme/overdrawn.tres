@@ -2,6 +2,20 @@
 
 [ext_resource type="FontFile" uid="uid://b7r2bduvv4mxl" path="res://assets/fonts/thin_sans.ttf" id="1_font"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blind_pill"]
+content_margin_left = 16.0
+content_margin_top = 2.0
+content_margin_right = 16.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 6
+border_color = Color(0.66, 0.66, 0.66, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+expand_margin_bottom = 6.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled"]
 content_margin_left = 18.0
 content_margin_top = 4.0
@@ -59,7 +73,35 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 expand_margin_bottom = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue_panel"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.57, 0.89, 1)
+border_width_bottom = 6
+border_color = Color(0, 0.36, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_bottom = 6.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_none"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold_panel"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.95, 0.73, 0.2, 1)
+border_width_bottom = 6
+border_color = Color(0.65, 0.47, 0.08, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_bottom = 6.0
 
 [sub_resource type="Gradient" id="Gradient_clear"]
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0)
@@ -208,48 +250,6 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 expand_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blue_panel"]
-content_margin_left = 12.0
-content_margin_top = 2.0
-content_margin_right = 12.0
-content_margin_bottom = 2.0
-bg_color = Color(0.0, 0.57, 0.89, 1)
-border_width_bottom = 6
-border_color = Color(0.0, 0.36, 0.58, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-expand_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold_panel"]
-content_margin_left = 12.0
-content_margin_top = 2.0
-content_margin_right = 12.0
-content_margin_bottom = 2.0
-bg_color = Color(0.95, 0.73, 0.2, 1)
-border_width_bottom = 6
-border_color = Color(0.65, 0.47, 0.08, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-expand_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blind_pill"]
-content_margin_left = 16.0
-content_margin_top = 2.0
-content_margin_right = 16.0
-content_margin_bottom = 2.0
-bg_color = Color(1, 1, 1, 1)
-border_width_bottom = 6
-border_color = Color(0.66, 0.66, 0.66, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-expand_margin_bottom = 6.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_red_panel"]
 content_margin_left = 12.0
 content_margin_top = 2.0
@@ -314,12 +314,16 @@ spacing_bottom = -6
 [resource]
 default_font = SubResource("FontVariation_trimmed")
 default_font_size = 32
+BlindPill/base_type = &"PanelContainer"
+BlindPill/styles/panel = SubResource("StyleBoxFlat_blind_pill")
 BlueButton/base_type = &"Button"
 BlueButton/styles/disabled = SubResource("StyleBoxFlat_disabled")
 BlueButton/styles/hover = SubResource("StyleBoxFlat_blue_hover")
 BlueButton/styles/hover_pressed = SubResource("StyleBoxFlat_blue_pressed")
 BlueButton/styles/normal = SubResource("StyleBoxFlat_blue")
 BlueButton/styles/pressed = SubResource("StyleBoxFlat_blue_pressed")
+BluePanel/base_type = &"PanelContainer"
+BluePanel/styles/panel = SubResource("StyleBoxFlat_blue_panel")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(1, 1, 1, 0.35)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
@@ -328,6 +332,8 @@ Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
 Button/font_sizes/font_size = 34
 Button/styles/focus = SubResource("StyleBoxEmpty_none")
+GoldPanel/base_type = &"PanelContainer"
+GoldPanel/styles/panel = SubResource("StyleBoxFlat_gold_panel")
 HSlider/constants/center_grabber = 0
 HSlider/icons/grabber = SubResource("GradientTexture2D_clear")
 HSlider/icons/grabber_disabled = SubResource("GradientTexture2D_clear")
@@ -365,12 +371,6 @@ RedButton/styles/hover = SubResource("StyleBoxFlat_red_hover")
 RedButton/styles/hover_pressed = SubResource("StyleBoxFlat_red_pressed")
 RedButton/styles/normal = SubResource("StyleBoxFlat_red")
 RedButton/styles/pressed = SubResource("StyleBoxFlat_red_pressed")
-BluePanel/base_type = &"PanelContainer"
-BluePanel/styles/panel = SubResource("StyleBoxFlat_blue_panel")
-GoldPanel/base_type = &"PanelContainer"
-GoldPanel/styles/panel = SubResource("StyleBoxFlat_gold_panel")
-BlindPill/base_type = &"PanelContainer"
-BlindPill/styles/panel = SubResource("StyleBoxFlat_blind_pill")
 RedPanel/base_type = &"PanelContainer"
 RedPanel/styles/panel = SubResource("StyleBoxFlat_red_panel")
 SettingTitle/base_type = &"Label"

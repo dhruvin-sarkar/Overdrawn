@@ -1,20 +1,20 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dmhnmufqgj4ya"]
 
-[ext_resource type="Script" path="res://scripts/table/TableScreen.cs" id="1_table"]
-[ext_resource type="Shader" path="res://shaders/paint_background.gdshader" id="2_paint"]
-[ext_resource type="Shader" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
-[ext_resource type="Theme" path="res://theme/overdrawn.tres" id="4_theme"]
-[ext_resource type="Script" path="res://scripts/ui/MenuOverlay.cs" id="5_overlay"]
-[ext_resource type="Script" path="res://scripts/ui/MenuButton.cs" id="6_button"]
+[ext_resource type="Script" uid="uid://cum8k80vgirmt" path="res://scripts/table/TableScreen.cs" id="1_table"]
+[ext_resource type="Shader" uid="uid://cr68nytkm8xo7" path="res://shaders/paint_background.gdshader" id="2_paint"]
+[ext_resource type="Shader" uid="uid://b8t587undvbub" path="res://shaders/crt_overlay.gdshader" id="3_crt"]
+[ext_resource type="Theme" uid="uid://8loo6n44xcyi" path="res://theme/overdrawn.tres" id="4_theme"]
+[ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="5_overlay"]
+[ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="6_button"]
 [ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="7_card"]
 [ext_resource type="PackedScene" path="res://scenes/cards/hand_fan.tscn" id="8_fan"]
 [ext_resource type="PackedScene" path="res://scenes/ui/components/stat_row.tscn" id="9_stat"]
 [ext_resource type="PackedScene" path="res://scenes/ui/components/setting_slider.tscn" id="10_slider"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
-[ext_resource type="Resource" path="res://data/card_style_library.tres" id="12_styles"]
-[ext_resource type="AudioStream" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
-[ext_resource type="Script" path="res://scripts/table/FeltMarkings.cs" id="14_marks"]
-[ext_resource type="Script" path="res://scripts/table/ShoeStack.cs" id="15_shoe"]
+[ext_resource type="Resource" uid="uid://btol8wqksn2sd" path="res://data/card_style_library.tres" id="12_styles"]
+[ext_resource type="AudioStream" uid="uid://cthkql0uqsl5w" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
+[ext_resource type="Script" uid="uid://bh6kmjck70fcb" path="res://scripts/table/FeltMarkings.cs" id="14_marks"]
+[ext_resource type="Script" uid="uid://ywmq0lj5dxkh" path="res://scripts/table/ShoeStack.cs" id="15_shoe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
 shader = ExtResource("2_paint")
@@ -53,7 +53,7 @@ shader_parameter/band_height = 0.04
 shader_parameter/band_shift_px = 1.5
 shader_parameter/band_glow = 0.025
 
-[node name="Table" type="Control"]
+[node name="Table" type="Control" unique_id=844128258]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,7 +67,7 @@ FanScene = ExtResource("8_fan")
 CardStyles = ExtResource("12_styles")
 OptionsScene = ExtResource("11_options")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1519095816]
 material = SubResource("ShaderMaterial_felt")
 layout_mode = 1
 anchors_preset = 15
@@ -77,7 +77,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Rail" type="PanelContainer" parent="."]
+[node name="Rail" type="PanelContainer" parent="." unique_id=471593099]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -85,24 +85,24 @@ offset_right = 460.0
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
 
-[node name="Pad" type="MarginContainer" parent="Rail"]
+[node name="Pad" type="MarginContainer" parent="Rail" unique_id=867738337]
 layout_mode = 2
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 18
 theme_override_constants/margin_bottom = 18
 
-[node name="Column" type="VBoxContainer" parent="Rail/Pad"]
+[node name="Column" type="VBoxContainer" parent="Rail/Pad" unique_id=293119136]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="BlindPill" type="PanelContainer" parent="Rail/Pad/Column"]
+[node name="BlindPill" type="PanelContainer" parent="Rail/Pad/Column" unique_id=708518946]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_type_variation = &"BlindPill"
 
-[node name="TableName" type="Label" parent="Rail/Pad/Column/BlindPill"]
+[node name="TableName" type="Label" parent="Rail/Pad/Column/BlindPill" unique_id=611300931]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.09, 0.11, 1)
@@ -111,18 +111,18 @@ theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetRow" type="HBoxContainer" parent="Rail/Pad/Column"]
+[node name="TargetRow" type="HBoxContainer" parent="Rail/Pad/Column" unique_id=282115591]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Token" type="PanelContainer" parent="Rail/Pad/Column/TargetRow"]
+[node name="Token" type="PanelContainer" parent="Rail/Pad/Column/TargetRow" unique_id=1423424019]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_vertical = 4
 theme_type_variation = &"BlindPill"
 
-[node name="TokenMark" type="Label" parent="Rail/Pad/Column/TargetRow/Token"]
+[node name="TokenMark" type="Label" parent="Rail/Pad/Column/TargetRow/Token" unique_id=185138523]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.08, 0.09, 0.11, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -131,46 +131,46 @@ text = "21"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TargetBox" type="PanelContainer" parent="Rail/Pad/Column/TargetRow"]
+[node name="TargetBox" type="PanelContainer" parent="Rail/Pad/Column/TargetRow" unique_id=307602228]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InsetPanel"
 
-[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/TargetRow/TargetBox"]
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/TargetRow/TargetBox" unique_id=137400615]
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Caption" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
+[node name="Caption" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner" unique_id=1048349265]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.6)
 theme_override_font_sizes/font_size = 18
 text = "Score at least"
 horizontal_alignment = 1
 
-[node name="Target" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
+[node name="Target" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner" unique_id=619052373]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
 theme_override_font_sizes/font_size = 42
 horizontal_alignment = 1
 
-[node name="Reward" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner"]
+[node name="Reward" type="Label" parent="Rail/Pad/Column/TargetRow/TargetBox/Inner" unique_id=558275527]
 unique_name_in_owner = true
 layout_mode = 2
-autowrap_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.85)
 theme_override_font_sizes/font_size = 18
 horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="Score" parent="Rail/Pad/Column" instance=ExtResource("9_stat")]
+[node name="Score" parent="Rail/Pad/Column" unique_id=1862264804 instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
 Title = "Round score"
 TitleWidth = 168.0
 FontSize = 28
 
-[node name="OutcomeName" type="Label" parent="Rail/Pad/Column"]
+[node name="OutcomeName" type="Label" parent="Rail/Pad/Column" unique_id=384908865]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -178,19 +178,20 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Readout" type="Control" parent="Rail/Pad/Column"]
+[node name="Readout" type="Control" parent="Rail/Pad/Column" unique_id=550493778]
 custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 
-[node name="Chips" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
+[node name="Chips" type="PanelContainer" parent="Rail/Pad/Column/Readout" unique_id=89130559]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = -1
 anchor_right = 0.45
 anchor_bottom = 1.0
 offset_right = -6.0
 theme_type_variation = &"BluePanel"
 
-[node name="ChipsValue" type="Label" parent="Rail/Pad/Column/Readout/Chips"]
+[node name="ChipsValue" type="Label" parent="Rail/Pad/Column/Readout/Chips" unique_id=1803237857]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
@@ -198,8 +199,9 @@ theme_override_font_sizes/font_size = 52
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Times" type="Label" parent="Rail/Pad/Column/Readout"]
+[node name="Times" type="Label" parent="Rail/Pad/Column/Readout" unique_id=1594549386]
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.45
 anchor_right = 0.55
 anchor_bottom = 1.0
@@ -209,16 +211,17 @@ text = "X"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mult" type="PanelContainer" parent="Rail/Pad/Column/Readout"]
+[node name="Mult" type="PanelContainer" parent="Rail/Pad/Column/Readout" unique_id=120943743]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.55
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 6.0
 theme_type_variation = &"RedPanel"
 
-[node name="MultValue" type="Label" parent="Rail/Pad/Column/Readout/Mult"]
+[node name="MultValue" type="Label" parent="Rail/Pad/Column/Readout/Mult" unique_id=1638515268]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
@@ -226,19 +229,19 @@ theme_override_font_sizes/font_size = 52
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="Rail/Pad/Column"]
+[node name="Spacer" type="Control" parent="Rail/Pad/Column" unique_id=662603579]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Controls" type="HBoxContainer" parent="Rail/Pad/Column"]
+[node name="Controls" type="HBoxContainer" parent="Rail/Pad/Column" unique_id=519266116]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Stack" type="VBoxContainer" parent="Rail/Pad/Column/Controls"]
+[node name="Stack" type="VBoxContainer" parent="Rail/Pad/Column/Controls" unique_id=607970669]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RunInfo" type="Button" parent="Rail/Pad/Column/Controls/Stack"]
+[node name="RunInfo" type="Button" parent="Rail/Pad/Column/Controls/Stack" unique_id=431067237]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
@@ -247,7 +250,7 @@ theme_override_font_sizes/font_size = 19
 text = "Run Info"
 script = ExtResource("6_button")
 
-[node name="Options" type="Button" parent="Rail/Pad/Column/Controls/Stack"]
+[node name="Options" type="Button" parent="Rail/Pad/Column/Controls/Stack" unique_id=1532130060]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
@@ -256,7 +259,7 @@ theme_override_font_sizes/font_size = 19
 text = "Options"
 script = ExtResource("6_button")
 
-[node name="Hands" parent="Rail/Pad/Column/Controls" instance=ExtResource("9_stat")]
+[node name="Hands" parent="Rail/Pad/Column/Controls" unique_id=797556423 instance=ExtResource("9_stat")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -265,12 +268,12 @@ Title = "Hands"
 TitleWidth = 64.0
 FontSize = 24
 
-[node name="Money" type="PanelContainer" parent="Rail/Pad/Column"]
+[node name="Money" type="PanelContainer" parent="Rail/Pad/Column" unique_id=240382026]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_type_variation = &"GoldPanel"
 
-[node name="MoneyValue" type="Label" parent="Rail/Pad/Column/Money"]
+[node name="MoneyValue" type="Label" parent="Rail/Pad/Column/Money" unique_id=1247067321]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.18, 0.12, 0.02, 1)
@@ -279,57 +282,57 @@ theme_override_font_sizes/font_size = 44
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Counts" type="HBoxContainer" parent="Rail/Pad/Column"]
+[node name="Counts" type="HBoxContainer" parent="Rail/Pad/Column" unique_id=567382927]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="LevelBox" type="PanelContainer" parent="Rail/Pad/Column/Counts"]
+[node name="LevelBox" type="PanelContainer" parent="Rail/Pad/Column/Counts" unique_id=1436326997]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InsetPanel"
 
-[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/LevelBox"]
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/LevelBox" unique_id=222267580]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner"]
+[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner" unique_id=1771062121]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.55)
 theme_override_font_sizes/font_size = 17
 text = "Level"
 horizontal_alignment = 1
 
-[node name="LevelCount" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner"]
+[node name="LevelCount" type="Label" parent="Rail/Pad/Column/Counts/LevelBox/Inner" unique_id=852985302]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 
-[node name="HandBox" type="PanelContainer" parent="Rail/Pad/Column/Counts"]
+[node name="HandBox" type="PanelContainer" parent="Rail/Pad/Column/Counts" unique_id=1979412539]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"InsetPanel"
 
-[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/HandBox"]
+[node name="Inner" type="VBoxContainer" parent="Rail/Pad/Column/Counts/HandBox" unique_id=637464975]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner"]
+[node name="Caption" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner" unique_id=1712755089]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.55)
 theme_override_font_sizes/font_size = 17
 text = "Hand"
 horizontal_alignment = 1
 
-[node name="HandCount" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner"]
+[node name="HandCount" type="Label" parent="Rail/Pad/Column/Counts/HandBox/Inner" unique_id=1259089573]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 
-[node name="Felt" type="Control" parent="."]
+[node name="Felt" type="Control" parent="." unique_id=487349795]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,7 +342,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="FeltMarkings" type="Control" parent="Felt"]
+[node name="FeltMarkings" type="Control" parent="Felt" unique_id=1005091584]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -350,7 +353,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("14_marks")
 
-[node name="JokerArea" type="Control" parent="Felt"]
+[node name="JokerArea" type="Control" parent="Felt" unique_id=1272229378]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -361,19 +364,17 @@ offset_bottom = 272.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="JokerRow" type="HBoxContainer" parent="Felt/JokerArea"]
+[node name="JokerRow" type="HBoxContainer" parent="Felt/JokerArea" unique_id=1282361429]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 0
 offset_right = 856.0
 offset_bottom = 214.0
 mouse_filter = 2
 theme_override_constants/separation = 14
 
-[node name="JokerCount" type="Label" parent="Felt/JokerArea"]
+[node name="JokerCount" type="Label" parent="Felt/JokerArea" unique_id=239912906]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 0
 offset_left = 736.0
 offset_top = 218.0
 offset_right = 856.0
@@ -383,7 +384,7 @@ theme_override_font_sizes/font_size = 22
 text = "0/5"
 horizontal_alignment = 2
 
-[node name="ConsumableRow" type="HBoxContainer" parent="Felt/JokerArea"]
+[node name="ConsumableRow" type="HBoxContainer" parent="Felt/JokerArea" unique_id=360797316]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -395,7 +396,7 @@ grow_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 14
 
-[node name="ConsumableCount" type="Label" parent="Felt/JokerArea"]
+[node name="ConsumableCount" type="Label" parent="Felt/JokerArea" unique_id=683316248]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -410,7 +411,7 @@ theme_override_font_sizes/font_size = 22
 text = "0/2"
 horizontal_alignment = 2
 
-[node name="DealerSeat" type="Control" parent="Felt"]
+[node name="DealerSeat" type="Control" parent="Felt" unique_id=397284962]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -421,13 +422,13 @@ offset_bottom = 580.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="DealerFan" parent="Felt/DealerSeat" instance=ExtResource("8_fan")]
+[node name="DealerFan" parent="Felt/DealerSeat" unique_id=343774510 instance=ExtResource("8_fan")]
 unique_name_in_owner = true
 layout_mode = 1
 CardSize = Vector2(160, 214)
 Arc = 0.0
 
-[node name="Banner" type="Label" parent="Felt"]
+[node name="Banner" type="Label" parent="Felt" unique_id=187126124]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -437,13 +438,12 @@ offset_top = 584.0
 offset_right = -230.0
 offset_bottom = 648.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
 theme_override_font_sizes/font_size = 56
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerSeats" type="HBoxContainer" parent="Felt"]
+[node name="PlayerSeats" type="HBoxContainer" parent="Felt" unique_id=77365208]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -457,7 +457,7 @@ mouse_filter = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Actions" type="HBoxContainer" parent="Felt"]
+[node name="Actions" type="HBoxContainer" parent="Felt" unique_id=1660652055]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -473,7 +473,7 @@ grow_vertical = 0
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Hit" type="Button" parent="Felt/Actions"]
+[node name="Hit" type="Button" parent="Felt/Actions" unique_id=1542665620]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
@@ -482,7 +482,7 @@ theme_override_font_sizes/font_size = 32
 text = "Hit"
 script = ExtResource("6_button")
 
-[node name="Stand" type="Button" parent="Felt/Actions"]
+[node name="Stand" type="Button" parent="Felt/Actions" unique_id=1141472854]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
@@ -491,7 +491,7 @@ theme_override_font_sizes/font_size = 32
 text = "Stand"
 script = ExtResource("6_button")
 
-[node name="Double" type="Button" parent="Felt/Actions"]
+[node name="Double" type="Button" parent="Felt/Actions" unique_id=236169355]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
@@ -500,7 +500,7 @@ theme_override_font_sizes/font_size = 32
 text = "Double"
 script = ExtResource("6_button")
 
-[node name="Split" type="Button" parent="Felt/Actions"]
+[node name="Split" type="Button" parent="Felt/Actions" unique_id=662591025]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 76)
 layout_mode = 2
@@ -508,7 +508,7 @@ theme_override_font_sizes/font_size = 32
 text = "Split"
 script = ExtResource("6_button")
 
-[node name="BetSpot" type="PanelContainer" parent="Felt"]
+[node name="BetSpot" type="PanelContainer" parent="Felt" unique_id=1446781376]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -524,31 +524,31 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_type_variation = &"InsetPanel"
 
-[node name="BetRow" type="HBoxContainer" parent="Felt/BetSpot"]
+[node name="BetRow" type="HBoxContainer" parent="Felt/BetSpot" unique_id=2120374519]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="WagerMin" type="Label" parent="Felt/BetSpot/BetRow"]
+[node name="WagerMin" type="Label" parent="Felt/BetSpot/BetRow" unique_id=1391202957]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.75)
 theme_override_font_sizes/font_size = 24
 vertical_alignment = 1
 
-[node name="Wager" parent="Felt/BetSpot/BetRow" instance=ExtResource("10_slider")]
+[node name="Wager" parent="Felt/BetSpot/BetRow" unique_id=1303377601 instance=ExtResource("10_slider")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WagerMax" type="Label" parent="Felt/BetSpot/BetRow"]
+[node name="WagerMax" type="Label" parent="Felt/BetSpot/BetRow" unique_id=325399063]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0.25, 0.75)
 theme_override_font_sizes/font_size = 24
 vertical_alignment = 1
 
-[node name="Deal" type="Button" parent="Felt/BetSpot/BetRow"]
+[node name="Deal" type="Button" parent="Felt/BetSpot/BetRow" unique_id=1146797783]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 68)
 layout_mode = 2
@@ -557,7 +557,7 @@ theme_override_font_sizes/font_size = 32
 text = "DEAL"
 script = ExtResource("6_button")
 
-[node name="ShoePile" type="VBoxContainer" parent="Felt"]
+[node name="ShoePile" type="VBoxContainer" parent="Felt" unique_id=1863865443]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -574,7 +574,7 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="ShoeBack" type="Control" parent="Felt/ShoePile"]
+[node name="ShoeBack" type="Control" parent="Felt/ShoePile" unique_id=1895018701]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -582,17 +582,17 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("15_shoe")
 
-[node name="ShoeTally" type="Label" parent="Felt/ShoePile"]
+[node name="ShoeTally" type="Label" parent="Felt/ShoePile" unique_id=1926954256]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.75)
 theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 
-[node name="OverlayLayer" type="CanvasLayer" parent="."]
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=885423816]
 layer = 5
 
-[node name="Overlay" type="Control" parent="OverlayLayer"]
+[node name="Overlay" type="Control" parent="OverlayLayer" unique_id=476605234]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -603,7 +603,7 @@ grow_vertical = 2
 theme = ExtResource("4_theme")
 script = ExtResource("5_overlay")
 
-[node name="Dim" type="ColorRect" parent="OverlayLayer/Overlay"]
+[node name="Dim" type="ColorRect" parent="OverlayLayer/Overlay" unique_id=1147122185]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -612,10 +612,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="CrtLayer" type="CanvasLayer" parent="."]
+[node name="CrtLayer" type="CanvasLayer" parent="." unique_id=950326178]
 layer = 10
 
-[node name="CrtOverlay" type="ColorRect" parent="CrtLayer"]
+[node name="CrtOverlay" type="ColorRect" parent="CrtLayer" unique_id=1236863667]
 material = SubResource("ShaderMaterial_crt")
 anchors_preset = 15
 anchor_right = 1.0
@@ -624,7 +624,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=706185116]
 stream = ExtResource("13_music")
 autoplay = true
 bus = &"Music"
