@@ -151,7 +151,7 @@ public partial class TableScreen : Control
 
 		GetNode<Label>("%TableName").Text = $"Level {_run.Level}";
 		_levelCount.Text = $"{_run.Level}/{RunEconomy.LevelsPerRun}";
-		GetNode<Label>("%TableTrick").Text = Trick(_run.Rules);
+		GetNode<FeltMarkings>("%FeltMarkings").ShowRules(_run.Rules);
 		GetNode<Label>("%Target").Text = $"{_run.ScoreTarget:N0}";
 		GetNode<Label>("%Reward").Text = $"Clear for ${RunEconomy.ClearPayout} + ${RunEconomy.UnusedHandBonus} a hand";
 
@@ -633,28 +633,6 @@ public partial class TableScreen : Control
 		Settlement.DealerWin => "DEALER WINS",
 		_ => throw new ArgumentOutOfRangeException(nameof(result), result, "Unworded settlement."),
 	};
-
-	/// What the player can read off the table before the first card is dealt.
-	private static string Trick(HouseRules rules)
-	{
-		var notes = new List<string>
-		{
-			rules.DealerHitsSoft17 ? "Dealer hits soft 17" : "Dealer stands on all 17s",
-			$"Blackjack pays {(Mathf.IsEqualApprox((float)rules.BlackjackPayout, 1.5f) ? "3:2" : "even money")}",
-		};
-
-		if (rules.DealerWinsTies)
-		{
-			notes.Add("The dealer takes pushes");
-		}
-
-		if (!rules.SplitAllowed)
-		{
-			notes.Add("No splitting");
-		}
-
-		return string.Join("  -  ", notes);
-	}
 
 	private static float Damp(float rate, float dt) => 1f - Mathf.Exp(-rate * dt);
 }

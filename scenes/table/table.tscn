@@ -13,13 +13,14 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
 [ext_resource type="Resource" path="res://data/card_style_library.tres" id="12_styles"]
 [ext_resource type="AudioStream" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
+[ext_resource type="Script" path="res://scripts/table/FeltMarkings.cs" id="14_marks"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_felt"]
 shader = ExtResource("2_paint")
-shader_parameter/colour_1 = Color(0.043, 0.129, 0.098, 1)
-shader_parameter/colour_2 = Color(0.125, 0.306, 0.231, 1)
-shader_parameter/colour_3 = Color(0.208, 0.431, 0.325, 1)
-shader_parameter/contrast = 1.1
+shader_parameter/colour_1 = Color(0.016, 0.055, 0.043, 1)
+shader_parameter/colour_2 = Color(0.071, 0.212, 0.161, 1)
+shader_parameter/colour_3 = Color(0.157, 0.369, 0.267, 1)
+shader_parameter/contrast = 1.6
 shader_parameter/spin_amount = 0.7
 shader_parameter/spin_speed = 0.45
 shader_parameter/paint_speed = 1.0
@@ -108,14 +109,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TableTrick" type="Label" parent="Rail/Pad/Column"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.68)
-theme_override_font_sizes/font_size = 19
-horizontal_alignment = 1
-autowrap_mode = 3
 
 [node name="TargetRow" type="HBoxContainer" parent="Rail/Pad/Column"]
 layout_mode = 2
@@ -344,6 +337,17 @@ offset_left = 460.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="FeltMarkings" type="Control" parent="Felt"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_marks")
 
 [node name="JokerArea" type="Control" parent="Felt"]
 layout_mode = 1
