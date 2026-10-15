@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/table/JokerRail.cs" id="1_rail"]
+[ext_resource type="Script" path="res://scripts/cards/CardPath.cs" id="2_path"]
+[ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="3_card"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/joker_tooltip.tscn" id="4_tip"]
+
+[sub_resource type="Curve2D" id="Curve2D_rail"]
+resource_local_to_scene = true
+
+[node name="JokerRail" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 856.0
+offset_bottom = 214.0
+mouse_filter = 2
+script = ExtResource("1_rail")
+CardScene = ExtResource("3_card")
+
+[node name="Path" type="Path2D" parent="."]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_rail")
+script = ExtResource("2_path")
+
+[node name="Tags" type="Control" parent="."]
+unique_name_in_owner = true
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Tooltip" parent="." instance=ExtResource("4_tip")]
+unique_name_in_owner = true
+layout_mode = 0

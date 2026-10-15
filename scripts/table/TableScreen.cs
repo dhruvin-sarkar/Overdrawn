@@ -6,6 +6,7 @@ using Godot;
 using Overdrawn.Audio;
 using Overdrawn.Blackjack;
 using Overdrawn.Cards;
+using Overdrawn.Content;
 using Overdrawn.Core;
 using Overdrawn.Run;
 using Overdrawn.Scoring;
@@ -23,6 +24,7 @@ public partial class TableScreen : Control
 	[Export] public PackedScene CardScene { get; set; } = null!;
 	[Export] public PackedScene FanScene { get; set; } = null!;
 	[Export] public CardStyleLibrary CardStyles { get; set; } = null!;
+	[Export] public JokerLibrary Jokers { get; set; } = null!;
 	[Export] public PackedScene OptionsScene { get; set; } = null!;
 
 	[ExportGroup("Pacing")]
@@ -72,6 +74,8 @@ public partial class TableScreen : Control
 	private int _played;
 
 	private HandFan _dealerFan = null!;
+	private JokerRail _rail = null!;
+	private Label _jokerCount = null!;
 	private HBoxContainer _seatRow = null!;
 	private Control _betSpot = null!;
 	private Control _actions = null!;
@@ -98,6 +102,8 @@ public partial class TableScreen : Control
 	public override void _Ready()
 	{
 		_dealerFan = GetNode<HandFan>("%DealerFan");
+		_rail = GetNode<JokerRail>("%JokerRail");
+		_jokerCount = GetNode<Label>("%JokerCount");
 		_seatRow = GetNode<HBoxContainer>("%PlayerSeats");
 		_betSpot = GetNode<Control>("%BetSpot");
 		_actions = GetNode<Control>("%Actions");
@@ -134,7 +140,7 @@ public partial class TableScreen : Control
 
 		_deal.Pressed += OnDeal;
 		GetNode<Button>("%Options").Pressed += () => _overlay.Open(OptionsScene);
-
+		_rail.Moved += (from, to) => _run.MoveJoker(from, to);
 	}
 
 	/// Sits the player down at this level's table. Starting a level is what
@@ -151,6 +157,8 @@ public partial class TableScreen : Control
 		GetNode<Label>("%TableName").Text = $"Level {_run.Level}";
 		_levelCount.Text = $"{_run.Level}/{RunEconomy.LevelsPerRun}";
 		GetNode<FeltMarkings>("%FeltMarkings").ShowRules(_run.Rules);
+		_rail.Fill(_run.Jokers.Select(joker => Jokers.Find(joker.Id)));
+		_jokerCount.Text = $"{_run.Jokers.Count}/{_run.JokerSlots}";
 		GetNode<Label>("%Target").Text = $"{_run.ScoreTarget:N0}";
 		GetNode<Label>("%Reward").Text = $"Clear for ${RunEconomy.ClearPayout} + ${RunEconomy.UnusedHandBonus} a hand";
 
@@ -452,7 +460,11 @@ public partial class TableScreen : Control
 	private async Task PlayStep(ScoreStep step, HandOutcome outcome)
 	{
 		float loud = Magnitude((long)(step.Chips * step.Mult));
-		_outcome.Text = Caption(step.Kind, outcome);
+		_outcome.Text = Caption(step, outcome);
+		if (step.Kind == ScoreStepKind.Joker)
+		{
+			_rail.Fire(step.Slot, step);
+		}
 
 		if (step.AddChips != 0)
 		{
@@ -461,10 +473,12 @@ public partial class TableScreen : Control
 			Sfx.Instance.Play("chips");
 		}
 
-		// Every step the pipeline can produce moves the mult.
-		_mult.Text = $"{step.Mult:0.##}";
-		_multPop = Mathf.Min(1f, _multPop + loud);
-		Sfx.Instance.Play("mult");
+		if (step.AddMult != 0 || step.TimesMult != 1)
+		{
+			_mult.Text = $"{step.Mult:0.##}";
+			_multPop = Mathf.Min(1f, _multPop + loud);
+			Sfx.Instance.Play("mult");
+		}
 
 		ScreenShake.Instance.Kick(Mathf.Lerp(CalmTrauma, LoudTrauma, loud) * BeatShare);
 		CrtPulse.Instance.Pulse(Mathf.Lerp(CalmPulse, LoudPulse, loud) * BeatShare);
@@ -472,12 +486,13 @@ public partial class TableScreen : Control
 	}
 
 	/// What a beat is called while it plays.
-	private static string Caption(ScoreStepKind kind, HandOutcome outcome) => kind switch
+	private string Caption(ScoreStep step, HandOutcome outcome) => step.Kind switch
 	{
 		ScoreStepKind.Base => outcome.Label(),
 		ScoreStepKind.Streak => "Win Streak",
 		ScoreStepKind.DealerBust => "Dealer Bust",
-		_ => throw new ArgumentOutOfRangeException(nameof(kind), kind, "Uncaptioned beat."),
+		ScoreStepKind.Joker => _rail.Joker(step.Slot).DisplayName,
+		_ => throw new ArgumentOutOfRangeException(nameof(step), step.Kind, "Uncaptioned beat."),
 	};
 
 	/// The score the beats have let through: the run's total less every hand of
@@ -587,6 +602,7 @@ public partial class TableScreen : Control
 		}
 
 		_deal.Disabled = _animating || round is not null || _run.LevelCleared || _run.HandsRemaining == 0;
+		_rail.Lock(_animating);
 		_hands.ShowValue($"{_run.HandsRemaining}/{RunEconomy.HandsPerLevel}", Colors.White);
 		_handCount.Text = $"{RunEconomy.HandsPerLevel - _run.HandsRemaining}/{RunEconomy.HandsPerLevel}";
 		int stock = _run.Shoe.Deck.Count + _run.Shoe.Temporary.Count;

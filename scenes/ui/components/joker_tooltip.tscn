@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/components/JokerTooltip.cs" id="1_tip"]
+
+[node name="JokerTooltip" type="PanelContainer"]
+z_index = 100
+custom_minimum_size = Vector2(340, 0)
+mouse_filter = 2
+theme_type_variation = &"MenuPanel"
+script = ExtResource("1_tip")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Name" type="Label" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+
+[node name="Effect" type="RichTextLabel" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="Rarity" type="Label" parent="Column"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"ValuePill"
+horizontal_alignment = 1

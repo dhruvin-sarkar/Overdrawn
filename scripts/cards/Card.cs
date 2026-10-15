@@ -56,6 +56,7 @@ public partial class Card : Node2D
 	public static Card? Held { get; private set; }
 
 	public bool IsDragging => Held == this;
+	public bool IsHovered => _hovered;
 
 	/// Where the face is drawn right now, trailing the home position.
 	public Vector2 FaceGlobalPosition => _facePosition;
@@ -327,14 +328,16 @@ public partial class Card : Node2D
 		}
 	}
 
-	private void Pop()
+	/// A quick swell and wobble, for the pointer arriving or a joker firing. It
+	/// settles at whatever size the card rests at.
+	public void Pop()
 	{
 		_scaleTween?.Kill();
 		_scaleTween = CreateTween();
 		Callable setScale = Callable.From<float>(SetFaceScale);
 		_scaleTween.TweenMethod(setScale, _scale, PopScale, 0.06f)
 			.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.Out);
-		_scaleTween.TweenMethod(setScale, PopScale, HoverScale, 0.14f)
+		_scaleTween.TweenMethod(setScale, PopScale, _hovered ? HoverScale : 1f, 0.14f)
 			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 		Punch(GD.Randf() < 0.5f ? -PopDegrees : PopDegrees);
 	}

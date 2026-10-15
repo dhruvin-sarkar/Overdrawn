@@ -17,7 +17,12 @@ public partial class CardPath : Path2D
 
 	public IReadOnlyList<Card> Cards => _order;
 
-	public override void _Process(double delta)
+	public override void _Process(double delta) => Arrange();
+
+	/// Sets every card on its slot along the curve, once a held card has claimed
+	/// the slot under it. Runs every frame; call it directly to lay out cards
+	/// that have only just been added.
+	public void Arrange()
 	{
 		SyncChildren();
 		if (_order.Count == 0)

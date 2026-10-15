@@ -6,11 +6,13 @@
 [ext_resource type="Theme" uid="uid://8loo6n44xcyi" path="res://theme/overdrawn.tres" id="4_theme"]
 [ext_resource type="Script" uid="uid://bxpkfk8q52os2" path="res://scripts/ui/MenuOverlay.cs" id="5_overlay"]
 [ext_resource type="Script" uid="uid://cilvnhwkcociu" path="res://scripts/ui/MenuButton.cs" id="6_button"]
+[ext_resource type="Resource" path="res://data/joker_library.tres" id="6_jv6v5"]
 [ext_resource type="PackedScene" path="res://scenes/cards/card.tscn" id="7_card"]
 [ext_resource type="PackedScene" path="res://scenes/cards/hand_fan.tscn" id="8_fan"]
 [ext_resource type="PackedScene" path="res://scenes/ui/components/stat_row.tscn" id="9_stat"]
 [ext_resource type="PackedScene" path="res://scenes/ui/components/setting_slider.tscn" id="10_slider"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menus/options_panel.tscn" id="11_options"]
+[ext_resource type="PackedScene" path="res://scenes/table/joker_rail.tscn" id="12_oldaa"]
 [ext_resource type="Resource" uid="uid://btol8wqksn2sd" path="res://data/card_style_library.tres" id="12_styles"]
 [ext_resource type="AudioStream" uid="uid://cthkql0uqsl5w" path="res://assets/audio/music/ambient_organ1.ogg" id="13_music"]
 [ext_resource type="Script" uid="uid://bh6kmjck70fcb" path="res://scripts/table/FeltMarkings.cs" id="14_marks"]
@@ -65,6 +67,7 @@ script = ExtResource("1_table")
 CardScene = ExtResource("7_card")
 FanScene = ExtResource("8_fan")
 CardStyles = ExtResource("12_styles")
+Jokers = ExtResource("6_jv6v5")
 OptionsScene = ExtResource("11_options")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1519095816]
@@ -364,13 +367,9 @@ offset_bottom = 272.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="JokerRow" type="HBoxContainer" parent="Felt/JokerArea" unique_id=1282361429]
+[node name="JokerRail" parent="Felt/JokerArea" unique_id=360291133 instance=ExtResource("12_oldaa")]
 unique_name_in_owner = true
-layout_mode = 1
-offset_right = 856.0
-offset_bottom = 214.0
-mouse_filter = 2
-theme_override_constants/separation = 14
+layout_mode = 0
 
 [node name="JokerCount" type="Label" parent="Felt/JokerArea" unique_id=239912906]
 unique_name_in_owner = true
