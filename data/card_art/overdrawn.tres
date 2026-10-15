@@ -1,0 +1,637 @@
+[gd_resource type="Resource" load_steps=95 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/back_room.png" id="atlas_back_room"]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/joker.png" id="atlas_joker"]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/odds.png" id="atlas_odds"]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/sleight.png" id="atlas_sleight"]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/special.png" id="atlas_special"]
+
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/atlases/voucher.png" id="atlas_voucher"]
+
+[sub_resource type="AtlasTexture" id="back_room_all_in"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_the_fixer"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_stacked_shoe"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(142, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_bad_beat"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(213, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_copycat"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(284, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_under_the_table"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(355, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_the_repeat"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(426, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_whispers"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(497, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_the_tell"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(568, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="back_room_jackpot"]
+atlas = ExtResource("atlas_back_room")
+region = Rect2(639, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_steady_hand"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_ace_high"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_low_roller"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_face_value"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_small_time"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(284, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_careful_player"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(355, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_bold_play"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(426, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_even_money"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(497, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_warm_up"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(568, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_two_of_a_kind"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(639, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_card_counter"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_flush_table"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_split_decision"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_double_trouble"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_insurance_policy"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(284, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_hot_streak"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(355, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_push_profiteer"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(426, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_deep_pockets"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(497, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_quick_hands"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(568, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_streak_shield"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(639, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_bust_insurance"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_cold_deck"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_perfect_streak"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_five_card_charlie_king"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_vault_breaker"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(284, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_whale_watcher"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(355, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_debt_deterrent"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(426, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_marked_deck"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(497, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_suit_loyalty"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(568, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_overtime"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(639, 190, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_perfect_sevens"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_the_house_doesnt_always_win"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_mult_engine"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_bankroll_to_bloodline"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_no_such_thing_as_bust"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(284, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_tens_company"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(355, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_all_in"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(426, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_loaded_table"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(497, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_golden_touch"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(568, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_house_always_loses"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(639, 285, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_fragile_fortune"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_tempered"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_shatterproof"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_double_or_nothing"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_iron_will"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(284, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_vein_of_gold"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(355, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_marked_man"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(426, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_anchor_point"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(497, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_wildcard_theory"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(568, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_two_timer"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(639, 380, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_tag_team"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(0, 475, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_collectors_eye"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(71, 475, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_endless_grind"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(142, 475, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="joker_prestige_engine"]
+atlas = ExtResource("atlas_joker")
+region = Rect2(213, 475, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_low_card"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_steady"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_charlie"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(142, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_twenty_one"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(213, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_blackjack"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(284, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="odds_sevens"]
+atlas = ExtResource("atlas_odds")
+region = Rect2(355, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_dealer"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_pit_boss"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_grifter"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(142, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_mark"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(213, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_sleeved_ace"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(284, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_fold"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(355, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_stacked_deck"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(426, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_cold_read"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(497, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_loaded_dice"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(568, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_the_count"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(639, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_house_edge"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(0, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_chip_runner"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(71, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_clean_slate"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(142, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="sleight_repeat_customer"]
+atlas = ExtResource("atlas_sleight")
+region = Rect2(213, 95, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="special_card_chip_card"]
+atlas = ExtResource("atlas_special")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="special_card_two_face_card"]
+atlas = ExtResource("atlas_special")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="voucher_bigger_tray"]
+atlas = ExtResource("atlas_voucher")
+region = Rect2(0, 0, 71, 95)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="voucher_card_sharp"]
+atlas = ExtResource("atlas_voucher")
+region = Rect2(71, 0, 71, 95)
+filter_clip = true
+
+[resource]
+metadata/schema_version = 1
+metadata/native_size = Vector2i(71, 95)
+metadata/textures = {
+"joker_steady_hand": SubResource("joker_steady_hand"),
+"joker_ace_high": SubResource("joker_ace_high"),
+"joker_low_roller": SubResource("joker_low_roller"),
+"joker_face_value": SubResource("joker_face_value"),
+"joker_small_time": SubResource("joker_small_time"),
+"joker_careful_player": SubResource("joker_careful_player"),
+"joker_bold_play": SubResource("joker_bold_play"),
+"joker_even_money": SubResource("joker_even_money"),
+"joker_warm_up": SubResource("joker_warm_up"),
+"joker_two_of_a_kind": SubResource("joker_two_of_a_kind"),
+"joker_card_counter": SubResource("joker_card_counter"),
+"joker_flush_table": SubResource("joker_flush_table"),
+"joker_split_decision": SubResource("joker_split_decision"),
+"joker_double_trouble": SubResource("joker_double_trouble"),
+"joker_insurance_policy": SubResource("joker_insurance_policy"),
+"joker_hot_streak": SubResource("joker_hot_streak"),
+"joker_push_profiteer": SubResource("joker_push_profiteer"),
+"joker_deep_pockets": SubResource("joker_deep_pockets"),
+"joker_quick_hands": SubResource("joker_quick_hands"),
+"joker_streak_shield": SubResource("joker_streak_shield"),
+"joker_bust_insurance": SubResource("joker_bust_insurance"),
+"joker_cold_deck": SubResource("joker_cold_deck"),
+"joker_perfect_streak": SubResource("joker_perfect_streak"),
+"joker_five_card_charlie_king": SubResource("joker_five_card_charlie_king"),
+"joker_vault_breaker": SubResource("joker_vault_breaker"),
+"joker_whale_watcher": SubResource("joker_whale_watcher"),
+"joker_debt_deterrent": SubResource("joker_debt_deterrent"),
+"joker_marked_deck": SubResource("joker_marked_deck"),
+"joker_suit_loyalty": SubResource("joker_suit_loyalty"),
+"joker_overtime": SubResource("joker_overtime"),
+"joker_perfect_sevens": SubResource("joker_perfect_sevens"),
+"joker_the_house_doesnt_always_win": SubResource("joker_the_house_doesnt_always_win"),
+"joker_mult_engine": SubResource("joker_mult_engine"),
+"joker_bankroll_to_bloodline": SubResource("joker_bankroll_to_bloodline"),
+"joker_no_such_thing_as_bust": SubResource("joker_no_such_thing_as_bust"),
+"joker_tens_company": SubResource("joker_tens_company"),
+"joker_all_in": SubResource("joker_all_in"),
+"joker_loaded_table": SubResource("joker_loaded_table"),
+"joker_golden_touch": SubResource("joker_golden_touch"),
+"joker_house_always_loses": SubResource("joker_house_always_loses"),
+"joker_fragile_fortune": SubResource("joker_fragile_fortune"),
+"joker_tempered": SubResource("joker_tempered"),
+"joker_shatterproof": SubResource("joker_shatterproof"),
+"joker_double_or_nothing": SubResource("joker_double_or_nothing"),
+"joker_iron_will": SubResource("joker_iron_will"),
+"joker_vein_of_gold": SubResource("joker_vein_of_gold"),
+"joker_marked_man": SubResource("joker_marked_man"),
+"joker_anchor_point": SubResource("joker_anchor_point"),
+"joker_wildcard_theory": SubResource("joker_wildcard_theory"),
+"joker_two_timer": SubResource("joker_two_timer"),
+"joker_tag_team": SubResource("joker_tag_team"),
+"joker_collectors_eye": SubResource("joker_collectors_eye"),
+"joker_endless_grind": SubResource("joker_endless_grind"),
+"joker_prestige_engine": SubResource("joker_prestige_engine"),
+"odds_low_card": SubResource("odds_low_card"),
+"odds_steady": SubResource("odds_steady"),
+"odds_charlie": SubResource("odds_charlie"),
+"odds_twenty_one": SubResource("odds_twenty_one"),
+"odds_blackjack": SubResource("odds_blackjack"),
+"odds_sevens": SubResource("odds_sevens"),
+"sleight_the_dealer": SubResource("sleight_the_dealer"),
+"sleight_the_pit_boss": SubResource("sleight_the_pit_boss"),
+"sleight_the_grifter": SubResource("sleight_the_grifter"),
+"sleight_the_mark": SubResource("sleight_the_mark"),
+"sleight_sleeved_ace": SubResource("sleight_sleeved_ace"),
+"sleight_the_fold": SubResource("sleight_the_fold"),
+"sleight_stacked_deck": SubResource("sleight_stacked_deck"),
+"sleight_cold_read": SubResource("sleight_cold_read"),
+"sleight_loaded_dice": SubResource("sleight_loaded_dice"),
+"sleight_the_count": SubResource("sleight_the_count"),
+"sleight_house_edge": SubResource("sleight_house_edge"),
+"sleight_chip_runner": SubResource("sleight_chip_runner"),
+"sleight_clean_slate": SubResource("sleight_clean_slate"),
+"sleight_repeat_customer": SubResource("sleight_repeat_customer"),
+"back_room_all_in": SubResource("back_room_all_in"),
+"back_room_the_fixer": SubResource("back_room_the_fixer"),
+"back_room_stacked_shoe": SubResource("back_room_stacked_shoe"),
+"back_room_bad_beat": SubResource("back_room_bad_beat"),
+"back_room_copycat": SubResource("back_room_copycat"),
+"back_room_under_the_table": SubResource("back_room_under_the_table"),
+"back_room_the_repeat": SubResource("back_room_the_repeat"),
+"back_room_whispers": SubResource("back_room_whispers"),
+"back_room_the_tell": SubResource("back_room_the_tell"),
+"back_room_jackpot": SubResource("back_room_jackpot"),
+"special_card_chip_card": SubResource("special_card_chip_card"),
+"special_card_two_face_card": SubResource("special_card_two_face_card"),
+"voucher_bigger_tray": SubResource("voucher_bigger_tray"),
+"voucher_card_sharp": SubResource("voucher_card_sharp"),
+}
+metadata/details = {
+"joker_steady_hand": {"name": "Steady Hand", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+4 Mult if the played hand has no Aces"},
+"joker_ace_high": {"name": "Ace High", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "Aces played as 11 give +8 Chips"},
+"joker_low_roller": {"name": "Low Roller", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+1 Mult per card valued 6 or under in the played hand"},
+"joker_face_value": {"name": "Face Value", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+10 Chips per face card in the played hand"},
+"joker_small_time": {"name": "Small Time", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+20 Chips flat on every hand"},
+"joker_careful_player": {"name": "Careful Player", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+3 Mult if you stood without ever hitting this hand"},
+"joker_bold_play": {"name": "Bold Play", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+3 Mult if you hit at least twice this hand"},
+"joker_even_money": {"name": "Even Money", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+$2 whenever a hand results in a push"},
+"joker_warm_up": {"name": "Warm Up", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+1 Mult on each of the first 3 hands played per level"},
+"joker_two_of_a_kind": {"name": "Two of a Kind", "kind": "joker", "rarity": "Common", "content_set": "base", "effect": "+15 Chips if your first two cards share the same rank"},
+"joker_card_counter": {"name": "Card Counter", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Permanent +1 Chip scaling each time a 2–6 is played this run (caps at +50)"},
+"joker_flush_table": {"name": "Flush Table", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "+2 Mult per card of the majority suit in the played hand"},
+"joker_split_decision": {"name": "Split Decision", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "If you split this hand, retrigger this Joker's effects on the second half"},
+"joker_double_trouble": {"name": "Double Trouble", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Double-down wins get ×1.5 Mult on top of the doubled chips"},
+"joker_insurance_policy": {"name": "Insurance Policy", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Gain $3 whenever you bust"},
+"joker_hot_streak": {"name": "Hot Streak", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Permanent +1 Mult (doesn't reset) per 3 consecutive wins this run, cap +10"},
+"joker_push_profiteer": {"name": "Push Profiteer", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Pushes score as if they were a win at your current total"},
+"joker_deep_pockets": {"name": "Deep Pockets", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "Interest cap raised by $100"},
+"joker_quick_hands": {"name": "Quick Hands", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "First Table Pack reroll each shop is free"},
+"joker_streak_shield": {"name": "Streak Shield", "kind": "joker", "rarity": "Uncommon", "content_set": "base", "effect": "A loss doesn't break your win-streak Mult the first time each level"},
+"joker_bust_insurance": {"name": "Bust Insurance", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "First bust each level scores as if you'd stood right before busting"},
+"joker_cold_deck": {"name": "Cold Deck", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Removes all face cards from your deck at run start; +5 Mult on every hand for the run"},
+"joker_perfect_streak": {"name": "Perfect Streak", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Win-streak Mult doubles per stack instead of +1, but resets on any push too, not just a loss"},
+"joker_five_card_charlie_king": {"name": "Five Card Charlie King", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "5+ card no-bust hands get +80 Chips, +4 Mult"},
+"joker_vault_breaker": {"name": "Vault Breaker", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Boss \"no doubling\"/\"no splitting\" rules don't apply to you"},
+"joker_whale_watcher": {"name": "Whale Watcher", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "+1 permanent Mult per $150 currently in your bankroll (recalculated live)"},
+"joker_debt_deterrent": {"name": "Debt Deterrent", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Debt no longer compounds — grows by a flat $5 per level instead"},
+"joker_marked_deck": {"name": "Marked Deck", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Permanent Peek on every hand for the rest of the run"},
+"joker_suit_loyalty": {"name": "Suit Loyalty", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "Choose a suit on pickup; +3 Mult per card of that suit for the rest of the run"},
+"joker_overtime": {"name": "Overtime", "kind": "joker", "rarity": "Rare", "content_set": "base", "effect": "+1 extra hand every level"},
+"joker_perfect_sevens": {"name": "Perfect Sevens", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "A hand of exactly 7-7-7 instantly clears the level's Score Target"},
+"joker_the_house_doesnt_always_win": {"name": "The House Doesn't Always Win", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Once per run, a losing hand is instead treated as a push"},
+"joker_mult_engine": {"name": "Mult Engine", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Every Joker positioned to the right of this one has its Mult effects doubled"},
+"joker_bankroll_to_bloodline": {"name": "Bankroll to Bloodline", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "At the start of each level, convert 10% of current Money into permanent Mult"},
+"joker_no_such_thing_as_bust": {"name": "No Such Thing As Bust", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Busting forfeits half your wager instead of all of it, and still scores as a Low Hand"},
+"joker_tens_company": {"name": "Ten's Company", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "10s and face cards can always be split together as a pair, not just matching ranks"},
+"joker_all_in": {"name": "All In", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Once per level, wager your entire bankroll on one hand; a loss leaves you $1 instead of $0"},
+"joker_loaded_table": {"name": "Loaded Table", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Every card in your deck is treated as having the Loaded enhancement"},
+"joker_golden_touch": {"name": "Golden Touch", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "Every card in your deck permanently gains the Golden enhancement"},
+"joker_house_always_loses": {"name": "House Always Loses", "kind": "joker", "rarity": "Legendary", "content_set": "base", "effect": "The active boss's special rule is disabled entirely (level still counts as a boss for scoring)"},
+"joker_fragile_fortune": {"name": "Fragile Fortune", "kind": "joker", "rarity": "Rare", "content_set": "systems_expansion", "effect": "+6 Mult whenever a Glass card is scored (on top of Glass's own ×2 Mult)"},
+"joker_tempered": {"name": "Tempered", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "Glass cards you own have their shatter chance reduced to 1-in-8"},
+"joker_shatterproof": {"name": "Shatterproof", "kind": "joker", "rarity": "Rare", "content_set": "systems_expansion", "effect": "Glass cards never shatter, but their Mult multiplier drops to ×1.5"},
+"joker_double_or_nothing": {"name": "Double or Nothing", "kind": "joker", "rarity": "Rare", "content_set": "systems_expansion", "effect": "Whenever a Glass card shatters, gain $20"},
+"joker_iron_will": {"name": "Iron Will", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "The passive Mult granted by Steel cards in your deck is doubled"},
+"joker_vein_of_gold": {"name": "Vein of Gold", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "Golden-enhanced cards pay double their cash bonus"},
+"joker_marked_man": {"name": "Marked Man", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "Marked cards also reveal the dealer's hole card's exact rank, not just its color"},
+"joker_anchor_point": {"name": "Anchor Point", "kind": "joker", "rarity": "Common", "content_set": "systems_expansion", "effect": "Whenever an Anchor card saves you from a bust, gain +2 Mult that hand"},
+"joker_wildcard_theory": {"name": "Wildcard Theory", "kind": "joker", "rarity": "Rare", "content_set": "systems_expansion", "effect": "Wild cards count as every suit simultaneously for suit-based Joker checks"},
+"joker_two_timer": {"name": "Two-Timer", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "Two-Face cards retrigger any Joker effect tied to their currently-active rank"},
+"joker_tag_team": {"name": "Tag Team", "kind": "joker", "rarity": "Rare", "content_set": "systems_expansion", "effect": "+2 permanent Mult whenever you redeem a Tag"},
+"joker_collectors_eye": {"name": "Collector's Eye", "kind": "joker", "rarity": "Uncommon", "content_set": "systems_expansion", "effect": "Tags you earn are 20% more likely to be Double Tags"},
+"joker_endless_grind": {"name": "Endless Grind", "kind": "joker", "rarity": "Legendary", "content_set": "systems_expansion", "effect": "Every 5 levels survived in Endless Mode, permanently gain +5 Mult"},
+"joker_prestige_engine": {"name": "Prestige Engine", "kind": "joker", "rarity": "Legendary", "content_set": "systems_expansion", "effect": "Completing a full Prestige Cycle (18 levels) doubles your current permanent Mult"},
+"odds_low_card": {"name": "Low Card", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "Low Hand (stand under 17) | +1 Mult, +8 Chips"},
+"odds_steady": {"name": "Steady", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "Hard 17–20 | +2 Mult, +12 Chips"},
+"odds_charlie": {"name": "Charlie", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "Charlie (5+ cards, no bust) | +3 Mult, +25 Chips"},
+"odds_twenty_one": {"name": "Twenty-One", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "21 (3+ cards) | +3 Mult, +30 Chips"},
+"odds_blackjack": {"name": "Blackjack", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "Natural Blackjack | +5 Mult, +60 Chips"},
+"odds_sevens": {"name": "Sevens", "kind": "odds", "rarity": "", "content_set": "consumables_addon", "effect": "21 Sevens (secret; only appears in packs/shop once you've hit a 7-7-7 hand at least once) | +8 Mult, +100 Chips"},
+"sleight_the_dealer": {"name": "The Dealer", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Wild enhancement to 1 selected card"},
+"sleight_the_pit_boss": {"name": "The Pit Boss", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Golden enhancement to 2 selected cards"},
+"sleight_the_grifter": {"name": "The Grifter", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Convert 1 selected card to a random different rank"},
+"sleight_the_mark": {"name": "The Mark", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Convert 1 selected card to a random different suit"},
+"sleight_sleeved_ace": {"name": "Sleeved Ace", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Convert up to 3 selected cards into Aces"},
+"sleight_the_fold": {"name": "The Fold", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Destroy up to 2 selected cards, permanently removing them from your deck"},
+"sleight_stacked_deck": {"name": "Stacked Deck", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Create 1 copy of a selected card, added to your deck"},
+"sleight_cold_read": {"name": "Cold Read", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Anchor enhancement to 1 selected card"},
+"sleight_loaded_dice": {"name": "Loaded Dice", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Loaded enhancement to 1 selected card"},
+"sleight_the_count": {"name": "The Count", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Lucky enhancement to 2 selected cards"},
+"sleight_house_edge": {"name": "House Edge", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Add Cursed enhancement AND Foil edition to 1 selected card (drawback and upside bundled together)"},
+"sleight_chip_runner": {"name": "Chip Runner", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Convert 1 selected card into a Chip Card"},
+"sleight_clean_slate": {"name": "Clean Slate", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Remove all enhancements, editions, and seals from 1 selected card"},
+"sleight_repeat_customer": {"name": "Repeat Customer", "kind": "sleight", "rarity": "", "content_set": "consumables_addon", "effect": "Re-creates the last Sleight or Odds Card you used this run"},
+"back_room_all_in": {"name": "All In", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Destroy 3 random cards in your deck; gain $30"},
+"back_room_the_fixer": {"name": "The Fixer", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Create a random Rare Joker (if you have room), but your Money drops to $0"},
+"back_room_stacked_shoe": {"name": "Stacked Shoe", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Convert every card in your entire deck to a single random suit"},
+"back_room_bad_beat": {"name": "Bad Beat", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Add Polychrome edition to a random Joker, but destroy all your other Jokers"},
+"back_room_copycat": {"name": "Copycat", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Create a copy of a random Joker you own, then destroy all your other Jokers"},
+"back_room_under_the_table": {"name": "Under the Table", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Add a Gold Seal to 1 selected card"},
+"back_room_the_repeat": {"name": "The Repeat", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Add a Red Seal to 1 selected card"},
+"back_room_whispers": {"name": "Whispers", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Add a Blue Seal to 1 selected card"},
+"back_room_the_tell": {"name": "The Tell", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Add a Purple Seal to 1 selected card"},
+"back_room_jackpot": {"name": "Jackpot", "kind": "back_room", "rarity": "", "content_set": "consumables_addon", "effect": "Instantly level up every Odds Card category by 1 — including ones you haven't discovered yet — with no drawback at all"},
+"special_card_chip_card": {"name": "Chip Card", "kind": "special", "rarity": "", "content_set": "base", "effect": "No rank or suit — never affects your 21 total, but adds flat Score whenever included in a scored hand"},
+"special_card_two_face_card": {"name": "Two-Face Card", "kind": "special", "rarity": "", "content_set": "base", "effect": "Enhancement letting the card act as either of two ranks, whichever is more favorable — stacks with Wild for degenerate combos"},
+"voucher_bigger_tray": {"name": "Bigger Tray", "kind": "voucher", "rarity": "", "content_set": "consumables_addon", "effect": "+1 Consumable Slot"},
+"voucher_card_sharp": {"name": "Card Sharp", "kind": "voucher", "rarity": "", "content_set": "consumables_addon", "effect": "Sleight, Odds, and Back Room Cards appear twice as often in the shop"},
+}

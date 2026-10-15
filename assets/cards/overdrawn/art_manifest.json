@@ -1,0 +1,1604 @@
+{
+  "schema_version": 1,
+  "native_size": [
+    71,
+    95
+  ],
+  "scope": "Illustration assets; documented card abilities are not implemented by this pack.",
+  "count": 88,
+  "expected_count": 90,
+  "counts": {
+    "joker": 54,
+    "odds": 6,
+    "sleight": 14,
+    "back_room": 10,
+    "special": 2,
+    "voucher": 2
+  },
+  "cards": [
+    {
+      "id": "joker_steady_hand",
+      "name": "Steady Hand",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+4 Mult if the played hand has no Aces",
+      "asset_path": "assets/cards/overdrawn/joker/joker_steady_hand.png",
+      "rarity": "Common",
+      "opaque_colors": 24,
+      "sha256": "0e3290dd4a2d853d52fb881ef4028650bd8ed377916748e8f3f77b869a575e2e",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_ace_high",
+      "name": "Ace High",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Aces played as 11 give +8 Chips",
+      "asset_path": "assets/cards/overdrawn/joker/joker_ace_high.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "71fd5e8d1d50f0b787e057a43352f78e14a7c1d9b3f5c0e29e12a77416c126ad",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_low_roller",
+      "name": "Low Roller",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+1 Mult per card valued 6 or under in the played hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_low_roller.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "03d34d0b44ff08f61d9a9f488e48f47aff3200dee5ca56a2f3484cd5796c46a6",
+      "atlas_region": [
+        142,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_face_value",
+      "name": "Face Value",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+10 Chips per face card in the played hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_face_value.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "649eabde9c50bbc9bd327cf01a56298fa22cac4fbee0e81b6b255fee14d13318",
+      "atlas_region": [
+        213,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_small_time",
+      "name": "Small Time",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+20 Chips flat on every hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_small_time.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "60d90a3c0b4dad3646fa643a88b0206be1bd73bca9801ba9de13a0d44a7efd72",
+      "atlas_region": [
+        284,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_careful_player",
+      "name": "Careful Player",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+3 Mult if you stood without ever hitting this hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_careful_player.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "d6b77ed4dbdc474dd10e3838d05cfb4adec3dca8aa6838e8b891a807a21aecd0",
+      "atlas_region": [
+        355,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_bold_play",
+      "name": "Bold Play",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+3 Mult if you hit at least twice this hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_bold_play.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "4ac343c375a9f54245c59b8c116858f61e66e71bbc8d6337737862bee43a836b",
+      "atlas_region": [
+        426,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_even_money",
+      "name": "Even Money",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+$2 whenever a hand results in a push",
+      "asset_path": "assets/cards/overdrawn/joker/joker_even_money.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "86d4b9cdd79e2a0027926109e825ed13e35e51fd2312df32c8f0e9869579f0be",
+      "atlas_region": [
+        497,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_warm_up",
+      "name": "Warm Up",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+1 Mult on each of the first 3 hands played per level",
+      "asset_path": "assets/cards/overdrawn/joker/joker_warm_up.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "454914cd8d884a02864afb68fb7dc8ed2de15f625c594da3c6223e1f72286773",
+      "atlas_region": [
+        568,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_two_of_a_kind",
+      "name": "Two of a Kind",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+15 Chips if your first two cards share the same rank",
+      "asset_path": "assets/cards/overdrawn/joker/joker_two_of_a_kind.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "5894a54b314e64a5f9af9b1d324ca8ecf0a11c1b952fa519e83728d900ae20a0",
+      "atlas_region": [
+        639,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_card_counter",
+      "name": "Card Counter",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Permanent +1 Chip scaling each time a 2–6 is played this run (caps at +50)",
+      "asset_path": "assets/cards/overdrawn/joker/joker_card_counter.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "f85adcd9ce2aeb3bf21291a24adfe22862c0d6c6525ac22cd69cc4f35b6ae5c1",
+      "atlas_region": [
+        0,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_flush_table",
+      "name": "Flush Table",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+2 Mult per card of the majority suit in the played hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_flush_table.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "bbe63a808833c26451d4c519250f587ce890865c3ed9cd3a5da1383af4db4110",
+      "atlas_region": [
+        71,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_split_decision",
+      "name": "Split Decision",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "If you split this hand, retrigger this Joker's effects on the second half",
+      "asset_path": "assets/cards/overdrawn/joker/joker_split_decision.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "674b1eb0c2adedfb15edf9f1cf335c677985167a672860bff936318df54268cc",
+      "atlas_region": [
+        142,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_double_trouble",
+      "name": "Double Trouble",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Double-down wins get ×1.5 Mult on top of the doubled chips",
+      "asset_path": "assets/cards/overdrawn/joker/joker_double_trouble.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "201e3a4e6905f78fb05343cabf16f5a9f6b023038e1a6d0ba24a0dc0b8ae489f",
+      "atlas_region": [
+        213,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_insurance_policy",
+      "name": "Insurance Policy",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Gain $3 whenever you bust",
+      "asset_path": "assets/cards/overdrawn/joker/joker_insurance_policy.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "49d755b3475db4bf3c9bdae20b0f2b1c6be410a12dbcd49e17608f3c5197dba3",
+      "atlas_region": [
+        284,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_hot_streak",
+      "name": "Hot Streak",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Permanent +1 Mult (doesn't reset) per 3 consecutive wins this run, cap +10",
+      "asset_path": "assets/cards/overdrawn/joker/joker_hot_streak.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "c914732f33623bff367ca31c3b4ae243f92817d9a0bcf97a4a7db449cb5c48fa",
+      "atlas_region": [
+        355,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_push_profiteer",
+      "name": "Push Profiteer",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Pushes score as if they were a win at your current total",
+      "asset_path": "assets/cards/overdrawn/joker/joker_push_profiteer.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "38fcf4cdddf0d1ee6f5dddc6a1514ad541ab6b10134a615a317e50d0ef532c9c",
+      "atlas_region": [
+        426,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_deep_pockets",
+      "name": "Deep Pockets",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Interest cap raised by $100",
+      "asset_path": "assets/cards/overdrawn/joker/joker_deep_pockets.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "437bc7b2ca58b83062fa0f44b645d7b3741f6cae74176e846dd04a089589f99f",
+      "atlas_region": [
+        497,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_quick_hands",
+      "name": "Quick Hands",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "First Table Pack reroll each shop is free",
+      "asset_path": "assets/cards/overdrawn/joker/joker_quick_hands.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "8f0fa7e3b5c93bac012c7c72394b0576c82646d7b960f63c4d95bfe09ba24c0e",
+      "atlas_region": [
+        568,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_streak_shield",
+      "name": "Streak Shield",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "A loss doesn't break your win-streak Mult the first time each level",
+      "asset_path": "assets/cards/overdrawn/joker/joker_streak_shield.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "c840ef8beee61898d72cd1f08999e0a1f5c5cc6bd65a7c5c913429c07066e237",
+      "atlas_region": [
+        639,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_bust_insurance",
+      "name": "Bust Insurance",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "First bust each level scores as if you'd stood right before busting",
+      "asset_path": "assets/cards/overdrawn/joker/joker_bust_insurance.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "ecc08fad7ee3b985f44ab2dbf860cf9712b91ad6fe8bce36f951a35a581d5fb8",
+      "atlas_region": [
+        0,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_cold_deck",
+      "name": "Cold Deck",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Removes all face cards from your deck at run start; +5 Mult on every hand for the run",
+      "asset_path": "assets/cards/overdrawn/joker/joker_cold_deck.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "f198ffcae2c43f7f6261597d9130a09c92b7490f69160c04df63668b84b45c75",
+      "atlas_region": [
+        71,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_perfect_streak",
+      "name": "Perfect Streak",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Win-streak Mult doubles per stack instead of +1, but resets on any push too, not just a loss",
+      "asset_path": "assets/cards/overdrawn/joker/joker_perfect_streak.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "bb2858d6e40154bd6428e1c107276341bd18872c3826912a9dd527ddd02c932d",
+      "atlas_region": [
+        142,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_five_card_charlie_king",
+      "name": "Five Card Charlie King",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "5+ card no-bust hands get +80 Chips, +4 Mult",
+      "asset_path": "assets/cards/overdrawn/joker/joker_five_card_charlie_king.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "51feea9b547202d74b756e0f65c1aaff8a9bf4500c4fd9fd3d892514e97804df",
+      "atlas_region": [
+        213,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_vault_breaker",
+      "name": "Vault Breaker",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Boss \"no doubling\"/\"no splitting\" rules don't apply to you",
+      "asset_path": "assets/cards/overdrawn/joker/joker_vault_breaker.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "4e13922f57736f420a4c3294abe033dac3a130979a15493ba7d63c80870dd53b",
+      "atlas_region": [
+        284,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_whale_watcher",
+      "name": "Whale Watcher",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+1 permanent Mult per $150 currently in your bankroll (recalculated live)",
+      "asset_path": "assets/cards/overdrawn/joker/joker_whale_watcher.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "05eb338bc140e2e94dfc6aa8a036280bd2f67e2f7a432c570f81fdaee53b5f1f",
+      "atlas_region": [
+        355,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_debt_deterrent",
+      "name": "Debt Deterrent",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Debt no longer compounds — grows by a flat $5 per level instead",
+      "asset_path": "assets/cards/overdrawn/joker/joker_debt_deterrent.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "eb7aa5fb181fca5d42e789139712d0dd27805b44899b8522e2fa746a609b8e12",
+      "atlas_region": [
+        426,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_marked_deck",
+      "name": "Marked Deck",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Permanent Peek on every hand for the rest of the run",
+      "asset_path": "assets/cards/overdrawn/joker/joker_marked_deck.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "14c88525287b9c26e6d25548677bc3a59e33dbb1ae4bb8c809fc85ff2451cf76",
+      "atlas_region": [
+        497,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_suit_loyalty",
+      "name": "Suit Loyalty",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Choose a suit on pickup; +3 Mult per card of that suit for the rest of the run",
+      "asset_path": "assets/cards/overdrawn/joker/joker_suit_loyalty.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "1f01a69ff34c6ad93c2f7867726578a05ad66fc2c81d4694307d36efd8b68233",
+      "atlas_region": [
+        568,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_overtime",
+      "name": "Overtime",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "+1 extra hand every level",
+      "asset_path": "assets/cards/overdrawn/joker/joker_overtime.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "0cff2546ec74811848b2434af746be76acb63635b7669f665bfb969e440e03da",
+      "atlas_region": [
+        639,
+        190,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_perfect_sevens",
+      "name": "Perfect Sevens",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "A hand of exactly 7-7-7 instantly clears the level's Score Target",
+      "asset_path": "assets/cards/overdrawn/joker/joker_perfect_sevens.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "65313874faa1665e23de1965122721f87baf2287cc753bd3d3f6a1770af1d5fb",
+      "atlas_region": [
+        0,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_the_house_doesnt_always_win",
+      "name": "The House Doesn't Always Win",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Once per run, a losing hand is instead treated as a push",
+      "asset_path": "assets/cards/overdrawn/joker/joker_the_house_doesnt_always_win.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "eac303963ba36ce5518cbabadf5407393d95ae07b4432811e2ca2b43ea89711a",
+      "atlas_region": [
+        71,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_mult_engine",
+      "name": "Mult Engine",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Every Joker positioned to the right of this one has its Mult effects doubled",
+      "asset_path": "assets/cards/overdrawn/joker/joker_mult_engine.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "46144495c3d9148750af146fcd0edcfc955f99a56d223c6a8573fb92a9823b8d",
+      "atlas_region": [
+        142,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_bankroll_to_bloodline",
+      "name": "Bankroll to Bloodline",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "At the start of each level, convert 10% of current Money into permanent Mult",
+      "asset_path": "assets/cards/overdrawn/joker/joker_bankroll_to_bloodline.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "ab3669ab31d0a1668b359e2cf0fc01730ba376ea6a55d018a74c0060c8116fdc",
+      "atlas_region": [
+        213,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_no_such_thing_as_bust",
+      "name": "No Such Thing As Bust",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Busting forfeits half your wager instead of all of it, and still scores as a Low Hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_no_such_thing_as_bust.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "1fac3a9ea1a7a702d554eb5ffa4866f92df75a8ff72cd4721291b840dde3c673",
+      "atlas_region": [
+        284,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_tens_company",
+      "name": "Ten's Company",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "10s and face cards can always be split together as a pair, not just matching ranks",
+      "asset_path": "assets/cards/overdrawn/joker/joker_tens_company.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "f5953fa3169b3d189f001deb4927a7bd113d5e3c4e5f3f6bf90509b6f4b2889b",
+      "atlas_region": [
+        355,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_all_in",
+      "name": "All In",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Once per level, wager your entire bankroll on one hand; a loss leaves you $1 instead of $0",
+      "asset_path": "assets/cards/overdrawn/joker/joker_all_in.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "aa09c50b19bad50b575c234e2616f9659922566eb1108af55296d12d6ee1f5e7",
+      "atlas_region": [
+        426,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_loaded_table",
+      "name": "Loaded Table",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Every card in your deck is treated as having the Loaded enhancement",
+      "asset_path": "assets/cards/overdrawn/joker/joker_loaded_table.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "32623b69b655b65c015231fc5292d59516f2e9187296044822a71f3800f8914f",
+      "atlas_region": [
+        497,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_golden_touch",
+      "name": "Golden Touch",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "Every card in your deck permanently gains the Golden enhancement",
+      "asset_path": "assets/cards/overdrawn/joker/joker_golden_touch.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "631eef6bdb0a78a951e395bf0cf72116c3811918f20b441efb80e49d417fa399",
+      "atlas_region": [
+        568,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_house_always_loses",
+      "name": "House Always Loses",
+      "kind": "joker",
+      "content_set": "base",
+      "effect": "The active boss's special rule is disabled entirely (level still counts as a boss for scoring)",
+      "asset_path": "assets/cards/overdrawn/joker/joker_house_always_loses.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "f865e340715569a6ca9941814f9993587e4b96e05325cb52ab6577de9a164f78",
+      "atlas_region": [
+        639,
+        285,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_fragile_fortune",
+      "name": "Fragile Fortune",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "+6 Mult whenever a Glass card is scored (on top of Glass's own ×2 Mult)",
+      "asset_path": "assets/cards/overdrawn/joker/joker_fragile_fortune.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "f8e33f6a680a9f6ceb6f10c8510e5f3d620e202784aa64f85db88cd263a5ecbd",
+      "atlas_region": [
+        0,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_tempered",
+      "name": "Tempered",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Glass cards you own have their shatter chance reduced to 1-in-8",
+      "asset_path": "assets/cards/overdrawn/joker/joker_tempered.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "028667375820832f5d1b68de2be5ee34ed22e7c55dbed071eea04be2234dc918",
+      "atlas_region": [
+        71,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_shatterproof",
+      "name": "Shatterproof",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Glass cards never shatter, but their Mult multiplier drops to ×1.5",
+      "asset_path": "assets/cards/overdrawn/joker/joker_shatterproof.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "66fd0d11b3f6dd7ee21e60371d74fdbd0067e8f8ef7763f7c83deafa1147f985",
+      "atlas_region": [
+        142,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_double_or_nothing",
+      "name": "Double or Nothing",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Whenever a Glass card shatters, gain $20",
+      "asset_path": "assets/cards/overdrawn/joker/joker_double_or_nothing.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "a8666edfde7fabb1c2dfdda176e1d1d625af95ab7a593ef9f9657b1af933ce78",
+      "atlas_region": [
+        213,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_iron_will",
+      "name": "Iron Will",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "The passive Mult granted by Steel cards in your deck is doubled",
+      "asset_path": "assets/cards/overdrawn/joker/joker_iron_will.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "454208d0169da237e9c3ea4926fdc692f8bef65de982f7271a9e3cbfe246ac58",
+      "atlas_region": [
+        284,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_vein_of_gold",
+      "name": "Vein of Gold",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Golden-enhanced cards pay double their cash bonus",
+      "asset_path": "assets/cards/overdrawn/joker/joker_vein_of_gold.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "d2bb903b49b3a2644551a08cfaab90fc328fc28558bd53d163a0b7a4d4e42496",
+      "atlas_region": [
+        355,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_marked_man",
+      "name": "Marked Man",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Marked cards also reveal the dealer's hole card's exact rank, not just its color",
+      "asset_path": "assets/cards/overdrawn/joker/joker_marked_man.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "982dcdeef9d08ccd3a9ed2620f48cffe33e51e42b1891adaca85aa44d2233601",
+      "atlas_region": [
+        426,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_anchor_point",
+      "name": "Anchor Point",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Whenever an Anchor card saves you from a bust, gain +2 Mult that hand",
+      "asset_path": "assets/cards/overdrawn/joker/joker_anchor_point.png",
+      "rarity": "Common",
+      "opaque_colors": 20,
+      "sha256": "ee54be2f661d0b61e5544f5cdd4eafce8b7f5618ffe4235e81964e25f97687c7",
+      "atlas_region": [
+        497,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_wildcard_theory",
+      "name": "Wildcard Theory",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Wild cards count as every suit simultaneously for suit-based Joker checks",
+      "asset_path": "assets/cards/overdrawn/joker/joker_wildcard_theory.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "60b3b29d460edded4874736c4097732cd16e0fc0ebd261751f165e8591e70986",
+      "atlas_region": [
+        568,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_two_timer",
+      "name": "Two-Timer",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Two-Face cards retrigger any Joker effect tied to their currently-active rank",
+      "asset_path": "assets/cards/overdrawn/joker/joker_two_timer.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "a22834646e6ad65c104ae8246059096f06611836cae2d48e1ec7988f9490cbf3",
+      "atlas_region": [
+        639,
+        380,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_tag_team",
+      "name": "Tag Team",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "+2 permanent Mult whenever you redeem a Tag",
+      "asset_path": "assets/cards/overdrawn/joker/joker_tag_team.png",
+      "rarity": "Rare",
+      "opaque_colors": 20,
+      "sha256": "b80bc9ed2d8ca012282715342e3430171d04f5998a31eac172f41110aa7c1478",
+      "atlas_region": [
+        0,
+        475,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_collectors_eye",
+      "name": "Collector's Eye",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Tags you earn are 20% more likely to be Double Tags",
+      "asset_path": "assets/cards/overdrawn/joker/joker_collectors_eye.png",
+      "rarity": "Uncommon",
+      "opaque_colors": 20,
+      "sha256": "8f5cdf39c283bf9f09bf33a5bc5aecb8d2c15cc7b4c41baacf4646683a695ef6",
+      "atlas_region": [
+        71,
+        475,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_endless_grind",
+      "name": "Endless Grind",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Every 5 levels survived in Endless Mode, permanently gain +5 Mult",
+      "asset_path": "assets/cards/overdrawn/joker/joker_endless_grind.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "e9f56eadcd0d40ec929b555e1e63acdbef2b1ebb5f021a1b9d785e38aebad922",
+      "atlas_region": [
+        142,
+        475,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "joker_prestige_engine",
+      "name": "Prestige Engine",
+      "kind": "joker",
+      "content_set": "systems_expansion",
+      "effect": "Completing a full Prestige Cycle (18 levels) doubles your current permanent Mult",
+      "asset_path": "assets/cards/overdrawn/joker/joker_prestige_engine.png",
+      "rarity": "Legendary",
+      "opaque_colors": 24,
+      "sha256": "251648789ac67b8c22cb110f1a1fe367412744b08d63d6e6a690ddb7191eeaad",
+      "atlas_region": [
+        213,
+        475,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/joker.png"
+    },
+    {
+      "id": "odds_low_card",
+      "name": "Low Card",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "Low Hand (stand under 17) | +1 Mult, +8 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_low_card.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "40ad94d9a9e05c78ff0c4efd176c6469690ad1ab44c37762ff96b8c59b98d36c",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "odds_steady",
+      "name": "Steady",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "Hard 17–20 | +2 Mult, +12 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_steady.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "1763e7a9214bef5ca7c2652a34c4c49dd2a4ef8bb02db45f89b51cae2726d003",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "odds_charlie",
+      "name": "Charlie",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "Charlie (5+ cards, no bust) | +3 Mult, +25 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_charlie.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "ddb2e67209d31e0bf882c13a09624756e5cc0ff54593a46fed327d592a300579",
+      "atlas_region": [
+        142,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "odds_twenty_one",
+      "name": "Twenty-One",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "21 (3+ cards) | +3 Mult, +30 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_twenty_one.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "da1dba82c7ff698776df5c6160afa9009065a2e89da9610baf1ebe8438d0b48e",
+      "atlas_region": [
+        213,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "odds_blackjack",
+      "name": "Blackjack",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "Natural Blackjack | +5 Mult, +60 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_blackjack.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "3f0616de1bfc07900e414ac02213996a5ed956c371d3124545d3d142923ebf8c",
+      "atlas_region": [
+        284,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "odds_sevens",
+      "name": "Sevens",
+      "kind": "odds",
+      "content_set": "consumables_addon",
+      "effect": "21 Sevens (secret; only appears in packs/shop once you've hit a 7-7-7 hand at least once) | +8 Mult, +100 Chips",
+      "asset_path": "assets/cards/overdrawn/odds/odds_sevens.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "adc70f3e0c8be700dd12c96002721c292c5a40b9dc21ea943496ace9e3413424",
+      "atlas_region": [
+        355,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/odds.png"
+    },
+    {
+      "id": "sleight_the_dealer",
+      "name": "The Dealer",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Wild enhancement to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_dealer.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "b853fcea3b6e35a4070166cdedb26ae72464f5418dfd85241adc5d78e9ef6387",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_the_pit_boss",
+      "name": "The Pit Boss",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Golden enhancement to 2 selected cards",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_pit_boss.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "34ccf96a495dd8d505f1c09dfd70c722f1baf4302cec4819c9b0443cf03b5f50",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_the_grifter",
+      "name": "The Grifter",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Convert 1 selected card to a random different rank",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_grifter.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "d8b404b939e8f03561c2536b82faad259202c5dd8f752a90777eb0c50f28a825",
+      "atlas_region": [
+        142,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_the_mark",
+      "name": "The Mark",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Convert 1 selected card to a random different suit",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_mark.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "683f6f1c7c2bdd177129bebbad0af170bb54e9eba1e236d462a1d919b060de89",
+      "atlas_region": [
+        213,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_sleeved_ace",
+      "name": "Sleeved Ace",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Convert up to 3 selected cards into Aces",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_sleeved_ace.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "60d0670af6b71377d5d79cf3b21380c560163bf378a0ef7429f95c085539be48",
+      "atlas_region": [
+        284,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_the_fold",
+      "name": "The Fold",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Destroy up to 2 selected cards, permanently removing them from your deck",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_fold.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "0933b9f9c684fe2ffb552a8e503bc4ba6d0935ed8cc39be936c98e09d88b5f12",
+      "atlas_region": [
+        355,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_stacked_deck",
+      "name": "Stacked Deck",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Create 1 copy of a selected card, added to your deck",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_stacked_deck.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "83d62f862c0e3a3f75047fe6604d320d585a8f34facddde799389064f9c421d8",
+      "atlas_region": [
+        426,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_cold_read",
+      "name": "Cold Read",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Anchor enhancement to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_cold_read.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "2cdca6318ae029b6d0c35945efa10f899e32ef0d87631bbe39d695f80f76c202",
+      "atlas_region": [
+        497,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_loaded_dice",
+      "name": "Loaded Dice",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Loaded enhancement to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_loaded_dice.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "4beab2a4a06b1b09d221335bef5b72e71ab28b7f963f1eeba43d50532d7678ed",
+      "atlas_region": [
+        568,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_the_count",
+      "name": "The Count",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Lucky enhancement to 2 selected cards",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_the_count.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "6430bf5cf7e59fe73b6c7b0dcb037eb5cfea80e48c861559935bda88b711bf73",
+      "atlas_region": [
+        639,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_house_edge",
+      "name": "House Edge",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Add Cursed enhancement AND Foil edition to 1 selected card (drawback and upside bundled together)",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_house_edge.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "dfb2e4bed5a5d5cfde6d2ed31695bc6db74ebd5ae830e08a69480bd9764d8d71",
+      "atlas_region": [
+        0,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_chip_runner",
+      "name": "Chip Runner",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Convert 1 selected card into a Chip Card",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_chip_runner.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "45ffbb7d0262e0b32c9225784ca8551a3810cacb88423e4fad4e6ba1400ff74f",
+      "atlas_region": [
+        71,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_clean_slate",
+      "name": "Clean Slate",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Remove all enhancements, editions, and seals from 1 selected card",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_clean_slate.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "a00a447bf2ed705ac8c1bfd7d99c3107886cb319dad136f095b0338ffb8dc646",
+      "atlas_region": [
+        142,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "sleight_repeat_customer",
+      "name": "Repeat Customer",
+      "kind": "sleight",
+      "content_set": "consumables_addon",
+      "effect": "Re-creates the last Sleight or Odds Card you used this run",
+      "asset_path": "assets/cards/overdrawn/sleight/sleight_repeat_customer.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "2fe7be4fc6b19b55c0f62a04fe2b3e7d2af0f842da0ee3d4f6371835d7f7f20d",
+      "atlas_region": [
+        213,
+        95,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/sleight.png"
+    },
+    {
+      "id": "back_room_all_in",
+      "name": "All In",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Destroy 3 random cards in your deck; gain $30",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_all_in.png",
+      "rarity": "",
+      "opaque_colors": 17,
+      "sha256": "2128e1aecd3ed413a6a7ded4979785835ab31914c188dce8c8f619967dfbfb2d",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_the_fixer",
+      "name": "The Fixer",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Create a random Rare Joker (if you have room), but your Money drops to $0",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_the_fixer.png",
+      "rarity": "",
+      "opaque_colors": 18,
+      "sha256": "4f52b558baad38f40e8d7012811325b68c2cd71e48c7f3645be9065aeb7a13b7",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_stacked_shoe",
+      "name": "Stacked Shoe",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Convert every card in your entire deck to a single random suit",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_stacked_shoe.png",
+      "rarity": "",
+      "opaque_colors": 18,
+      "sha256": "0c5e290502922c39d6900cb12fee35cf586fcf1c78cc801a58df821827426088",
+      "atlas_region": [
+        142,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_bad_beat",
+      "name": "Bad Beat",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Add Polychrome edition to a random Joker, but destroy all your other Jokers",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_bad_beat.png",
+      "rarity": "",
+      "opaque_colors": 18,
+      "sha256": "6a4bda645489394956821253a143d7a7cfea3507246a2dd101ddd443ee25d2c4",
+      "atlas_region": [
+        213,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_copycat",
+      "name": "Copycat",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Create a copy of a random Joker you own, then destroy all your other Jokers",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_copycat.png",
+      "rarity": "",
+      "opaque_colors": 17,
+      "sha256": "af770b329179a5247794cf05951710e9474865b644b4fe93720d9242c7479e5e",
+      "atlas_region": [
+        284,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_under_the_table",
+      "name": "Under the Table",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Add a Gold Seal to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_under_the_table.png",
+      "rarity": "",
+      "opaque_colors": 17,
+      "sha256": "5fc83e0514ec58ce27c268b1c037d3067ffac84587fa4f1536b45bb9decc4493",
+      "atlas_region": [
+        355,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_the_repeat",
+      "name": "The Repeat",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Add a Red Seal to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_the_repeat.png",
+      "rarity": "",
+      "opaque_colors": 19,
+      "sha256": "cbba222b1fa943f719b5b954f655ca64597238d71e8969dcafed95161f05c4d2",
+      "atlas_region": [
+        426,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_whispers",
+      "name": "Whispers",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Add a Blue Seal to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_whispers.png",
+      "rarity": "",
+      "opaque_colors": 19,
+      "sha256": "01e00e66c28877033ae07e7b9abecdd0f8bc980ded96e74de516f45d110c78a7",
+      "atlas_region": [
+        497,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_the_tell",
+      "name": "The Tell",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Add a Purple Seal to 1 selected card",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_the_tell.png",
+      "rarity": "",
+      "opaque_colors": 18,
+      "sha256": "437ddc3ee3d2b9e7efc72183c0de8cfe07a8f3a867a674139b326bae495c5c12",
+      "atlas_region": [
+        568,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "back_room_jackpot",
+      "name": "Jackpot",
+      "kind": "back_room",
+      "content_set": "consumables_addon",
+      "effect": "Instantly level up every Odds Card category by 1 — including ones you haven't discovered yet — with no drawback at all",
+      "asset_path": "assets/cards/overdrawn/back_room/back_room_jackpot.png",
+      "rarity": "",
+      "opaque_colors": 18,
+      "sha256": "e5304cd11a71c34c4ff0d82201b4d3fb35e8cac8c2522634e75710cc506c47cf",
+      "atlas_region": [
+        639,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/back_room.png"
+    },
+    {
+      "id": "special_card_chip_card",
+      "name": "Chip Card",
+      "kind": "special",
+      "content_set": "base",
+      "effect": "No rank or suit — never affects your 21 total, but adds flat Score whenever included in a scored hand",
+      "asset_path": "assets/cards/overdrawn/special/special_card_chip_card.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "e82a754c53d87516847a905ba814f727914e92a02fa8bb2e2157dad81a60c28a",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/special.png"
+    },
+    {
+      "id": "special_card_two_face_card",
+      "name": "Two-Face Card",
+      "kind": "special",
+      "content_set": "base",
+      "effect": "Enhancement letting the card act as either of two ranks, whichever is more favorable — stacks with Wild for degenerate combos",
+      "asset_path": "assets/cards/overdrawn/special/special_card_two_face_card.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "e212921f9204f73efb8ea51b3eecb0b8b8bcb215a1048bc309ea62563df24bbd",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/special.png"
+    },
+    {
+      "id": "voucher_bigger_tray",
+      "name": "Bigger Tray",
+      "kind": "voucher",
+      "content_set": "consumables_addon",
+      "effect": "+1 Consumable Slot",
+      "asset_path": "assets/cards/overdrawn/voucher/voucher_bigger_tray.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "ad84e1097f876d43725534273445c6eeedc75d2b909a7238924672dd140e4adc",
+      "atlas_region": [
+        0,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/voucher.png"
+    },
+    {
+      "id": "voucher_card_sharp",
+      "name": "Card Sharp",
+      "kind": "voucher",
+      "content_set": "consumables_addon",
+      "effect": "Sleight, Odds, and Back Room Cards appear twice as often in the shop",
+      "asset_path": "assets/cards/overdrawn/voucher/voucher_card_sharp.png",
+      "rarity": "",
+      "opaque_colors": 20,
+      "sha256": "f6f6899ac63d1b7561739b7c97a30fffc3c0a151b42d0f665749cd9ebe5741c5",
+      "atlas_region": [
+        71,
+        0,
+        71,
+        95
+      ],
+      "atlas_path": "assets/cards/overdrawn/atlases/voucher.png"
+    }
+  ]
+}
