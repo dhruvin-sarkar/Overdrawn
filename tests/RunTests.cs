@@ -235,6 +235,15 @@ public class RunEconomyTests
 		Assert.Equal(37, RunEconomy.GrowDebt(33));
 	}
 
+	[Theory]
+	[InlineData(50, 55)]
+	[InlineData(100, 110)]
+	[InlineData(200, 220)]
+	public void TenPercentOfARoundDebtIsExactlyTenPercent(int debt, int grown)
+	{
+		Assert.Equal(grown, RunEconomy.GrowDebt(debt));
+	}
+
 	[Fact]
 	public void TheCollectorComesOnceDebtPassesThreeTimesTheLoan()
 	{

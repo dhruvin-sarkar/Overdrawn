@@ -27,7 +27,7 @@ public static class RunEconomy
 	public const int InterestCap = 50;
 
 	public const int DebtLoanMultiple = 3;
-	public const double DebtInterest = 0.1;
+	public const int DebtInterestPercent = 10;
 	/// Debt past this multiple of the original loan sends The Collector after you.
 	public const int CollectorMultiple = 3;
 
@@ -63,8 +63,9 @@ public static class RunEconomy
 	public static int LoanFor(int level) => WagerBounds(level).Minimum * DebtLoanMultiple;
 
 	/// Debt grows at the start of every level it is still outstanding, and the
-	/// house rounds the interest up.
-	public static int GrowDebt(int debt) => debt <= 0 ? 0 : (int)Math.Ceiling(debt * (1 + DebtInterest));
+	/// house rounds the interest up. Whole-dollar math, so ten percent of $200
+	/// is $20 and never a cent over.
+	public static int GrowDebt(int debt) => debt <= 0 ? 0 : debt + (((debt * DebtInterestPercent) + 99) / 100);
 
 	public static bool CollectorDue(int debt, int originalLoan) =>
 		originalLoan > 0 && debt > originalLoan * CollectorMultiple;
