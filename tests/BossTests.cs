@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Overdrawn.Blackjack;
 using Overdrawn.Bosses;
 using Overdrawn.Cards;
@@ -120,6 +121,12 @@ public class BossTests
 			Assert.NotEqual(boss.Rules[0].Id, boss.Rules[1].Id);
 			Assert.All(boss.Rules, rule => Assert.Contains(rule.Id, BossRules.SingleRules));
 		}
+	}
+
+	[Fact]
+	public void EveryBossCardOnDiskHasARuleAndEveryRuleHasACard()
+	{
+		Assert.Equal(BossRules.Ids.Order(), Roster.IdsIn("bosses").Order());
 	}
 
 	[Fact]

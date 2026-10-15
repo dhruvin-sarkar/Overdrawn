@@ -1,8 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using Overdrawn.Blackjack;
 using Overdrawn.Cards;
 using Overdrawn.Jokers;
@@ -137,15 +134,8 @@ public class JokerTests
 	[Fact]
 	public void EveryJokerCardOnDiskHasARuleAndEveryRuleHasACard()
 	{
-		string folder = Path.Combine(RepositoryRoot(), "data", "jokers");
-		var ids = Directory.GetFiles(folder, "*.tres")
-			.Select(path => Regex.Match(File.ReadAllText(path), "^Id = \"([a-z_]+)\"$", RegexOptions.Multiline).Groups[1].Value);
-
-		Assert.Equal(JokerRules.Ids.Order(), ids.Order());
+		Assert.Equal(JokerRules.Ids.Order(), Roster.IdsIn("jokers").Order());
 	}
-
-	private static string RepositoryRoot([CallerFilePath] string testFile = "") =>
-		Path.GetDirectoryName(Path.GetDirectoryName(testFile))!;
 
 	// The rail.
 

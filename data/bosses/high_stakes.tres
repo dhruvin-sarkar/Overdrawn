@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "high_stakes"
+DisplayName = "High Stakes"
+Rule = "Score Target doubled, but Base Chips also doubled"
+Color = Color(1, 0.416, 0.165, 1)

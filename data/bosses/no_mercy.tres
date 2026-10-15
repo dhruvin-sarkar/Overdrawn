@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "no_mercy"
+DisplayName = "No Mercy"
+Rule = "Combines two other boss rules at random"
+Color = Color(0.639, 0.086, 0.169, 1)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "cold_shoulder"
+DisplayName = "Cold Shoulder"
+Rule = "Shoe for this level has no Aces"
+Color = Color(0.549, 0.847, 0.949, 1)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "the_twins"
+DisplayName = "The Twins"
+Rule = "No splitting this level"
+Color = Color(0.816, 0.392, 0.722, 1)

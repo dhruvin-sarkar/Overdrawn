@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "the_collector"
+DisplayName = "The Collector"
+Rule = "Doubles any outstanding debt immediately; clearing this level wipes all debt"
+Color = Color(0.49, 0.294, 0.816, 1)

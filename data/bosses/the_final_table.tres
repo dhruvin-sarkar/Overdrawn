@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="1_card"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "the_final_table"
+DisplayName = "The Final Table"
+Rule = "Dealer hits soft 17 + peeks + Blackjack pays 1:1, all at once"
+Color = Color(1, 0.839, 0.251, 1)

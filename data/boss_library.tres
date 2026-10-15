@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BossLibrary" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/BossLibrary.cs" id="1_library"]
+[ext_resource type="Script" path="res://scripts/content/BossCard.cs" id="2_card"]
+[ext_resource type="Resource" path="res://data/bosses/the_house.tres" id="3_boss"]
+[ext_resource type="Resource" path="res://data/bosses/ol_sixty_five.tres" id="4_boss"]
+[ext_resource type="Resource" path="res://data/bosses/the_vault.tres" id="5_boss"]
+[ext_resource type="Resource" path="res://data/bosses/the_twins.tres" id="6_boss"]
+[ext_resource type="Resource" path="res://data/bosses/sharp_eyes.tres" id="7_boss"]
+[ext_resource type="Resource" path="res://data/bosses/the_whale.tres" id="8_boss"]
+[ext_resource type="Resource" path="res://data/bosses/high_stakes.tres" id="9_boss"]
+[ext_resource type="Resource" path="res://data/bosses/cold_shoulder.tres" id="10_boss"]
+[ext_resource type="Resource" path="res://data/bosses/the_collector.tres" id="11_boss"]
+[ext_resource type="Resource" path="res://data/bosses/no_mercy.tres" id="12_boss"]
+[ext_resource type="Resource" path="res://data/bosses/the_final_table.tres" id="13_boss"]
+
+[resource]
+script = ExtResource("1_library")
+Bosses = Array[ExtResource("2_card")]([ExtResource("3_boss"), ExtResource("4_boss"), ExtResource("5_boss"), ExtResource("6_boss"), ExtResource("7_boss"), ExtResource("8_boss"), ExtResource("9_boss"), ExtResource("10_boss"), ExtResource("11_boss"), ExtResource("12_boss"), ExtResource("13_boss")])
