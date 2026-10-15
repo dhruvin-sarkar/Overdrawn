@@ -73,15 +73,17 @@ internal static class Deals
 		ScoreCalculator.Score(Played(hand), jokers);
 
 	public static RunState NewRun(int jokerSlots = RunEconomy.BaseJokerSlots) =>
-		RunState.Begin("house_deck", Shoe.StandardDeck(), seed: 7, jokerSlots: jokerSlots);
+		RunState.Begin("house_deck", Shoe.StandardDeck(), seed: 7, DeckTerms.House with { JokerSlots = jokerSlots });
 
 	/// A run whose shoe deals exactly these cards, in this order: player,
 	/// dealer, player, dealer, then the rest from the top.
-	public static RunState Rigged(params Rank[] order)
+	public static RunState Rigged(params Rank[] order) => Rigged(DeckTerms.House, order);
+
+	public static RunState Rigged(DeckTerms terms, params Rank[] order)
 	{
 		List<PlayingCard> deck = Shoe.StandardDeck();
 		deck.AddRange(order.Select(rank => new PlayingCard(Suit.Spades, rank)).Reverse());
-		return RunState.Begin("test", deck, seed: 1);
+		return RunState.Begin("test", deck, seed: 1, terms);
 	}
 
 	/// Deals a hand at the standard wager, plays the moves, then lets the dealer

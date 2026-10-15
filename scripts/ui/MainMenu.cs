@@ -70,7 +70,7 @@ public partial class MainMenu : Control
 	private void StartRun(string startingDeckId)
 	{
 		StartingDeck deck = StartingDecks.Find(startingDeckId);
-		RunState run = RunState.Begin(deck.Id, deck.BuildDeck(), (int)GD.Randi(), deck.StartingBankrollScale);
+		RunState run = RunState.Begin(deck.Id, deck.BuildDeck(), (int)GD.Randi(), deck.Terms());
 
 		var table = TableScene.Instantiate<TableScreen>();
 		GetTree().Root.AddChild(table);

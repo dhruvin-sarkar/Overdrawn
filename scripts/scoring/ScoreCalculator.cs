@@ -72,6 +72,12 @@ public static class ScoreCalculator
 
 		var steps = new List<ScoreStep> { new(ScoreStepKind.Base, chips, mult, 1, chips, mult) };
 
+		if (hand.DeckMult != 0)
+		{
+			mult += hand.DeckMult;
+			steps.Add(new ScoreStep(ScoreStepKind.Deck, 0, hand.DeckMult, 1, chips, mult));
+		}
+
 		int streak = Math.Min(hand.WinStreak, MaxStreakBonus);
 		foreach (JokerRule joker in jokers)
 		{

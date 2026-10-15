@@ -9,3 +9,5 @@ DisplayName = "High Roller's Deck"
 Effect = "Wager min and max both +50% for the whole run; starting bankroll -30%"
 RemovedRanks = Array[int]([])
 StartingBankrollScale = 0.7
+MinimumWagerScale = 1.5
+MaximumWagerScale = 1.5

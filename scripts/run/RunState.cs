@@ -28,17 +28,20 @@ public sealed class RunState
 	private readonly HashSet<string> _bossesMet = new();
 	private bool _seated;
 
-	private RunState(string startingDeckId, Shoe shoe, Random random, int bankroll, int jokerSlots)
+	private RunState(string startingDeckId, DeckTerms terms, Shoe shoe, Random random)
 	{
 		StartingDeckId = startingDeckId;
+		Terms = terms;
 		Shoe = shoe;
 		Random = random;
-		Bankroll = bankroll;
-		JokerSlots = jokerSlots;
+		Bankroll = (int)Math.Round(BaseStartingBankroll * terms.BankrollScale);
+		JokerSlots = terms.JokerSlots;
 		UpcomingBoss = DrawBoss(RunEconomy.NextBossLevel(Level));
 	}
 
 	public string StartingDeckId { get; }
+	/// What the starting deck does to the run besides its cards.
+	public DeckTerms Terms { get; }
 	public Shoe Shoe { get; }
 	public Random Random { get; }
 
@@ -72,13 +75,13 @@ public sealed class RunState
 		}
 	}
 
-	/// What this level's table takes: the house limits for the level, with the
-	/// boss's minimum where it sets one.
+	/// What this level's table takes: the house limits for the level as the
+	/// starting deck scales them, with the boss's minimum where it sets one.
 	public (int Minimum, int Maximum) TableLimits
 	{
 		get
 		{
-			(int minimum, int maximum) = RunEconomy.WagerBounds(Level);
+			(int minimum, int maximum) = RunEconomy.WagerBounds(Level, Terms.MinimumWagerScale, Terms.MaximumWagerScale);
 			return BossRulesInForce ? (Boss!.MinimumWager(minimum), maximum) : (minimum, maximum);
 		}
 	}
@@ -86,8 +89,10 @@ public sealed class RunState
 	/// How many times over the base Chips count at this level's table.
 	public int BaseChipsScale => BossRulesInForce ? Boss!.BaseChipsScale : 1;
 
-	/// The most interest a level's end can pay.
-	public int InterestCap => RunEconomy.InterestCap + _jokers.Sum(joker => joker.InterestCapBonus);
+	/// The most interest a level's end can pay: the house cap as the starting
+	/// deck scales it, raised by whatever the rail adds.
+	public int InterestCap => (int)Math.Round(RunEconomy.InterestCap * Terms.InterestCapScale)
+		+ _jokers.Sum(joker => joker.InterestCapBonus);
 
 	/// The rail, in slot order. The order is the order the jokers fire in.
 	public IReadOnlyList<JokerRule> Jokers => _jokers;
@@ -116,27 +121,30 @@ public sealed class RunState
 	public bool RunWon => Level == RunEconomy.LevelsPerRun && LevelCleared;
 
 	/// Whether the dealer's hole card is dealt face up at this table.
-	public bool Peek => _jokers.Any(joker => joker.Peek);
+	public bool Peek => Terms.Peek || _jokers.Any(joker => joker.Peek);
 
 	/// <param name="deck">The player's permanent deck, already built to the starting deck's composition.</param>
-	/// <param name="bankrollScale">The starting deck's pull on the opening bankroll.</param>
-	/// <param name="jokerSlots">How many jokers the rail holds to begin with.</param>
-	public static RunState Begin(string startingDeckId, IEnumerable<PlayingCard> deck, int seed,
-		float bankrollScale = 1f, int jokerSlots = RunEconomy.BaseJokerSlots)
+	/// <param name="terms">What the starting deck does besides its cards; the House Deck's when left out.</param>
+	public static RunState Begin(string startingDeckId, IEnumerable<PlayingCard> deck, int seed, DeckTerms? terms = null)
 	{
-		if (bankrollScale <= 0f)
+		terms ??= DeckTerms.House;
+		if (terms.BankrollScale <= 0)
 		{
-			throw new ArgumentOutOfRangeException(nameof(bankrollScale), bankrollScale, "A run cannot open broke.");
+			throw new ArgumentOutOfRangeException(nameof(terms), terms.BankrollScale, "A run cannot open broke.");
 		}
 
-		if (jokerSlots < 1)
+		if (terms.JokerSlots < 1)
 		{
-			throw new ArgumentOutOfRangeException(nameof(jokerSlots), jokerSlots, "A rail needs at least one slot.");
+			throw new ArgumentOutOfRangeException(nameof(terms), terms.JokerSlots, "A rail needs at least one slot.");
+		}
+
+		if (terms.MinimumWagerScale <= 0 || terms.MaximumWagerScale <= 0 || terms.InterestCapScale < 0)
+		{
+			throw new ArgumentOutOfRangeException(nameof(terms), terms, "A deck can scale the table but never zero it.");
 		}
 
 		var random = new Random(seed);
-		return new RunState(startingDeckId, new Shoe(deck, random), random,
-			(int)Math.Round(BaseStartingBankroll * bankrollScale), jokerSlots);
+		return new RunState(startingDeckId, terms, new Shoe(deck, random), random);
 	}
 
 	/// Sits the player down at this level's table, which is when the dealer

@@ -203,7 +203,7 @@ public sealed class Round
 			_run.RecordOutcome(settlement);
 
 			var scoring = new ScoringHand(hand, settlement, seat, _run.WinStreak, _run.HandsPlayed, _run.Bankroll,
-				_run.BaseChipsScale);
+				_run.BaseChipsScale, _run.Terms.Mult);
 			foreach (JokerRule joker in jokers)
 			{
 				joker.OnSettled(scoring);

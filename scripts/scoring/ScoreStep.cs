@@ -6,6 +6,7 @@ namespace Overdrawn.Scoring;
 public enum ScoreStepKind
 {
 	Base,
+	Deck,
 	Streak,
 	DealerBust,
 	Joker,

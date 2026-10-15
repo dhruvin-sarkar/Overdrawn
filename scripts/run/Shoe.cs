@@ -89,6 +89,12 @@ public sealed class Shoe
 		}
 	}
 
+	/// The card the next draw takes. Read it after reaching for the cut card,
+	/// because a shuffle there would change it.
+	public PlayingCard Next => _drawPile.Count > 0
+		? _drawPile[^1]
+		: throw new InvalidOperationException("The shoe is empty; the cut card shuffles it between hands.");
+
 	public PlayingCard Draw()
 	{
 		if (_drawPile.Count == 0)

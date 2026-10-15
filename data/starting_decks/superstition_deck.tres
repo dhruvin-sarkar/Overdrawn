@@ -9,3 +9,4 @@ DisplayName = "Superstition Deck"
 Effect = "All four 4s removed from the deck (48 cards total); +1 permanent Mult"
 RemovedRanks = Array[int]([4])
 StartingBankrollScale = 1.0
+Mult = 1

@@ -9,3 +9,5 @@ DisplayName = "Split Deck"
 Effect = "Start with 2 extra Joker slots; max wager -25% for the whole run"
 RemovedRanks = Array[int]([])
 StartingBankrollScale = 1.0
+ExtraJokerSlots = 2
+MaximumWagerScale = 0.75

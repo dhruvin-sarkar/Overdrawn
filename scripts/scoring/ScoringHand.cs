@@ -12,8 +12,9 @@ namespace Overdrawn.Scoring;
 /// <param name="HandNumber">Which deal of the level this hand belongs to, from one.</param>
 /// <param name="Bankroll">What the player holds once the table has paid, read live.</param>
 /// <param name="BaseChipsScale">How many times over the table counts the base Chips.</param>
+/// <param name="DeckMult">Mult the starting deck adds to every hand that scores.</param>
 public sealed record ScoringHand(Hand Hand, HandSettlement Settlement, int Seat, int WinStreak, int HandNumber, int Bankroll,
-	int BaseChipsScale = 1)
+	int BaseChipsScale = 1, int DeckMult = 0)
 {
 	/// The tier the hand scores in: what the cards say, unless a joker reframes it.
 	public HandOutcome Outcome { get; init; } = ScoreCalculator.Classify(Hand);

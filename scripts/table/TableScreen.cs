@@ -25,6 +25,7 @@ public partial class TableScreen : Control
 	[Export] public PackedScene FanScene { get; set; } = null!;
 	[Export] public CardStyleLibrary CardStyles { get; set; } = null!;
 	[Export] public JokerLibrary Jokers { get; set; } = null!;
+	[Export] public StartingDeckLibrary StartingDecks { get; set; } = null!;
 	[Export] public PackedScene OptionsScene { get; set; } = null!;
 
 	[ExportGroup("Pacing")]
@@ -489,6 +490,7 @@ public partial class TableScreen : Control
 	private string Caption(ScoreStep step, HandOutcome outcome) => step.Kind switch
 	{
 		ScoreStepKind.Base => outcome.Label(),
+		ScoreStepKind.Deck => StartingDecks.Find(_run.StartingDeckId).DisplayName,
 		ScoreStepKind.Streak => "Win Streak",
 		ScoreStepKind.DealerBust => "Dealer Bust",
 		ScoreStepKind.Joker => _rail.Joker(step.Slot).DisplayName,

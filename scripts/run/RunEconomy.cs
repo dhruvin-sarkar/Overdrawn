@@ -54,10 +54,12 @@ public static class RunEconomy
 	public static long NextScoreTarget(long previousTarget, double multiplier) =>
 		(long)Math.Round(previousTarget * multiplier);
 
-	public static (int Minimum, int Maximum) WagerBounds(int level)
+	/// <param name="minimumScale">A starting deck's pull on the minimum, applied before rounding.</param>
+	/// <param name="maximumScale">A starting deck's pull on the maximum, applied before rounding.</param>
+	public static (int Minimum, int Maximum) WagerBounds(int level, double minimumScale = 1, double maximumScale = 1)
 	{
 		double growth = Math.Pow(WagerGrowth, Level(level) - 1);
-		return (ToStep(FirstMinimumWager * growth), ToStep(FirstMaximumWager * growth));
+		return (ToStep(FirstMinimumWager * growth * minimumScale), ToStep(FirstMaximumWager * growth * maximumScale));
 	}
 
 	/// A dollar for every ten held, and the house stops counting at fifty.

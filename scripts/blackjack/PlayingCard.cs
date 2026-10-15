@@ -15,4 +15,7 @@ public readonly record struct PlayingCard(Suit Suit, Rank Rank)
 		Rank.Jack or Rank.Queen or Rank.King => 10,
 		_ => (int)Rank,
 	};
+
+	/// Two to six, the cards a counter counts up. An Ace is never low.
+	public bool IsLow => Rank != Rank.Ace && Value <= 6;
 }

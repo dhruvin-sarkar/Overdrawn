@@ -9,8 +9,8 @@ namespace Overdrawn.Tests;
 
 public class RunStateTests
 {
-	private static RunState Begin(float bankrollScale = 1f, params Rank[] without) =>
-		RunState.Begin("house_deck", Shoe.StandardDeck(without), seed: 7, bankrollScale);
+	private static RunState Begin(double bankrollScale = 1, params Rank[] without) =>
+		RunState.Begin("house_deck", Shoe.StandardDeck(without), seed: 7, DeckTerms.House with { BankrollScale = bankrollScale });
 
 	[Fact]
 	public void ARunOpensAtLevelOneWithEightHandsAndTheFirstTarget()
@@ -36,19 +36,19 @@ public class RunStateTests
 	[Fact]
 	public void ADeckThatTradesMoneyForPowerOpensPoorer()
 	{
-		Assert.Equal(70, Begin(bankrollScale: 0.7f).Bankroll);
+		Assert.Equal(70, Begin(bankrollScale: 0.7).Bankroll);
 	}
 
 	[Fact]
 	public void ARunCannotOpenOnAWorthlessBankroll()
 	{
-		Assert.Throws<ArgumentOutOfRangeException>(() => Begin(bankrollScale: 0f));
+		Assert.Throws<ArgumentOutOfRangeException>(() => Begin(bankrollScale: 0));
 	}
 
 	[Fact]
 	public void APulledRankLeavesTheDeckEntirely()
 	{
-		RunState run = Begin(1f, Rank.Four);
+		RunState run = Begin(1, Rank.Four);
 
 		Assert.Equal(48, run.Shoe.Deck.Count);
 		Assert.DoesNotContain(run.Shoe.Deck, card => card.Rank == Rank.Four);
