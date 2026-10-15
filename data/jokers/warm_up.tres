@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_warm_up.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "warm_up"
+DisplayName = "Warm Up"
+Rarity = 0
+Cost = 25
+Effect = "+1 Mult on each of the first 3 hands played per level"
+Art = ExtResource("2_art")

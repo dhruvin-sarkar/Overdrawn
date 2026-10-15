@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_bust_insurance.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "bust_insurance"
+DisplayName = "Bust Insurance"
+Rarity = 2
+Cost = 65
+Effect = "First bust each level scores as if you'd stood right before busting"
+Art = ExtResource("2_art")

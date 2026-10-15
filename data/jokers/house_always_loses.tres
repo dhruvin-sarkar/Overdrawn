@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_house_always_loses.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "house_always_loses"
+DisplayName = "House Always Loses"
+Rarity = 3
+Cost = 120
+Effect = "The active boss's special rule is disabled entirely (level still counts as a boss for scoring)"
+Art = ExtResource("2_art")

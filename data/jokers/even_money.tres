@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_even_money.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "even_money"
+DisplayName = "Even Money"
+Rarity = 0
+Cost = 25
+Effect = "+$2 whenever a hand results in a push"
+Art = ExtResource("2_art")

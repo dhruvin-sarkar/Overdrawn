@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_insurance_policy.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "insurance_policy"
+DisplayName = "Insurance Policy"
+Rarity = 1
+Cost = 40
+Effect = "Gain $3 whenever you bust"
+Art = ExtResource("2_art")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_mult_engine.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "mult_engine"
+DisplayName = "Mult Engine"
+Rarity = 3
+Cost = 120
+Effect = "Every Joker positioned to the right of this one has its Mult effects doubled"
+Art = ExtResource("2_art")

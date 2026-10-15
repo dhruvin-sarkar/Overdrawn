@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_double_trouble.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "double_trouble"
+DisplayName = "Double Trouble"
+Rarity = 1
+Cost = 40
+Effect = "Double-down wins get ×1.5 Mult on top of the doubled chips"
+Art = ExtResource("2_art")

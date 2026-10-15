@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_low_roller.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "low_roller"
+DisplayName = "Low Roller"
+Rarity = 0
+Cost = 25
+Effect = "+1 Mult per card valued 6 or under in the played hand"
+Art = ExtResource("2_art")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_perfect_streak.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "perfect_streak"
+DisplayName = "Perfect Streak"
+Rarity = 2
+Cost = 65
+Effect = "Win-streak Mult doubles per stack instead of +1, but resets on any push too, not just a loss"
+Art = ExtResource("2_art")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_no_such_thing_as_bust.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "no_such_thing_as_bust"
+DisplayName = "No Such Thing As Bust"
+Rarity = 3
+Cost = 120
+Effect = "Busting forfeits half your wager instead of all of it, and still scores as a Low Hand"
+Art = ExtResource("2_art")

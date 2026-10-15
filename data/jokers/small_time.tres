@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_small_time.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "small_time"
+DisplayName = "Small Time"
+Rarity = 0
+Cost = 25
+Effect = "+20 Chips flat on every hand"
+Art = ExtResource("2_art")

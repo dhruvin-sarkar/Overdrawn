@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_face_value.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "face_value"
+DisplayName = "Face Value"
+Rarity = 0
+Cost = 25
+Effect = "+10 Chips per face card in the played hand"
+Art = ExtResource("2_art")

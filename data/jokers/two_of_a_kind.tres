@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_two_of_a_kind.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "two_of_a_kind"
+DisplayName = "Two of a Kind"
+Rarity = 0
+Cost = 25
+Effect = "+15 Chips if your first two cards share the same rank"
+Art = ExtResource("2_art")

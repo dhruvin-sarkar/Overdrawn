@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="JokerCard" format=3]
+
+[ext_resource type="Script" path="res://scripts/content/JokerCard.cs" id="1_card"]
+[ext_resource type="Texture2D" path="res://assets/cards/overdrawn/joker/joker_suit_loyalty.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_card")
+Id = "suit_loyalty"
+DisplayName = "Suit Loyalty"
+Rarity = 2
+Cost = 65
+Effect = "Choose a suit on pickup; +3 Mult per card of that suit for the rest of the run"
+Art = ExtResource("2_art")
