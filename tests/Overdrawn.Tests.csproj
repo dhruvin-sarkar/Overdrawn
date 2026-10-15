@@ -15,6 +15,7 @@
     <Compile Include="../scripts/cards/Rank.cs" />
     <Compile Include="../scripts/scoring/*.cs" />
     <Compile Include="../scripts/jokers/**/*.cs" />
+    <Compile Include="../scripts/bosses/**/*.cs" />
   </ItemGroup>
 
   <ItemGroup>

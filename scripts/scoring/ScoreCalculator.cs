@@ -68,6 +68,7 @@ public static class ScoreCalculator
 			HandOutcome.Blackjack => (sum + 100, 8d),
 			_ => throw new ArgumentOutOfRangeException(nameof(hand), hand.Outcome, "Unscored outcome."),
 		};
+		chips *= hand.BaseChipsScale;
 
 		var steps = new List<ScoreStep> { new(ScoreStepKind.Base, chips, mult, 1, chips, mult) };
 
