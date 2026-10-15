@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using Overdrawn.Blackjack;
 using Overdrawn.Cards;
+using Overdrawn.Jokers;
 using Overdrawn.Scoring;
 using Xunit;
 
@@ -10,6 +12,7 @@ public class ScoreCalculatorTests
 {
 	private static readonly HandSettlement Won = new(Settlement.PlayerWin, 20);
 	private static readonly HandSettlement DealerBusted = new(Settlement.DealerBust, 20);
+	private static readonly JokerRule[] NoJokers = Array.Empty<JokerRule>();
 
 	private static Hand Dealt(params Rank[] ranks)
 	{
@@ -22,13 +25,16 @@ public class ScoreCalculatorTests
 		return hand;
 	}
 
+	private static ScoreBreakdown Score(Hand hand, HandSettlement settlement, int winStreak = 0) =>
+		ScoreCalculator.Score(new ScoringHand(hand, settlement, 0, winStreak, 1, 100), NoJokers);
+
 	[Fact]
 	public void ABustScoresNothingAtAll()
 	{
 		Hand hand = Dealt(Rank.Ten, Rank.Six);
 		hand.Take(new PlayingCard(Suit.Spades, Rank.Ten));
 
-		ScoreBreakdown score = ScoreCalculator.Score(hand, new HandSettlement(Settlement.PlayerBust, -20), 0);
+		ScoreBreakdown score = Score(hand, new HandSettlement(Settlement.PlayerBust, -20));
 
 		Assert.Equal(HandOutcome.Bust, score.Outcome);
 		Assert.Equal(0, score.Score);
@@ -37,7 +43,7 @@ public class ScoreCalculatorTests
 	[Fact]
 	public void StandingUnderSeventeenScoresTheCardsAlone()
 	{
-		ScoreBreakdown score = ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Six), Won, 0);
+		ScoreBreakdown score = Score(Dealt(Rank.Ten, Rank.Six), Won);
 
 		Assert.Equal(HandOutcome.StandUnder17, score.Outcome);
 		Assert.Equal(16, score.Chips);
@@ -48,7 +54,7 @@ public class ScoreCalculatorTests
 	[Fact]
 	public void StandingSeventeenToTwentyAddsFifteenChipsAndDoublesMult()
 	{
-		ScoreBreakdown score = ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), Won, 0);
+		ScoreBreakdown score = Score(Dealt(Rank.Ten, Rank.Nine), Won);
 
 		Assert.Equal(HandOutcome.Stand17To20, score.Outcome);
 		Assert.Equal(34, score.Chips);
@@ -62,7 +68,7 @@ public class ScoreCalculatorTests
 		Hand hand = Dealt(Rank.Seven, Rank.Four);
 		hand.Take(new PlayingCard(Suit.Spades, Rank.Ten));
 
-		ScoreBreakdown score = ScoreCalculator.Score(hand, Won, 0);
+		ScoreBreakdown score = Score(hand, Won);
 
 		Assert.Equal(HandOutcome.TwentyOne, score.Outcome);
 		Assert.Equal(61, score.Chips);
@@ -73,7 +79,7 @@ public class ScoreCalculatorTests
 	[Fact]
 	public void ANaturalIsWorthFarMoreThanTheSameTotalOnThreeCards()
 	{
-		ScoreBreakdown score = ScoreCalculator.Score(Dealt(Rank.Ace, Rank.King), Won, 0);
+		ScoreBreakdown score = Score(Dealt(Rank.Ace, Rank.King), Won);
 
 		Assert.Equal(HandOutcome.Blackjack, score.Outcome);
 		Assert.Equal(121, score.Chips);
@@ -84,15 +90,21 @@ public class ScoreCalculatorTests
 	[Fact]
 	public void AWinStreakAddsOneMultPerWinAndStopsAtTen()
 	{
-		Assert.Equal(5, ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), Won, 3).Mult);
-		Assert.Equal(12, ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), Won, 10).Mult);
-		Assert.Equal(12, ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), Won, 40).Mult);
+		Assert.Equal(5, Score(Dealt(Rank.Ten, Rank.Nine), Won, 3).Mult);
+		Assert.Equal(12, Score(Dealt(Rank.Ten, Rank.Nine), Won, 10).Mult);
+		Assert.Equal(12, Score(Dealt(Rank.Ten, Rank.Nine), Won, 40).Mult);
+	}
+
+	[Fact]
+	public void AStreakCannotBeNegative()
+	{
+		Assert.Throws<ArgumentOutOfRangeException>(() => Score(Dealt(Rank.Ten, Rank.Nine), Won, -1));
 	}
 
 	[Fact]
 	public void WinningBecauseTheDealerBustedIsWorthAnExtraMult()
 	{
-		Assert.Equal(3, ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), DealerBusted, 0).Mult);
+		Assert.Equal(3, Score(Dealt(Rank.Ten, Rank.Nine), DealerBusted).Mult);
 	}
 
 	[Fact]
@@ -101,13 +113,13 @@ public class ScoreCalculatorTests
 		Hand hand = Dealt(Rank.Ten, Rank.Six);
 		hand.Surrender();
 
-		Assert.Equal(0, ScoreCalculator.Score(hand, new HandSettlement(Settlement.PlayerSurrender, -10), 0).Score);
+		Assert.Equal(0, Score(hand, new HandSettlement(Settlement.PlayerSurrender, -10)).Score);
 	}
 
 	[Fact]
 	public void TheBeatsArriveInTheOrderTheyFiredAndLandOnTheFinalTotal()
 	{
-		ScoreBreakdown score = ScoreCalculator.Score(Dealt(Rank.Ten, Rank.Nine), DealerBusted, 3);
+		ScoreBreakdown score = Score(Dealt(Rank.Ten, Rank.Nine), DealerBusted, 3);
 
 		Assert.Equal(
 			new[] { ScoreStepKind.Base, ScoreStepKind.Streak, ScoreStepKind.DealerBust },
@@ -126,6 +138,6 @@ public class ScoreCalculatorTests
 		Hand hand = Dealt(Rank.Ten, Rank.Six);
 		hand.Take(new PlayingCard(Suit.Spades, Rank.Ten));
 
-		Assert.Empty(ScoreCalculator.Score(hand, new HandSettlement(Settlement.PlayerBust, -20), 0).Steps);
+		Assert.Empty(Score(hand, new HandSettlement(Settlement.PlayerBust, -20)).Steps);
 	}
 }

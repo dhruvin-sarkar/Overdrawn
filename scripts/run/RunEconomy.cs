@@ -11,6 +11,10 @@ public static class RunEconomy
 	public const int LevelsPerRun = 18;
 	public const int HandsPerLevel = 8;
 
+	/// The rail a run opens with, before a deck or a voucher widens it.
+	public const int BaseJokerSlots = 5;
+	public const int BaseConsumableSlots = 2;
+
 	public const long FirstScoreTarget = 300;
 	public const double StandardTargetGrowth = 1.4;
 

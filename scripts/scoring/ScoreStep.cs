@@ -8,6 +8,7 @@ public enum ScoreStepKind
 	Base,
 	Streak,
 	DealerBust,
+	Joker,
 }
 
 /// <summary>
@@ -15,7 +16,9 @@ public enum ScoreStepKind
 /// once it has. The screen plays these in order so the player watches the score
 /// being built rather than being handed a total.
 /// </summary>
-public readonly record struct ScoreStep(ScoreStepKind Kind, int AddChips, double AddMult, int Chips, double Mult)
+/// <param name="Slot">Which joker fired, for a joker beat; -1 for the rest of the pipeline.</param>
+public readonly record struct ScoreStep(
+	ScoreStepKind Kind, int AddChips, double AddMult, double TimesMult, int Chips, double Mult, int Slot = -1)
 {
 	public static readonly IReadOnlyList<ScoreStep> None = new List<ScoreStep>();
 }

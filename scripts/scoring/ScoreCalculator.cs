@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Overdrawn.Blackjack;
+using Overdrawn.Jokers;
 
 namespace Overdrawn.Scoring;
 
@@ -12,7 +13,8 @@ public readonly record struct ScoreBreakdown(
 /// <summary>
 /// Turns a finished hand into Chips x Mult. It reads the hand and the money
 /// settlement after the fact and changes neither: HandResolver has already
-/// decided what actually happened at the table.
+/// decided what actually happened at the table. Jokers fire strictly in slot
+/// order, left to right, and the list handed in is that order.
 /// </summary>
 public static class ScoreCalculator
 {
@@ -38,45 +40,87 @@ public static class ScoreCalculator
 		return hand.Total >= 17 ? HandOutcome.Stand17To20 : HandOutcome.StandUnder17;
 	}
 
-	/// <param name="winStreak">Consecutive wins including this hand, zero if it lost.</param>
-	public static ScoreBreakdown Score(Hand hand, HandSettlement settlement, int winStreak)
+	/// <param name="jokers">The rail in slot order. Each joker fires in turn, left to right.</param>
+	public static ScoreBreakdown Score(ScoringHand hand, IReadOnlyList<JokerRule> jokers)
 	{
-		if (winStreak < 0)
+		if (hand.WinStreak < 0)
 		{
-			throw new ArgumentOutOfRangeException(nameof(winStreak), winStreak, "A streak cannot be negative.");
+			throw new ArgumentOutOfRangeException(nameof(hand), hand.WinStreak, "A streak cannot be negative.");
 		}
 
-		HandOutcome outcome = Classify(hand);
-		if (outcome == HandOutcome.Bust)
+		// A joker may change what the hand is before anything scores it.
+		foreach (JokerRule joker in jokers)
 		{
-			return new ScoreBreakdown(outcome, 0, 0, 0, ScoreStep.None);
+			hand = joker.Reframe(hand);
 		}
 
-		int sum = hand.Total;
-		(int chips, double mult) = outcome switch
+		if (hand.Outcome == HandOutcome.Bust)
+		{
+			return new ScoreBreakdown(HandOutcome.Bust, 0, 0, 0, ScoreStep.None);
+		}
+
+		int sum = hand.Hand.Total;
+		(int chips, double mult) = hand.Outcome switch
 		{
 			HandOutcome.StandUnder17 => (sum, 1d),
 			HandOutcome.Stand17To20 => (sum + 15, 2d),
 			HandOutcome.TwentyOne => (sum + 40, 4d),
 			HandOutcome.Blackjack => (sum + 100, 8d),
-			_ => throw new ArgumentOutOfRangeException(nameof(hand), outcome, "Unscored outcome."),
+			_ => throw new ArgumentOutOfRangeException(nameof(hand), hand.Outcome, "Unscored outcome."),
 		};
 
-		var steps = new List<ScoreStep> { new(ScoreStepKind.Base, chips, mult, chips, mult) };
+		var steps = new List<ScoreStep> { new(ScoreStepKind.Base, chips, mult, 1, chips, mult) };
 
-		int streak = Math.Min(winStreak, MaxStreakBonus);
+		int streak = Math.Min(hand.WinStreak, MaxStreakBonus);
+		foreach (JokerRule joker in jokers)
+		{
+			streak = joker.StreakBonus(hand.WinStreak, streak);
+		}
+
 		if (streak > 0)
 		{
 			mult += streak;
-			steps.Add(new ScoreStep(ScoreStepKind.Streak, 0, streak, chips, mult));
+			steps.Add(new ScoreStep(ScoreStepKind.Streak, 0, streak, 1, chips, mult));
 		}
 
-		if (settlement.DealerBusted)
+		if (hand.Settlement.DealerBusted)
 		{
 			mult += 1;
-			steps.Add(new ScoreStep(ScoreStepKind.DealerBust, 0, 1, chips, mult));
+			steps.Add(new ScoreStep(ScoreStepKind.DealerBust, 0, 1, 1, chips, mult));
 		}
 
-		return new ScoreBreakdown(outcome, chips, mult, (long)(chips * mult), steps);
+		int plays = 1;
+		foreach (JokerRule joker in jokers)
+		{
+			plays += joker.Retriggers(hand);
+		}
+
+		for (int slot = 0; slot < jokers.Count; slot++)
+		{
+			if (jokers[slot].OnScore(hand) is not { } trigger)
+			{
+				continue;
+			}
+
+			// Every other joker gets a say in this beat; where each one sits is
+			// what decides whether it has one.
+			for (int other = 0; other < jokers.Count; other++)
+			{
+				if (other != slot)
+				{
+					trigger = jokers[other].Amplify(trigger, other, slot);
+				}
+			}
+
+			for (int play = 0; play < plays; play++)
+			{
+				chips += trigger.Chips;
+				mult += trigger.Mult;
+				mult *= trigger.Times;
+				steps.Add(new ScoreStep(ScoreStepKind.Joker, trigger.Chips, trigger.Mult, trigger.Times, chips, mult, slot));
+			}
+		}
+
+		return new ScoreBreakdown(hand.Outcome, chips, mult, (long)(chips * mult), steps);
 	}
 }

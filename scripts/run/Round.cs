@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Overdrawn.Blackjack;
+using Overdrawn.Jokers;
 using Overdrawn.Scoring;
 
 namespace Overdrawn.Run;
@@ -46,7 +47,8 @@ public sealed class Round
 	public Hand Active => _hands[ActiveIndex];
 
 	/// The dealer's second card is dealt face down and stays that way until the
-	/// dealer turns it over, which a natural on either side does not skip.
+	/// dealer turns it over, which a natural on either side does not skip. A
+	/// player with Peek sees it from the deal.
 	public bool HoleCardHidden { get; private set; }
 
 	public IReadOnlyList<Move> LegalMoves => Phase == RoundPhase.PlayerTurn ? Moves(Active) : Array.Empty<Move>();
@@ -79,7 +81,7 @@ public sealed class Round
 		_run.Stake(wager);
 		_run.SpendHand();
 		_run.Shoe.BeginHand();
-		HoleCardHidden = true;
+		HoleCardHidden = !_run.Peek;
 
 		var hand = new Hand(wager);
 		_hands.Add(hand);
@@ -160,7 +162,9 @@ public sealed class Round
 	}
 
 	/// Settles every hand for money, then scores every hand, each in the order
-	/// it was dealt.
+	/// it was dealt. The rail has its say at each step, in slot order:
+	/// HandResolver rules on the hand, a joker may overrule it, the money moves,
+	/// the streak is recorded, the rail sees the hand, and then it scores.
 	public void Finish()
 	{
 		if (Phase != RoundPhase.DealerTurn)
@@ -173,15 +177,45 @@ public sealed class Round
 			throw new InvalidOperationException("The dealer still has cards to draw.");
 		}
 
-		foreach (Hand hand in _hands)
+		IReadOnlyList<JokerRule> jokers = _run.Jokers;
+		for (int seat = 0; seat < _hands.Count; seat++)
 		{
+			Hand hand = _hands[seat];
 			HandSettlement settlement = HandResolver.Settle(hand, Dealer, _run.Rules);
+			foreach (JokerRule joker in jokers)
+			{
+				settlement = joker.Overrule(settlement, hand);
+			}
+
 			_run.Collect(hand.Wager + settlement.Payout);
+
+			int cash = 0;
+			foreach (JokerRule joker in jokers)
+			{
+				cash += joker.Payout(hand, settlement);
+			}
+
+			if (cash != 0)
+			{
+				_run.Collect(cash);
+			}
+
 			_run.RecordOutcome(settlement);
 
-			ScoreBreakdown score = ScoreCalculator.Score(hand, settlement, _run.WinStreak);
+			var scoring = new ScoringHand(hand, settlement, seat, _run.WinStreak, _run.HandsPlayed, _run.Bankroll);
+			foreach (JokerRule joker in jokers)
+			{
+				joker.OnSettled(scoring);
+			}
+
+			ScoreBreakdown score = ScoreCalculator.Score(scoring, jokers);
 			_run.AddScore(score.Score);
 			_results.Add(new HandResult(hand, settlement, score));
+
+			if (jokers.Any(joker => joker.ClearsLevel(scoring)))
+			{
+				_run.ClearLevel();
+			}
 		}
 
 		Phase = RoundPhase.Settled;

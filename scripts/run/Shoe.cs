@@ -58,6 +58,11 @@ public sealed class Shoe
 		Shuffle();
 	}
 
+	/// Strikes cards out of the permanent deck for good. The cards already in
+	/// the draw pile stay until the next shuffle, the way a real shoe only
+	/// changes between hands. Returns how many were struck.
+	public int RemoveFromDeck(Func<PlayingCard, bool> match) => _deck.RemoveAll(card => match(card));
+
 	/// Adds a card to the shoe for the rest of this level only, the way a table
 	/// that duplicates dealt cards does.
 	public void AddTemporary(PlayingCard card)
