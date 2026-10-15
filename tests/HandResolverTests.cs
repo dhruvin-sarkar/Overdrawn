@@ -165,7 +165,7 @@ public class HandResolverTests
 		HandSettlement settlement = HandResolver.Settle(hand, Dealt(0, Rank.Ten, Rank.Nine), HouseRules.Standard);
 
 		Assert.Equal(Settlement.PlayerSurrender, settlement.Result);
-		Assert.Equal(-12, settlement.Payout);
+		Assert.Equal(-13, settlement.Payout);
 	}
 
 	[Fact]

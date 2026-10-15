@@ -92,8 +92,7 @@ public static class HandResolver
 	{
 		if (hand.Surrendered)
 		{
-			// Half the wager back, and the house keeps the odd dollar.
-			return new HandSettlement(Settlement.PlayerSurrender, -(hand.Wager / 2));
+			return new HandSettlement(Settlement.PlayerSurrender, ForfeitHalf(hand.Wager));
 		}
 
 		// A bust loses even when the dealer goes on to bust as well — the
@@ -135,6 +134,10 @@ public static class HandResolver
 
 		return Tie(rules, hand.Wager);
 	}
+
+	/// What giving up half a wager costs: half of it, and the house keeps the
+	/// odd dollar.
+	public static int ForfeitHalf(int wager) => -(wager - (wager / 2));
 
 	/// Insurance is a side bet, settled before the hand itself and paying 2:1.
 	public static int SettleInsurance(int bet, Hand dealer, HouseRules rules)
