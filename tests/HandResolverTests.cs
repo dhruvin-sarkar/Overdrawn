@@ -202,14 +202,16 @@ public class HandResolverTests
 	}
 
 	[Fact]
-	public void TenValueCardsOfDifferentRanksSplit()
+	public void TenValueCardsOfDifferentRanksSplitOnlyWhereTheTableSaysSo()
 	{
 		var hand = new Hand(20);
 		hand.Deal(new PlayingCard(Suit.Spades, Rank.King));
 		hand.Deal(new PlayingCard(Suit.Hearts, Rank.Queen));
+		Hand dealer = Dealt(0, Rank.Ten, Rank.Six);
 
+		Assert.DoesNotContain(Move.Split, HandResolver.LegalMoves(hand, dealer, 100, HouseRules.Standard, splitsUsed: 0));
 		Assert.Contains(Move.Split, HandResolver.LegalMoves(
-			hand, Dealt(0, Rank.Ten, Rank.Six), 100, HouseRules.Standard, splitsUsed: 0));
+			hand, dealer, 100, HouseRules.Standard with { SplitAnyTens = true }, splitsUsed: 0));
 	}
 
 	[Fact]

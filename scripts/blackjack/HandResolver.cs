@@ -57,7 +57,9 @@ public static class HandResolver
 			moves.Add(Move.Double);
 		}
 
-		if (opening && hand.IsPair && rules.SplitAllowed && splitsUsed < rules.MaxSplits && bankroll >= hand.Wager)
+		bool pair = opening
+			&& (hand.IsPair || (rules.SplitAnyTens && hand.Cards[0].Value == 10 && hand.Cards[1].Value == 10));
+		if (pair && rules.SplitAllowed && splitsUsed < rules.MaxSplits && bankroll >= hand.Wager)
 		{
 			moves.Add(Move.Split);
 		}

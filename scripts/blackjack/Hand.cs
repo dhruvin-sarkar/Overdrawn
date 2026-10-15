@@ -52,7 +52,9 @@ public sealed class Hand
 	/// A hand is finished once it can take no more cards.
 	public bool IsFinished => Stood || Surrendered || IsBust || Total == 21 || (Doubled && _cards.Count > 2);
 
-	public bool IsPair => _cards.Count == 2 && _cards[0].Value == _cards[1].Value;
+	/// Two cards of one rank. Whether a King and a Queen split as a pair is the
+	/// table's call, so that lives in the house rules rather than here.
+	public bool IsPair => _cards.Count == 2 && _cards[0].Rank == _cards[1].Rank;
 
 	public void Take(PlayingCard card)
 	{
@@ -90,12 +92,13 @@ public sealed class Hand
 		Surrendered = true;
 	}
 
-	/// Takes the second card off a pair so it can start a hand of its own.
+	/// Takes the second card off a pair so it can start a hand of its own. Which
+	/// pairs a table lets split is decided by HandResolver before this is called.
 	public PlayingCard SplitOff()
 	{
-		if (!IsPair)
+		if (_cards.Count != 2 || _cards[0].Value != _cards[1].Value)
 		{
-			throw new InvalidOperationException("Only a pair can be split.");
+			throw new InvalidOperationException("Only two cards of one value can be split.");
 		}
 
 		PlayingCard card = _cards[1];
