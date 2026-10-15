@@ -2,6 +2,14 @@ using System;
 
 namespace Overdrawn.Run;
 
+/// What a cleared level pays, line by line, in the order the cash-out reads it.
+/// <param name="HandsLeft">How many of the level's hands went unplayed.</param>
+/// <param name="HandBonus">What those hands are worth.</param>
+public readonly record struct CashOut(int Clear, int HandsLeft, int HandBonus, int BossBonus, int Interest)
+{
+	public int Total => Clear + HandBonus + BossBonus + Interest;
+}
+
 /// <summary>
 /// Every number a run runs on, straight from the Content Reference: what a
 /// level asks for, what a table lets you wager, and what the house pays.
@@ -38,6 +46,9 @@ public static class RunEconomy
 	/// Every third level is a boss.
 	public static bool IsBossLevel(int level) => Level(level) % 3 == 0;
 
+	/// The first boss level at or after this one.
+	public static int NextBossLevel(int level) => (Level(level) + 2) / 3 * 3;
+
 	/// A level asks for the previous level's target times its own multiplier:
 	/// x1.4 for a standard table, or whatever the boss brings.
 	public static long NextScoreTarget(long previousTarget, double multiplier) =>
@@ -53,18 +64,21 @@ public static class RunEconomy
 	public static int Interest(int bankroll, int cap = InterestCap) =>
 		Math.Min(Math.Max(bankroll, 0) / DollarsPerInterestDollar, cap);
 
-	public static int LevelPayout(int unusedHands, bool boss)
+	/// The house pays for the clear and for every hand left unplayed, a boss
+	/// pays its bonus on top, and the money held as the level ends earns interest.
+	public static CashOut CashOutFor(int handsLeft, bool boss, int bankroll, int interestCap)
 	{
-		if (unusedHands < 0 || unusedHands > HandsPerLevel)
+		if (handsLeft < 0)
 		{
-			throw new ArgumentOutOfRangeException(nameof(unusedHands), unusedHands, "A level has eight hands.");
+			throw new ArgumentOutOfRangeException(nameof(handsLeft), handsLeft, "A level cannot have hands to spare below none.");
 		}
 
-		return ClearPayout + (unusedHands * UnusedHandBonus) + (boss ? BossClearBonus : 0);
+		return new CashOut(ClearPayout, handsLeft, handsLeft * UnusedHandBonus, boss ? BossClearBonus : 0,
+			Interest(bankroll, interestCap));
 	}
 
 	/// The house floats you three minimum wagers when you cannot cover one.
-	public static int LoanFor(int level) => WagerBounds(level).Minimum * DebtLoanMultiple;
+	public static int LoanFor(int minimumWager) => minimumWager * DebtLoanMultiple;
 
 	/// Debt grows at the start of every level it is still outstanding, and the
 	/// house rounds the interest up. Whole-dollar math, so ten percent of $200

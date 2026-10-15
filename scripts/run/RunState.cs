@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Overdrawn.Blackjack;
+using Overdrawn.Bosses;
 using Overdrawn.Jokers;
 
 namespace Overdrawn.Run;
 
 /// <summary>
 /// One run in progress: the money on the table, how far through the eighteen
-/// levels it is, the shoe it is dealt from, and the jokers on the rail in the
-/// order they fire. Deliberately free of Godot so the rules it enforces can be
-/// tested without the engine.
+/// levels it is, the shoe it is dealt from, the boss waiting at the end of each
+/// stretch of three, and the jokers on the rail in the order they fire.
+/// Deliberately free of Godot so the rules it enforces can be tested without
+/// the engine.
 /// </summary>
 public sealed class RunState
 {
@@ -23,6 +25,8 @@ public sealed class RunState
 	public static readonly HouseRules BaseTable = new() { SurrenderAllowed = false, InsuranceAllowed = false };
 
 	private readonly List<JokerRule> _jokers = new();
+	private readonly HashSet<string> _bossesMet = new();
+	private bool _seated;
 
 	private RunState(string startingDeckId, Shoe shoe, Random random, int bankroll, int jokerSlots)
 	{
@@ -31,14 +35,26 @@ public sealed class RunState
 		Random = random;
 		Bankroll = bankroll;
 		JokerSlots = jokerSlots;
+		UpcomingBoss = DrawBoss(RunEconomy.NextBossLevel(Level));
 	}
 
 	public string StartingDeckId { get; }
 	public Shoe Shoe { get; }
 	public Random Random { get; }
 
+	/// The boss dealing this level, or null at an ordinary table.
+	public BossRule? Boss { get; private set; }
+
+	/// The boss at the end of this stretch of three levels. It is drawn as the
+	/// stretch begins so the player can see it coming.
+	public BossRule UpcomingBoss { get; private set; }
+
+	/// Whether the boss's rules are in force. A joker can switch them off, and
+	/// the level still asks for a boss's target and pays a boss's bonus.
+	public bool BossRulesInForce => Boss is not null && !_jokers.Any(joker => joker.DisablesBossRule);
+
 	/// The rules this level's table is dealt under, before any joker bends them.
-	public HouseRules TableRules { get; private set; } = BaseTable;
+	public HouseRules TableRules => BossRulesInForce ? Boss!.Bend(BaseTable) : BaseTable;
 
 	/// The rules the hand is actually played by: the table's, bent by whichever
 	/// jokers bend rules, in slot order.
@@ -56,6 +72,23 @@ public sealed class RunState
 		}
 	}
 
+	/// What this level's table takes: the house limits for the level, with the
+	/// boss's minimum where it sets one.
+	public (int Minimum, int Maximum) TableLimits
+	{
+		get
+		{
+			(int minimum, int maximum) = RunEconomy.WagerBounds(Level);
+			return BossRulesInForce ? (Boss!.MinimumWager(minimum), maximum) : (minimum, maximum);
+		}
+	}
+
+	/// How many times over the base Chips count at this level's table.
+	public int BaseChipsScale => BossRulesInForce ? Boss!.BaseChipsScale : 1;
+
+	/// The most interest a level's end can pay.
+	public int InterestCap => RunEconomy.InterestCap + _jokers.Sum(joker => joker.InterestCapBonus);
+
 	/// The rail, in slot order. The order is the order the jokers fire in.
 	public IReadOnlyList<JokerRule> Jokers => _jokers;
 	public int JokerSlots { get; private set; }
@@ -63,6 +96,8 @@ public sealed class RunState
 	public int Level { get; private set; } = 1;
 	public long ScoreTarget { get; private set; } = RunEconomy.FirstScoreTarget;
 	public long LevelScore { get; private set; }
+	/// How many hands this level deals in all, extra hands included.
+	public int HandsThisLevel { get; private set; } = RunEconomy.HandsPerLevel;
 	public int HandsRemaining { get; private set; } = RunEconomy.HandsPerLevel;
 	/// How many hands this level has dealt so far.
 	public int HandsPlayed { get; private set; }
@@ -75,6 +110,10 @@ public sealed class RunState
 	public bool IsBossLevel => RunEconomy.IsBossLevel(Level);
 	public bool LevelCleared => LevelScore >= ScoreTarget;
 	public bool LevelFailed => HandsRemaining == 0 && !LevelCleared;
+	/// Whether this level has paid out, which is what lets the player leave it.
+	public bool CashedOut { get; private set; }
+	/// Cleared the final table.
+	public bool RunWon => Level == RunEconomy.LevelsPerRun && LevelCleared;
 
 	/// Whether the dealer's hole card is dealt face up at this table.
 	public bool Peek => _jokers.Any(joker => joker.Peek);
@@ -98,6 +137,19 @@ public sealed class RunState
 		var random = new Random(seed);
 		return new RunState(startingDeckId, new Shoe(deck, random), random,
 			(int)Math.Round(BaseStartingBankroll * bankrollScale), jokerSlots);
+	}
+
+	/// Sits the player down at this level's table, which is when the dealer
+	/// shuffles a fresh shoe, without whatever cards the boss keeps out of it.
+	public void SitDown()
+	{
+		if (_seated)
+		{
+			throw new InvalidOperationException("The player is already sitting at this level's table.");
+		}
+
+		_seated = true;
+		Shoe.BeginLevel(Array.Empty<PlayingCard>(), strike: BossRulesInForce ? Boss!.Strikes : null);
 	}
 
 	/// Puts a joker in the rightmost free slot. The joker sees the run the
@@ -153,12 +205,13 @@ public sealed class RunState
 	/// minimum. It triggers on its own; it is not an offer.
 	public bool CoverMinimumWager()
 	{
-		if (Bankroll >= RunEconomy.WagerBounds(Level).Minimum)
+		int minimum = TableLimits.Minimum;
+		if (Bankroll >= minimum)
 		{
 			return false;
 		}
 
-		int loan = RunEconomy.LoanFor(Level);
+		int loan = RunEconomy.LoanFor(minimum);
 		Bankroll += loan;
 		Debt += loan;
 		if (OriginalLoan == 0)
@@ -166,7 +219,21 @@ public sealed class RunState
 			OriginalLoan = loan;
 		}
 
+		CallTheCollectorIfDue();
 		return true;
+	}
+
+	/// Pays the debt off in the shop, for exactly what is owed.
+	public void PayOffDebt()
+	{
+		if (Debt == 0)
+		{
+			throw new InvalidOperationException("There is no debt to pay off.");
+		}
+
+		Withdraw(Debt);
+		Debt = 0;
+		OriginalLoan = 0;
 	}
 
 	/// Spends one of the level's hands. Dealing is what uses one up.
@@ -229,6 +296,128 @@ public sealed class RunState
 	public void ClearLevel()
 	{
 		LevelScore = Math.Max(LevelScore, ScoreTarget);
+	}
+
+	/// Pays out a cleared level: the clear itself, every hand left unplayed, a
+	/// boss's bonus, and interest on what the player held as it ended. A boss
+	/// that wipes the debt wipes it here.
+	public CashOut CashOutLevel()
+	{
+		if (!LevelCleared)
+		{
+			throw new InvalidOperationException("Only a cleared level pays out.");
+		}
+
+		if (CashedOut)
+		{
+			throw new InvalidOperationException("This level has already paid out.");
+		}
+
+		CashOut cashOut = RunEconomy.CashOutFor(HandsRemaining, IsBossLevel, Bankroll, InterestCap);
+		Bankroll += cashOut.Total;
+		if (BossRulesInForce && Boss!.WipesDebtOnClear)
+		{
+			Debt = 0;
+			OriginalLoan = 0;
+		}
+
+		CashedOut = true;
+		return cashOut;
+	}
+
+	/// Moves on to the next level: a bigger target, a fresh set of hands, a
+	/// streak that starts again, debt a little heavier, the boss if this is a
+	/// boss level, and every joker's level-start say, in slot order.
+	public void BeginNextLevel()
+	{
+		if (!CashedOut)
+		{
+			throw new InvalidOperationException("A level is only left once it has paid out.");
+		}
+
+		if (Level == RunEconomy.LevelsPerRun)
+		{
+			throw new InvalidOperationException("There is no table after the final one.");
+		}
+
+		Level++;
+		Boss = IsBossLevel ? UpcomingBoss : null;
+		ScoreTarget = RunEconomy.NextScoreTarget(ScoreTarget, Boss?.TargetMultiplier ?? RunEconomy.StandardTargetGrowth);
+		LevelScore = 0;
+		HandsThisLevel = RunEconomy.HandsPerLevel + _jokers.Sum(joker => joker.ExtraHands);
+		HandsRemaining = HandsThisLevel;
+		HandsPlayed = 0;
+		WinStreak = 0;
+		CashedOut = false;
+		_seated = false;
+		Shoe.EndLevel();
+
+		GrowDebt();
+		if (Boss is not null)
+		{
+			_bossesMet.Add(Boss.Id);
+			if (BossRulesInForce)
+			{
+				Debt = Boss.DebtOnArrival(Debt);
+			}
+		}
+		else if (RunEconomy.IsBossLevel(Level - 1))
+		{
+			UpcomingBoss = DrawBoss(RunEconomy.NextBossLevel(Level));
+		}
+
+		CallTheCollectorIfDue();
+
+		foreach (JokerRule joker in _jokers)
+		{
+			joker.OnLevelStart(this);
+		}
+	}
+
+	/// Interest on debt, at whatever rate the rail allows, in slot order.
+	private void GrowDebt()
+	{
+		if (Debt == 0)
+		{
+			return;
+		}
+
+		int grown = RunEconomy.GrowDebt(Debt);
+		foreach (JokerRule joker in _jokers)
+		{
+			grown = joker.GrowDebt(Debt, grown);
+		}
+
+		Debt = grown;
+	}
+
+	/// Debt past three times its first loan sends The Collector to the boss
+	/// table the player has not reached yet. The final table is never given up.
+	private void CallTheCollectorIfDue()
+	{
+		if (IsBossLevel || UpcomingBoss.Id == BossRules.Collector
+			|| RunEconomy.NextBossLevel(Level) == RunEconomy.LevelsPerRun
+			|| !RunEconomy.CollectorDue(Debt, OriginalLoan))
+		{
+			return;
+		}
+
+		UpcomingBoss = BossRules.Create(BossRules.Collector, Random);
+	}
+
+	/// A boss for a boss level, from those fierce enough for it that this run
+	/// has not met yet. The last level always gets The Final Table.
+	private BossRule DrawBoss(int level)
+	{
+		if (level == RunEconomy.LevelsPerRun)
+		{
+			return BossRules.Create(BossRules.FinalTable, Random);
+		}
+
+		List<string> fierceEnough = BossRules.DrawnAt(level).ToList();
+		List<string> unmet = fierceEnough.Where(id => !_bossesMet.Contains(id)).ToList();
+		List<string> pool = unmet.Count > 0 ? unmet : fierceEnough;
+		return BossRules.Create(pool[Random.Next(pool.Count)], Random);
 	}
 
 	private void Withdraw(int amount)

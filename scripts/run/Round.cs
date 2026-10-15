@@ -59,7 +59,7 @@ public sealed class Round
 	{
 		get
 		{
-			(int minimum, int maximum) = RunEconomy.WagerBounds(_run.Level);
+			(int minimum, int maximum) = _run.TableLimits;
 			return (minimum, Math.Min(maximum, _run.Bankroll));
 		}
 	}
@@ -202,7 +202,8 @@ public sealed class Round
 
 			_run.RecordOutcome(settlement);
 
-			var scoring = new ScoringHand(hand, settlement, seat, _run.WinStreak, _run.HandsPlayed, _run.Bankroll);
+			var scoring = new ScoringHand(hand, settlement, seat, _run.WinStreak, _run.HandsPlayed, _run.Bankroll,
+				_run.BaseChipsScale);
 			foreach (JokerRule joker in jokers)
 			{
 				joker.OnSettled(scoring);

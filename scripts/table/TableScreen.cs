@@ -148,7 +148,7 @@ public partial class TableScreen : Control
 	public void Begin(RunState run)
 	{
 		_run = run;
-		_run.Shoe.BeginLevel(Array.Empty<PlayingCard>());
+		_run.SitDown();
 
 		_dealerFan.ShowStake(0);
 		_shownScore = _run.LevelScore;
@@ -519,7 +519,7 @@ public partial class TableScreen : Control
 	/// score grows multiplicatively across a run while the hand count is flat.
 	private float Magnitude(long score)
 	{
-		float par = (float)_run.ScoreTarget / RunEconomy.HandsPerLevel;
+		float par = (float)_run.ScoreTarget / _run.HandsThisLevel;
 		return Mathf.Clamp(Mathf.Log(1f + (score / par)) / Mathf.Log(1f + LoudMultiple), 0f, 1f);
 	}
 
@@ -603,9 +603,9 @@ public partial class TableScreen : Control
 
 		_deal.Disabled = _animating || round is not null || _run.LevelCleared || _run.HandsRemaining == 0;
 		_rail.Lock(_animating);
-		_hands.ShowValue($"{_run.HandsRemaining}/{RunEconomy.HandsPerLevel}", Colors.White);
-		_handCount.Text = $"{RunEconomy.HandsPerLevel - _run.HandsRemaining}/{RunEconomy.HandsPerLevel}";
-		int stock = _run.Shoe.Deck.Count + _run.Shoe.Temporary.Count;
+		_hands.ShowValue($"{_run.HandsRemaining}/{_run.HandsThisLevel}", Colors.White);
+		_handCount.Text = $"{_run.HandsPlayed}/{_run.HandsThisLevel}";
+		int stock = _run.Shoe.Stock;
 		_shoeCount.Text = $"{_run.Shoe.Remaining}/{stock}";
 		_shoeBack.ShowStock(BackStyle().Back, _run.Shoe.Remaining / (float)stock);
 

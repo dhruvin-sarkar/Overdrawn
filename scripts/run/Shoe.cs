@@ -24,6 +24,7 @@ public sealed class Shoe
 	public const int CutCard = 24;
 
 	private int _cap;
+	private Func<PlayingCard, bool>? _strike;
 
 	public Shoe(IEnumerable<PlayingCard> deck, Random random)
 	{
@@ -37,8 +38,13 @@ public sealed class Shoe
 	public IReadOnlyList<PlayingCard> Temporary => _temporary;
 	public int Remaining => _drawPile.Count;
 
+	/// How many cards a full shoe holds this level, once struck cards are out
+	/// and the cap is in.
+	public int Stock => Math.Min(_cap > 0 ? _cap : int.MaxValue, Dealable().Count());
+
 	/// <param name="cap">How many cards the shoe holds this level, or zero for all of them.</param>
-	public void BeginLevel(IEnumerable<PlayingCard> temporary, int cap = 0)
+	/// <param name="strike">Cards kept out of the shoe for this level only, such as a boss's.</param>
+	public void BeginLevel(IEnumerable<PlayingCard> temporary, int cap = 0, Func<PlayingCard, bool>? strike = null)
 	{
 		if (cap < 0)
 		{
@@ -48,6 +54,7 @@ public sealed class Shoe
 		_temporary.Clear();
 		_temporary.AddRange(temporary);
 		_cap = cap;
+		_strike = strike;
 		Shuffle();
 	}
 
@@ -55,6 +62,7 @@ public sealed class Shoe
 	{
 		_temporary.Clear();
 		_cap = 0;
+		_strike = null;
 		Shuffle();
 	}
 
@@ -115,9 +123,11 @@ public sealed class Shoe
 	private void Fill()
 	{
 		_drawPile.Clear();
-		_drawPile.AddRange(_deck);
-		_drawPile.AddRange(_temporary);
+		_drawPile.AddRange(Dealable());
 	}
+
+	private IEnumerable<PlayingCard> Dealable() =>
+		_deck.Concat(_temporary).Where(card => _strike is null || !_strike(card));
 
 	/// <param name="without">Ranks the deck is built without, such as a deck that has had its fours pulled.</param>
 	public static List<PlayingCard> StandardDeck(IEnumerable<Rank>? without = null)

@@ -215,16 +215,35 @@ public class RunEconomyTests
 	[Fact]
 	public void ClearingEarlyPaysForTheHandsYouDidNotNeed()
 	{
-		Assert.Equal(25, RunEconomy.LevelPayout(0, boss: false));
-		Assert.Equal(40, RunEconomy.LevelPayout(3, boss: false));
-		Assert.Equal(90, RunEconomy.LevelPayout(3, boss: true));
+		Assert.Equal(25, RunEconomy.CashOutFor(0, boss: false, bankroll: 0, RunEconomy.InterestCap).Total);
+		Assert.Equal(40, RunEconomy.CashOutFor(3, boss: false, bankroll: 0, RunEconomy.InterestCap).Total);
+		Assert.Equal(90, RunEconomy.CashOutFor(3, boss: true, bankroll: 0, RunEconomy.InterestCap).Total);
+	}
+
+	[Fact]
+	public void TheCashOutReadsLineByLine()
+	{
+		CashOut cashOut = RunEconomy.CashOutFor(3, boss: true, bankroll: 125, RunEconomy.InterestCap);
+
+		Assert.Equal(new CashOut(Clear: 25, HandsLeft: 3, HandBonus: 15, BossBonus: 50, Interest: 12), cashOut);
+		Assert.Equal(102, cashOut.Total);
+	}
+
+	[Theory]
+	[InlineData(1, 3)]
+	[InlineData(3, 3)]
+	[InlineData(4, 6)]
+	[InlineData(17, 18)]
+	public void TheNextBossSitsAtTheEndOfTheStretch(int level, int bossLevel)
+	{
+		Assert.Equal(bossLevel, RunEconomy.NextBossLevel(level));
 	}
 
 	[Fact]
 	public void ALoanIsThreeMinimumWagers()
 	{
-		Assert.Equal(30, RunEconomy.LoanFor(1));
-		Assert.Equal(45, RunEconomy.LoanFor(5));
+		Assert.Equal(30, RunEconomy.LoanFor(RunEconomy.WagerBounds(1).Minimum));
+		Assert.Equal(45, RunEconomy.LoanFor(RunEconomy.WagerBounds(5).Minimum));
 	}
 
 	[Fact]
